@@ -78,16 +78,35 @@ def check_envelope_completeness():
     return (ok / tot if tot else 1.0), tot, ok, files
 
 
+def self_check(chunks):
+    """负对照自检：往汇总里注入一个假数字，检查器必须能抓到——
+    证明 100% 不是检查器失效造成的假象（规则模式下本检查为恒真，
+    其真正价值在 LLM 模式与 CI 防退化，报告需如实注明）。"""
+    from query import CORE_VENDORS as CV
+    v = CV[0]
+    d = list(DIMENSIONS)[0]
+    ev = retrieve(chunks, v, d + " " + DIMENSIONS[d], top_k=4, lock_section=d)
+    if not ev:
+        return False
+    blob = "\n".join(c["text"] for _, c in ev)
+    fake = extractive_summary(ev) + "公司估值已达9999亿美元。"
+    missing = [n for n in extract_numbers(fake) if n not in blob]
+    return "9999亿" in missing
+
+
 def main():
     index_path = os.environ.get("INDEX_PATH", PROJ / "rag" / "index_v2.json")
     rate_n, tot_n, hit_n, bad_cells = check_number_grounding(index_path)
     rate_e, tot_e, ok_e, files = check_envelope_completeness()
+    idx = json.loads(Path(index_path).read_text(encoding="utf-8"))
+    sc = self_check(idx["chunks"])
 
     summary = {
         "date": "2026-10-23",
         "number_grounding": {"rate": round(rate_n, 4), "hit": hit_n, "total": tot_n,
                              "cells_with_missing": bad_cells[:10]},
         "envelope_completeness": {"rate": round(rate_e, 4), "ok": ok_e, "total": tot_e},
+        "self_check_negative_control": sc,
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "faithfulness_report.json").write_text(
@@ -100,7 +119,11 @@ def main():
         "| 检查项 | 指标 | 结果 |",
         "|---|---|---|",
         f"| 数字回指率（汇总数字 ↔ 证据原文） | {hit_n}/{tot_n} | **{rate_n:.1%}** |",
-        f"| 信封完整率（实时数据层事实携带四要素） | {ok_e}/{tot_e} | **{rate_e:.1%}** |", "",
+        f"| 信封完整率（实时数据层事实携带四要素） | {ok_e}/{tot_e} | **{rate_e:.1%}** |",
+        f"| 负对照自检（注入假数字必须被抓到） | — | **{'通过' if sc else '失败'}** |", "",
+        "> ⚠️ 如实标注：规则模式下汇总为证据原文的抽取式子串，数字回指恒真——",
+        "> 该指标在 LLM 模式（DEEPSEEK_API_KEY）下才有信息量；规则模式下的价值是",
+        "> CI 防代码退化（如截断逻辑被破坏），配合负对照自证检查器有效。", "",
         "## 方法说明", "",
         "- 数字回指：对每个 厂商×维度 格，复跑与生产完全相同的检索与确定性汇总，",
         "  抽取汇总中的业务数字（≥2 位或带单位），逐一验证其在证据原文中出现——",

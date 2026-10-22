@@ -20,6 +20,10 @@
     "locked_retrieval": {
       "fact_recall@3": 0.967,
       "full_fact_items": "19/20"
+    },
+    "by_type": {
+      "stable": "7/7",
+      "time-sensitive": "13/13"
     }
   },
   "detail": [

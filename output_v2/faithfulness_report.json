@@ -11,7 +11,8 @@
       "rate": 1.0,
       "ok": 80,
       "total": 80
-    }
+    },
+    "self_check_negative_control": true
   },
   "envelope_by_file": [
     {

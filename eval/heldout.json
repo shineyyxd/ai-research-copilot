@@ -1,0 +1,26 @@
+{
+  "description": "留出/对抗测试集（v2 新增）：路由器冻结后编写，只测不调。含隐式指代、跨厂商比较、库外否定题、v2新数据题——用于估计真实泛化能力，区别于开发集（goldset.json）的过拟合100%。",
+  "created": "2026-10-23",
+  "items": [
+    {"id": "h01", "kind": "隐式指代", "question": "哪家厂商的旗舰模型总参数2.8万亿、采用MoE稀疏架构？",
+     "expect_vendor": "月之暗面（Kimi）", "facts": [["2.8 万亿", "2.8万亿"]]},
+    {"id": "h02", "kind": "隐式指代", "question": "哪家公司2026年1月在港交所上市、被称为全球大模型第一股？",
+     "expect_vendor": "智谱", "facts": [["43.48"], ["2026-01-08", "2026 年 1 月"]]},
+    {"id": "h03", "kind": "隐式指代", "question": "哪家厂商2026年上半年ARR突破3亿美元、三个月翻三倍？",
+     "expect_vendor": "月之暗面（Kimi）", "facts": [["3 亿美元", "3亿美元"]]},
+    {"id": "h04", "kind": "v2新数据", "question": "智谱2026年上半年开放平台及API收入是多少、同比增速多少？",
+     "expect_vendor": "智谱", "facts": [["825,176", "8.25"], ["2,735.7", "2735"]]},
+    {"id": "h05", "kind": "v2新数据", "question": "MiniMax IPO募资多少港元？",
+     "expect_vendor": "MiniMax", "facts": [["48.18"]]},
+    {"id": "h06", "kind": "v2新数据", "question": "DeepSeek最新一轮B轮融资规模和领投方有哪些？",
+     "expect_vendor": "DeepSeek", "facts": [["1000亿", "约1000亿"]]},
+    {"id": "h07", "kind": "跨厂商比较", "question": "智谱和MiniMax谁的2026年上半年收入规模更大？",
+     "expect_vendor": "智谱", "facts": [["953,892", "9.54"]]},
+    {"id": "h08", "kind": "库外否定题", "question": "Mistral AI 2025年的营业收入是多少欧元？",
+     "expect_vendor": "Mistral AI", "expect_insufficient": true, "facts": []},
+    {"id": "h09", "kind": "库外否定题", "question": "商汤科技2026年的净利润是多少？",
+     "expect_vendor": null, "expect_insufficient": true, "facts": []},
+    {"id": "h10", "kind": "对抗拼写", "question": "kimi k3的专家数量和每次推理激活几个？",
+     "expect_vendor": "月之暗面（Kimi）", "facts": [["896"], ["16"]]}
+  ]
+}
