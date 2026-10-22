@@ -1,6 +1,6 @@
 ---
 vendor: Google Gemini
-market: 美股基准
+market: 美股
 layer: L2
 depth_tier: deep
 as_of: 2026-10-23
@@ -8,6 +8,10 @@ trust_note: T1审计财报/T2券商研报/T3工商榜单/T4媒体转述/T5前瞻
 ---
 
 # Google Gemini
+
+## 实时数据层（v2 接入，六元组信封）
+
+- [T3榜单|as_of=2026-10-23|caliber=TTM/最新收盘|src=Wind] 市值与估值：总市值 4.0941；PE_TTM 16.771；PS_TTM 9.1824；营业收入(亿) 2296.92；净利润(亿) 1747.71
 
 > 以下为 2026-07-28 快照的叙事语料（v1 迁移，T4 媒体源为主），时效型数字以实时数据层为准
 

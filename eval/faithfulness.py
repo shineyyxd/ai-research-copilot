@@ -102,7 +102,7 @@ def main():
     sc = self_check(idx["chunks"])
 
     summary = {
-        "date": "2026-10-23",
+        "date": __import__("time").strftime("%Y-%m-%d"),
         "number_grounding": {"rate": round(rate_n, 4), "hit": hit_n, "total": tot_n,
                              "cells_with_missing": bad_cells[:10]},
         "envelope_completeness": {"rate": round(rate_e, 4), "ok": ok_e, "total": tot_e},

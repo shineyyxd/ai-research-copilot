@@ -41,15 +41,11 @@ VENDOR_ALIASES = {
     "字节豆包": ["豆包", "字节", "火山引擎", "抖音"],
     "阶跃星辰": ["阶跃", "StepFun", "Step 3", "Step-3"],
     "零一万物": ["零一万物", "零一", "01.AI", "李开复", "万物智能"],
-    "OpenAI": ["OpenAI", "openai", "GPT", "ChatGPT", "奥特曼", "Altman"],
-    "Anthropic": ["Anthropic", "anthropic", "Claude", "claude"],
     "Google Gemini": ["Gemini", "gemini", "谷歌", "Google", "DeepMind"],
-    "xAI（Grok）": ["xAI", "Grok", "grok", "马斯克"],
     "Meta（Llama）": ["Meta", "Llama", "llama", "扎克伯格"],
     "百度文心": ["百度", "文心", "ERNIE", "Ernie", "Baidu"],
     "科大讯飞（星火）": ["科大讯飞", "讯飞", "星火", "SparkDesk", "iFlytek"],
     "腾讯（混元）": ["腾讯", "混元", "Hunyuan", "hunyuan"],
-    "Mistral AI": ["Mistral", "mistral", "米斯特拉尔"],
 }
 
 

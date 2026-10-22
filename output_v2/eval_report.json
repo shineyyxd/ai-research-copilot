@@ -1,29 +1,29 @@
 {
   "summary": {
-    "date": "2026-07-28",
-    "goldset_size": 20,
+    "date": "2026-10-23",
+    "goldset_size": 18,
     "top_k": 3,
     "baseline_no_router": {
-      "vendor_hit@1": 0.35,
-      "vendor_hit@3": 0.6,
-      "section_hit@1": 0.35,
-      "fact_recall@3": 0.7,
-      "full_fact_items": "12/20"
+      "vendor_hit@1": 0.444,
+      "vendor_hit@3": 0.611,
+      "section_hit@1": 0.444,
+      "fact_recall@3": 0.714,
+      "full_fact_items": "11/18"
     },
     "open_retrieval": {
       "vendor_hit@1": 1.0,
       "vendor_hit@3": 1.0,
       "section_hit@1": 1.0,
       "fact_recall@3": 1.0,
-      "full_fact_items": "20/20"
+      "full_fact_items": "18/18"
     },
     "locked_retrieval": {
-      "fact_recall@3": 0.967,
-      "full_fact_items": "19/20"
+      "fact_recall@3": 0.964,
+      "full_fact_items": "17/18"
     },
     "by_type": {
       "stable": "7/7",
-      "time-sensitive": "13/13"
+      "time-sensitive": "11/11"
     }
   },
   "detail": [
@@ -294,38 +294,6 @@
         "section_hit@1": true,
         "fact_recall": "1/1",
         "top1": "字节豆包§产品定位"
-      },
-      "locked": {
-        "fact_recall": "1/1"
-      }
-    },
-    {
-      "id": "g18",
-      "question": "Anthropic 的估值和 ARR 到什么水平了？",
-      "vendor": "Anthropic",
-      "dim": "商业化策略",
-      "open": {
-        "vendor_hit@1": true,
-        "vendor_hit@3": true,
-        "section_hit@1": true,
-        "fact_recall": "1/1",
-        "top1": "Anthropic§商业化策略"
-      },
-      "locked": {
-        "fact_recall": "1/1"
-      }
-    },
-    {
-      "id": "g19",
-      "question": "xAI Grok 在美国市场的份额？",
-      "vendor": "xAI（Grok）",
-      "dim": "产品定位",
-      "open": {
-        "vendor_hit@1": true,
-        "vendor_hit@3": true,
-        "section_hit@1": true,
-        "fact_recall": "1/1",
-        "top1": "xAI（Grok）§产品定位"
       },
       "locked": {
         "fact_recall": "1/1"

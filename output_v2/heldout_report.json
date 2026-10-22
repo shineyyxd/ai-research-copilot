@@ -18,70 +18,70 @@
       "kind": "隐式指代",
       "question": "哪家厂商的旗舰模型总参数2.8万亿、采用MoE稀疏架构？",
       "ok": true,
-      "detail": "top-1=月之暗面（Kimi）(0.1963) 厂商✅ 事实1/1"
+      "detail": "top-1=月之暗面（Kimi）(0.1969) 厂商✅ 事实1/1"
     },
     {
       "id": "h02",
       "kind": "隐式指代",
       "question": "哪家公司2026年1月在港交所上市、被称为全球大模型第一股？",
       "ok": true,
-      "detail": "top-1=智谱(0.1528) 厂商✅ 事实2/2"
+      "detail": "top-1=智谱(0.1554) 厂商✅ 事实2/2"
     },
     {
       "id": "h03",
       "kind": "隐式指代",
       "question": "哪家厂商2026年上半年ARR突破3亿美元、三个月翻三倍？",
       "ok": true,
-      "detail": "top-1=月之暗面（Kimi）(0.2251) 厂商✅ 事实1/1"
+      "detail": "top-1=月之暗面（Kimi）(0.232) 厂商✅ 事实1/1"
     },
     {
       "id": "h04",
       "kind": "v2新数据",
       "question": "智谱2026年上半年开放平台及API收入是多少、同比增速多少？",
       "ok": false,
-      "detail": "top-1=智谱(0.0823) 厂商✅ 事实0/2"
+      "detail": "top-1=智谱(0.0833) 厂商✅ 事实0/2"
     },
     {
       "id": "h05",
       "kind": "v2新数据",
       "question": "MiniMax IPO募资多少港元？",
       "ok": true,
-      "detail": "top-1=MiniMax(0.0705) 厂商✅ 事实1/1"
+      "detail": "top-1=MiniMax(0.0706) 厂商✅ 事实1/1"
     },
     {
       "id": "h06",
       "kind": "v2新数据",
       "question": "DeepSeek最新一轮B轮融资规模和领投方有哪些？",
       "ok": false,
-      "detail": "top-1=DeepSeek(0.0365) 厂商✅ 事实0/1"
+      "detail": "top-1=DeepSeek(0.0353) 厂商✅ 事实0/1"
     },
     {
       "id": "h07",
       "kind": "跨厂商比较",
       "question": "智谱和MiniMax谁的2026年上半年收入规模更大？",
       "ok": false,
-      "detail": "top-1=MiniMax(0.137) 厂商❌ 事实0/1"
+      "detail": "top-1=MiniMax(0.1455) 厂商❌ 事实0/1"
     },
     {
       "id": "h08",
       "kind": "库外否定题",
-      "question": "Mistral AI 2025年的营业收入是多少欧元？",
+      "question": "Mistral AI 2025年的营业收入是多少欧元？（注：该厂商已不在语料库中）",
       "ok": true,
-      "detail": "top-1=MiniMax(0.0757) → 拒答✅"
+      "detail": "top-1=Google Gemini(0.0705) → 拒答✅"
     },
     {
       "id": "h09",
       "kind": "库外否定题",
       "question": "商汤科技2026年的净利润是多少？",
       "ok": true,
-      "detail": "top-1=科大讯飞（星火）(0.0524) → 拒答✅"
+      "detail": "top-1=Google Gemini(0.0785) → 拒答✅"
     },
     {
       "id": "h10",
       "kind": "对抗拼写",
       "question": "kimi k3的专家数量和每次推理激活几个？",
       "ok": true,
-      "detail": "top-1=月之暗面（Kimi）(0.1478) 厂商✅ 事实2/2"
+      "detail": "top-1=月之暗面（Kimi）(0.1457) 厂商✅ 事实2/2"
     }
   ]
 }

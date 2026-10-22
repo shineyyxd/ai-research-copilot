@@ -9,8 +9,8 @@
     },
     "envelope_completeness": {
       "rate": 1.0,
-      "ok": 80,
-      "total": 80
+      "ok": 83,
+      "total": 83
     },
     "self_check_negative_control": true
   },
@@ -28,12 +28,6 @@
       "rate": 1.0
     },
     {
-      "file": "anthropic.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
-    },
-    {
       "file": "baidu.md",
       "facts": 4,
       "enveloped": 4,
@@ -41,9 +35,9 @@
     },
     {
       "file": "bytedance-doubao.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
+      "facts": 1,
+      "enveloped": 1,
+      "rate": 1.0
     },
     {
       "file": "deepseek.md",
@@ -53,9 +47,9 @@
     },
     {
       "file": "google-gemini.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
+      "facts": 1,
+      "enveloped": 1,
+      "rate": 1.0
     },
     {
       "file": "iflytek.md",
@@ -65,9 +59,9 @@
     },
     {
       "file": "meta-llama.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
+      "facts": 1,
+      "enveloped": 1,
+      "rate": 1.0
     },
     {
       "file": "minimax.md",
@@ -76,22 +70,10 @@
       "rate": 1.0
     },
     {
-      "file": "mistral.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
-    },
-    {
       "file": "moonshot-kimi.md",
       "facts": 10,
       "enveloped": 10,
       "rate": 1.0
-    },
-    {
-      "file": "openai.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
     },
     {
       "file": "stepfun.md",
@@ -104,12 +86,6 @@
       "facts": 4,
       "enveloped": 4,
       "rate": 1.0
-    },
-    {
-      "file": "xai-grok.md",
-      "facts": 0,
-      "enveloped": 0,
-      "rate": null
     },
     {
       "file": "zhipu.md",

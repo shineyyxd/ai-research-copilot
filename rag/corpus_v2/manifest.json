@@ -84,55 +84,23 @@
     "key": "bytedance-doubao",
     "market": "未上市",
     "T1": 0,
-    "T3": 0,
-    "v1": 1
-  },
-  {
-    "vendor": "OpenAI",
-    "key": "openai",
-    "market": "美股基准",
-    "T1": 0,
-    "T3": 0,
-    "v1": 1
-  },
-  {
-    "vendor": "Anthropic",
-    "key": "anthropic",
-    "market": "美股基准",
-    "T1": 0,
-    "T3": 0,
+    "T3": 1,
     "v1": 1
   },
   {
     "vendor": "Google Gemini",
     "key": "google-gemini",
-    "market": "美股基准",
+    "market": "美股",
     "T1": 0,
-    "T3": 0,
+    "T3": 1,
     "v1": 1
   },
   {
     "vendor": "Meta（Llama）",
     "key": "meta-llama",
-    "market": "美股基准",
+    "market": "美股",
     "T1": 0,
-    "T3": 0,
+    "T3": 1,
     "v1": 1
-  },
-  {
-    "vendor": "xAI（Grok）",
-    "key": "xai-grok",
-    "market": "美股基准",
-    "T1": 0,
-    "T3": 0,
-    "v1": 1
-  },
-  {
-    "vendor": "Mistral AI",
-    "key": "mistral",
-    "market": "美股基准",
-    "T1": 0,
-    "T3": 0,
-    "v1": 0
   }
 ]

@@ -53,7 +53,7 @@ def main():
 
     n = len(items)
     total_ok = sum(r["ok"] for r in rows)
-    summary = {"date": "2026-10-23", "size": n, "pass": total_ok,
+    summary = {"date": __import__("time").strftime("%Y-%m-%d"), "size": n, "pass": total_ok,
                "pass_rate": round(total_ok / n, 3),
                "by_kind": {k: f"{v[0]}/{v[1]}" for k, v in agg.items()}}
     OUT.mkdir(parents=True, exist_ok=True)

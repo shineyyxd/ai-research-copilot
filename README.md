@@ -9,23 +9,24 @@
 
 | 维度 | v1（2026-07） | v2（2026-10） |
 |---|---|---|
-| 数据源 | 手工整理静态语料（13 家） | **真实接口接入**：天眼查（工商/融资）+ Wind（财务/公告），17 家 L2 厂商 + 70 家产业链厂商池 |
+| 数据源 | 手工整理静态语料（13 家） | **真实接口接入**：天眼查（工商/融资）+ Wind（财务/公告），13 家 L2 厂商（无真实数据层的一律不做）+ 70 家产业链厂商池 |
 | 证据模型 | source/section/score | **六元组信封**：trust_tier/as_of/caliber/src，每条事实机器可验证 |
 | Agent 架构 | 单脚本 for 循环 | **节点式 Harness**（`rag/harness.py`）：supervisor→planner→[interrupt 审批]→researcher→critic→reporter，SQLite 断点恢复 + JSONL 审计日志 |
 | 评测 | 20 条金标检索评测 | + **金标防腐化**（stable/time-sensitive + as_of）+ **端到端 faithfulness 评测**（数字回指率/信封完整率） |
 | 自动化 | 无 | **GitHub Actions**：每日追踪器 cron 自动 commit 周报（带质量门禁）+ 每次 push 评测回归 |
-| 厂商池 | 13 家模型厂商 | 三维分类（市场×产业链层×研究深度）：L2 模型层 17 家深挖 + L1/L3/L4 跟踪层，见 [厂商池](docs/vendor-pool-v2.md) |
+| 厂商池 | 13 家模型厂商 | 三维分类（市场×产业链层×研究深度）：L2 模型层 13 家深挖 + L1/L3/L4 跟踪层，见 [厂商池](docs/vendor-pool-v2.md) |
 
 ## 快速开始
 
 ```bash
 # 入库（v2 语料）→ 矩阵 → 节点式 Deep Research → 双层评测
 export CORPUS_DIR=rag/corpus_v2 INDEX_PATH=rag/index_v2.json OUT_DIR=output_v2
-python rag/ingest.py            # 18 文档 → chunk 索引
+python rag/ingest.py            # 14 文档 → chunk 索引
 python rag/query.py             # 四维对比矩阵 → output_v2/matrix.md
 python rag/research_graph.py    # 节点式研究循环（断点恢复+审计）→ research_report.md
-python eval/eval.py             # 金标回归：Hit@1 35%→100%
-python eval/faithfulness.py     # 忠实性：数字回指率/信封完整率
+python eval/eval.py             # 金标回归：Hit@1 44%→100%（18 题开发集）
+python eval/heldout_eval.py     # 留出集泛化：10 题对抗评测
+python eval/faithfulness.py     # 忠实性：数字回指率/信封完整率（含负对照自检）
 
 # 带人工审批点的运行（计划生成后暂停，编辑计划后放行）
 REQUIRE_APPROVAL=1 python rag/research_graph.py
@@ -37,16 +38,21 @@ python tracker/run.py && python scripts/quality_gate.py
 
 ## 评测结果（一条命令可复现）
 
-**开发集回归**（20 条金标问答，v2 语料 68 chunk / 16 厂商）：
+**开发集回归**（18 条金标问答，v2.1 语料 59 chunk / 13 厂商）：
 
 | 指标 | 无路由 baseline | +厂商路由器 | 维度锁定 |
 |---|---|---|---|
-| 厂商命中 Hit@1 | 35% | **100%** | — |
-| 事实召回 Recall@3 | 70% | **100%** | 96.7% |
+| 厂商命中 Hit@1 | 44% | **100%** | — |
+| 事实召回 Recall@3 | 71% | **100%** | 96.4% |
 
 > ⚠️ 如实标注：该集是**开发集**——路由器在其上迭代调参，100% 是过拟合预期；
 > 金标事实反向出卷自语料（必存在于库中）。它的正确定位是 **CI 回归测试**（防退化），
-> 不代表对未见过问题的泛化能力。
+> 不代表对未见过问题的泛化能力。（历史记录：v1 原始 20 题/16 厂商配置下 baseline 为 35%；
+> 当前 18 题/13 厂商配置下 baseline 44%——baseline 随题库与语料变化，只有"同配置对比"才有意义。）
+
+**厂商池原则（v2.1）**：**没有真实数据层的厂商一律不做**——OpenAI/Anthropic/xAI/Mistral
+因未上市且无真实财务数据接口，已从 L2 池移除（仅保留已上市、可拉取真实数据的 Google/Meta
+作为海外对标）；待接入可靠数据源后再考虑回补。
 
 **留出集泛化**（10 条对抗题，路由器冻结后编写，只测不调）：
 
@@ -80,15 +86,15 @@ python tracker/run.py && python scripts/quality_gate.py
   快照日期 2026-10-23；GitHub Search / HN Algolia（赛道动态，无需 Key）
 - **合规边界**：原始数据快照（`data/`）仅本地留存、不入公开仓库；
   仓库内只放研判结论 + 证据指针（来源/时点/口径），引用而非搬运
-- **诚实标注**：未上市厂商（DeepSeek/月之暗面/阶跃/零一/Mistral）无审计财报，
-  证据弱于上市厂商，矩阵中显式标注 ⚠️证据待补；未配 LLM Key 时为确定性规则兜底，
-  报告头部注明运行模式
+- **诚实标注**：未上市厂商（DeepSeek/月之暗面/阶跃/零一/字节豆包）无审计财报，
+  证据以天眼查工商/融资 + 媒体为主，弱于上市厂商，矩阵中显式标注 ⚠️证据待补；
+  未配 LLM Key 时为确定性规则兜底，报告头部注明运行模式
 
 ## 目录
 
 ```
 rag/            检索与研究循环（ingest/query/research + harness/research_graph）
-rag/corpus_v2/  L2 模型层 17 家语料（实时数据层 + v1 叙事层，六元组信封）
+rag/corpus_v2/  L2 模型层 13 家语料（实时数据层 + v1 叙事层，六元组信封）
 tracker/        赛道追踪器（GitHub/HN 双源，快照回溯）
 eval/           金标评测 + 端到端忠实性评测
 dashboard/      零依赖离线 Dashboard（build_dashboard.py 重新生成）

@@ -29,13 +29,9 @@ VENDORS = {
     "baidu":        ("百度文心", "港股", None, None, "百度集团"),
     "iflytek":      ("科大讯飞（星火）", "A股", None, None, "科大讯飞"),
     "tencent":      ("腾讯（混元）", "港股", None, None, "腾讯控股"),
-    "bytedance-doubao": ("字节豆包", "未上市", "bytedance-doubao.md", None, None),
-    "openai":       ("OpenAI", "美股基准", "openai.md", None, None),
-    "anthropic":    ("Anthropic", "美股基准", "anthropic.md", None, None),
-    "google-gemini":("Google Gemini", "美股基准", "google-gemini.md", None, None),
-    "meta-llama":   ("Meta（Llama）", "美股基准", "meta-llama.md", None, None),
-    "xai-grok":     ("xAI（Grok）", "美股基准", "xai-grok.md", None, None),
-    "mistral":      ("Mistral AI", "美股基准", None, None, None),
+    "bytedance-doubao": ("字节豆包", "未上市", "bytedance-doubao.md", "字节豆包", None),
+    "google-gemini":("Google Gemini", "美股", "google-gemini.md", None, "Google"),
+    "meta-llama":   ("Meta（Llama）", "美股", "meta-llama.md", None, "Meta"),
 }
 
 def env(tier, as_of, caliber, source):

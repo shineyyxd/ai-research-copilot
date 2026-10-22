@@ -1,5 +1,5 @@
 {
-  "description": "RAG 检索评测金标集。每条 = 自然语言问题 + 期望厂商 + 期望维度章节 + 金标事实（语料中真实存在的可验证子串，any-of 语义）。标注日期 2026-07-28，全部事实已用 grep 逐条验证存在于 corpus。 ｜ v2：每条标注 type（stable/time-sensitive）+ as_of，时效型题目按数据快照日期判定，防金标腐化。",
+  "description": "RAG 检索评测金标集。每条 = 自然语言问题 + 期望厂商 + 期望维度章节 + 金标事实（语料中真实存在的可验证子串，any-of 语义）。标注日期 2026-07-28，全部事实已用 grep 逐条验证存在于 corpus。 ｜ v2：每条标注 type（stable/time-sensitive）+ as_of，时效型题目按数据快照日期判定，防金标腐化。 ｜ v2.1：随厂商池裁剪（去除无真实数据层的海外未上市厂商），g18/g19 移除，18 条。",
   "items": [
     {
       "id": "g01",
@@ -261,32 +261,6 @@
       ],
       "type": "time-sensitive",
       "as_of": "2026-07"
-    },
-    {
-      "id": "g18",
-      "question": "Anthropic 的估值和 ARR 到什么水平了？",
-      "vendor": "Anthropic",
-      "dim": "商业化策略",
-      "facts": [
-        [
-          "9650"
-        ]
-      ],
-      "type": "time-sensitive",
-      "as_of": "2026-07"
-    },
-    {
-      "id": "g19",
-      "question": "xAI Grok 在美国市场的份额？",
-      "vendor": "xAI（Grok）",
-      "dim": "产品定位",
-      "facts": [
-        [
-          "17.8"
-        ]
-      ],
-      "type": "time-sensitive",
-      "as_of": "2026-01"
     },
     {
       "id": "g20",

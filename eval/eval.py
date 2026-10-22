@@ -103,7 +103,7 @@ def main():
 
     n = len(items)
     summary = {
-        "date": "2026-07-28", "goldset_size": n, "top_k": TOP_K,
+        "date": __import__("time").strftime("%Y-%m-%d"), "goldset_size": n, "top_k": TOP_K,
         "baseline_no_router": {
             "vendor_hit@1": round(agg["r_v1"] / n, 3),
             "vendor_hit@3": round(agg["r_v3"] / n, 3),
