@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 投研 Copilot · 大模型厂商竞品研究终端</title>
+<style>
+  /* ============ v2 · 投研终端风 ============
+     暖黑底 + 琥珀主色 + 衬线中文大标题 + 等宽数字
+     红涨绿跌（中国市场惯例）                     */
+  :root{
+    --bg:#100e0b; --bg2:#161310; --panel:#1a1712; --panel2:#211d17;
+    --border:#2c2620; --border2:#3a3229;
+    --text:#ede7dc; --sub:#b3a893; --muted:#8a7f6c; --faint:#5f574a;
+    --amber:#e8a33d; --amber-hi:#ffc562; --amber-dim:rgba(232,163,61,.10);
+    --up:#e5534b; --up-dim:rgba(229,83,75,.12);
+    --down:#4cae8a; --down-dim:rgba(76,174,138,.12);
+    --ink:#100e0b;
+    --serif:"Songti SC","STSong","Noto Serif SC","SimSun",serif;
+    --sans:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    --mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(1100px 480px at 78% -8%, rgba(232,163,61,.07), transparent 60%)}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+  /* ---- ticker：真实数据行情带 ---- */
+  .ticker{border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden;white-space:nowrap}
+  .ticker .inner{display:inline-block;padding:7px 0;animation:tk 46s linear infinite}
+  @keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .tk-item{display:inline-flex;gap:8px;align-items:baseline;margin:0 26px;font-family:var(--mono);font-size:12px}
+  .tk-item .nm{color:var(--sub)}
+  .tk-item .vl{color:var(--text);font-weight:600}
+  .tk-item .chg.u{color:var(--up)}
+  .tk-item .chg.d{color:var(--down)}
+  .tk-item .chg.f{color:var(--amber)}
+
+  /* ---- header ---- */
+  header{position:sticky;top:0;background:rgba(16,14,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:50}
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--amber);color:var(--amber);display:grid;place-items:center;font-family:var(--serif);font-size:15px;font-weight:700}
+  .brand .t1{font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.04em}
+  .brand .t2{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase}
+  nav{display:flex;gap:2px}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 13px;border-radius:4px;transition:.15s}
+  nav a:hover{color:var(--amber-hi);background:var(--amber-dim)}
+
+  /* ---- hero ---- */
+  .hero{padding:64px 0 12px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .kicker::after{content:"";width:56px;height:1px;background:linear-gradient(90deg,var(--amber),transparent)}
+  .hero h1{font-family:var(--serif);font-size:clamp(30px,4.4vw,44px);font-weight:700;line-height:1.25;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--amber-hi)}
+  .hero p.sub{color:var(--sub);margin-top:16px;max-width:700px;font-size:14.5px}
+  .hero p.sub b{color:var(--text)}
+  .stamp{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:11.5px;color:var(--faint);font-family:var(--mono)}
+  .stamp::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 8px var(--up)}
+
+  /* ---- kpi 数字墙 ---- */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);margin:44px 0 6px;border:1px solid var(--border);background:var(--panel)}
+  .kpi{padding:22px 22px 18px;border-right:1px solid var(--border);position:relative}
+  .kpi:last-child{border-right:none}
+  .kpi .v{font-size:38px;font-weight:700;font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1.05;color:var(--text)}
+  .kpi .v small{font-size:14px;color:var(--muted);font-weight:400;margin-left:3px}
+  .kpi .k{font-size:12px;color:var(--muted);margin-top:8px}
+  .kpi.gold .v{color:var(--amber-hi)}
+  .kpi.gold::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--amber)}
+
+  section{padding:58px 0 6px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-no{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.1em}
+  .sec-head h2{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:.02em}
+  .sec-head .hint{font-size:12px;color:var(--faint);margin-left:auto}
+  .sec-desc{color:var(--muted);font-size:13px;margin-bottom:22px;max-width:780px}
+
+  /* ---- matrix ---- */
+  .tabs{display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);width:fit-content;background:var(--panel)}
+  .tab{border:none;border-right:1px solid var(--border);background:transparent;color:var(--muted);font-size:13.5px;padding:10px 26px;cursor:pointer;font-family:var(--sans);transition:.15s}
+  .tab:last-child{border-right:none}
+  .tab:hover{color:var(--text)}
+  .tab.on{background:var(--amber);color:var(--ink);font-weight:700}
+  .tierlabel{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.18em;margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+  .tierlabel::after{content:"";flex:1;height:1px;background:var(--border)}
+  .tierlabel .cnt{color:var(--faint)}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--border);padding:18px 20px;transition:.18s;position:relative}
+  .card:hover{border-color:var(--border2);background:var(--panel2)}
+  .card .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+  .card .vname{font-family:var(--serif);font-weight:700;font-size:16.5px;letter-spacing:.02em}
+  .badge{font-size:10px;padding:2px 8px;border:1px solid var(--border2);color:var(--muted);font-family:var(--mono);letter-spacing:.08em}
+  .badge.core{color:var(--amber);border-color:rgba(232,163,61,.45);background:var(--amber-dim)}
+  .card .lead{color:var(--text);font-size:13.5px;line-height:1.75}
+  .card .rest{color:var(--muted);font-size:12.5px;line-height:1.7;margin-top:6px;display:none}
+  .card.open .rest{display:block}
+  .evtoggle{margin-top:12px;font-size:11.5px;color:var(--amber);cursor:pointer;user-select:none;background:none;border:none;font-family:var(--mono);padding:0;letter-spacing:.06em}
+  .evtoggle:hover{color:var(--amber-hi)}
+  .evlist{display:none;margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+  .evlist.open{display:block}
+  .ev{margin-bottom:10px;padding:11px 13px;background:var(--bg2);border-left:2px solid var(--amber)}
+  .ev .evmeta{display:flex;gap:10px;align-items:center;font-size:10.5px;font-family:var(--mono);color:var(--faint);margin-bottom:6px}
+  .ev .score{color:var(--amber)}
+  .ev .sbar{flex:0 0 70px;height:3px;background:var(--border);overflow:hidden}
+  .ev .sbar i{display:block;height:100%;background:var(--amber)}
+  .ev .etext{font-size:12px;color:var(--sub);line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* ---- tiers：色块化 ---- */
+  .tiers{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+  .tiercard{padding:20px 18px;border:1px solid var(--border);position:relative;overflow:hidden}
+  .tiercard.up{background:linear-gradient(180deg,var(--up-dim),var(--panel) 55%);border-top:3px solid var(--up)}
+  .tiercard.flat{background:linear-gradient(180deg,var(--amber-dim),var(--panel) 55%);border-top:3px solid var(--amber)}
+  .tiercard.down{background:linear-gradient(180deg,var(--down-dim),var(--panel) 55%);border-top:3px solid var(--down)}
+  .tiercard .tno{font-family:var(--mono);font-size:34px;font-weight:700;position:absolute;right:12px;top:6px;opacity:.14;letter-spacing:-.04em}
+  .tiercard.up .tno{color:var(--up)}
+  .tiercard.flat .tno{color:var(--amber)}
+  .tiercard.down .tno{color:var(--down)}
+  .tiercard h3{font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.45;margin-bottom:4px}
+  .tiercard .mode{font-size:11px;font-family:var(--mono);letter-spacing:.08em;margin-bottom:12px}
+  .tiercard.up .mode{color:var(--up)}
+  .tiercard.flat .mode{color:var(--amber)}
+  .tiercard.down .mode{color:var(--down)}
+  .tiercard .vs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .tiercard .vchip{font-size:12px;font-weight:600;padding:3px 10px;background:var(--bg2);border:1px solid var(--border2)}
+  .tiercard .note{font-size:12px;color:var(--muted);line-height:1.7}
+
+  /* ---- sellside ---- */
+  .ss{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .sscard{background:var(--panel);border:1px solid var(--border);padding:22px 24px}
+  .sscard .sshead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .sscard .ssv{font-family:var(--serif);font-weight:700;font-size:17px}
+  .sscard .sscov{font-size:11px;color:var(--muted);font-family:var(--mono)}
+  .sscard .bignum{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:-.02em;margin:6px 0 2px}
+  .sscard .bignum .rng{color:var(--amber-hi)}
+  .sscard .bignum .x{color:var(--faint);font-size:16px;margin:0 6px}
+  .sscard .bigsub{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .sscard svg{width:100%;height:auto;display:block}
+  .sscard .extra{font-size:12.5px;color:var(--sub);margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)}
+  .sscard .extra b{color:var(--up);font-weight:700}
+
+  /* ---- credibility：阶梯 ---- */
+  .credgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border)}
+  .credcol{padding:18px 16px 16px;border-right:1px solid var(--border);background:var(--panel);position:relative}
+  .credcol:last-child{border-right:none}
+  .credcol::before{content:"";position:absolute;top:0;left:0;right:0;height:var(--h,100%);background:var(--amber);opacity:.0}
+  .credcol .stair{height:8px;background:var(--amber);margin-bottom:14px;opacity:calc(1.05 - var(--i)*0.19)}
+  .credcol .lv{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.1em}
+  .credcol .nm{font-family:var(--serif);font-size:15.5px;font-weight:700;margin:3px 0 8px}
+  .credcol .ds{font-size:11.5px;color:var(--muted);line-height:1.65;margin-bottom:10px}
+  .credcol .ex{font-size:11px;color:var(--faint);line-height:1.6;padding-top:8px;border-top:1px dashed var(--border)}
+  .credcol .use{display:inline-block;font-size:10.5px;font-family:var(--mono);margin-top:10px;padding:2px 8px;border:1px solid}
+  .credcol.ok .use{color:var(--down);border-color:rgba(76,174,138,.4)}
+  .credcol.warn .use{color:var(--amber);border-color:rgba(232,163,61,.4)}
+
+  /* ---- trace ---- */
+  .trace-stats{display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);width:fit-content;background:var(--panel)}
+  .tstat{padding:12px 22px;font-size:12.5px;border-right:1px solid var(--border);color:var(--muted)}
+  .tstat:last-child{border-right:none}
+  .tstat b{font-family:var(--mono);color:var(--amber-hi);font-size:17px;margin-right:2px}
+  .compare{background:var(--panel);border:1px solid var(--border);padding:22px 24px;margin-bottom:20px}
+  .compare h4{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:16px}
+  .cmprow{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .cmprow .lbl{width:200px;font-size:12px;color:var(--muted);text-align:right;flex-shrink:0;font-family:var(--mono)}
+  .cmprow .bar{flex:1;height:26px;background:var(--bg2);overflow:hidden;position:relative}
+  .cmprow .bar i{display:block;height:100%}
+  .cmprow .pct{font-family:var(--mono);font-size:17px;width:64px;font-weight:700}
+  .tlwrap{max-height:360px;overflow-y:auto;border:1px solid var(--border);background:var(--panel)}
+  .tlrow{display:flex;gap:12px;padding:9px 20px;font-size:12.5px;border-bottom:1px solid rgba(44,38,32,.55)}
+  .tlrow:last-child{border-bottom:none}
+  .tlrow .stp{font-family:var(--mono);font-size:10.5px;color:var(--ink);background:var(--muted);padding:1px 9px;height:fit-content;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.06em}
+  .tlrow .stp.s拆解{background:#7fa8d9}
+  .tlrow .stp.s检索{background:var(--amber)}
+  .tlrow .stp.s自检{background:var(--down)}
+  .tlrow .stp.s汇总{background:var(--up);color:#fff}
+  .tlrow .dtl{color:var(--sub);line-height:1.65}
+
+  footer{margin-top:64px;border-top:1px solid var(--border);padding:26px 0 40px;color:var(--faint);font-size:12px;line-height:1.9}
+  footer b{color:var(--muted);font-family:var(--serif)}
+
+  @media(max-width:980px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .kpi{border-bottom:1px solid var(--border)}
+    .cards,.ss{grid-template-columns:1fr}
+    .tiers{grid-template-columns:repeat(2,1fr)}
+    .credgrid{grid-template-columns:1fr}
+    .credcol{border-right:none;border-bottom:1px solid var(--border)}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="inner" id="ticker"></div></div>
+
+<header><div class="wrap hbar">
+  <div class="brand">
+    <span class="mark">研</span>
+    <div><div class="t1">AI 投研 Copilot</div><div class="t2">Deep Research Terminal</div></div>
+  </div>
+  <nav>
+    <a href="#matrix">四维矩阵</a><a href="#tiers">梯队分化</a><a href="#sellside">卖方定价</a><a href="#cred">数据可信度</a><a href="#trace">研究循环</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">LLM Vendor Competitive Research</div>
+    <h1>大模型厂商竞品研究<br>基于<em>可溯源证据</em>的四维研判</h1>
+    <p class="sub">「<b>技术路线 — 产品定位 — 商业化策略 — 生态壁垒</b>」四维框架，覆盖国内核心 + 海外对标共 <b id="h-nv"></b> 家厂商。语料来自公开财报、券商研报与权威数据源，每一格结论可溯源至证据 chunk，<b>全程零编造</b>。</p>
+    <div class="stamp" id="h-stamp"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section id="matrix">
+    <div class="sec-head"><span class="sec-no">01</span><h2>四维对比矩阵</h2><span class="hint">点卡片可展开全文与证据溯源</span></div>
+    <p class="sec-desc">维度锁（确定性规则）保证每格命中对应维度章节；相关度分数为原始 TF-IDF 余弦值，未虚高。</p>
+    <div class="tabs" id="dimtabs"></div>
+    <div id="matrixbody"></div>
+  </section>
+
+  <section id="tiers">
+    <div class="sec-head"><span class="sec-no">02</span><h2>梯队分化 · 五类获利模式</h2><span class="hint">研判层为人工结论，依据均来自语料真实数据</span></div>
+    <div class="tiers" id="tierbody"></div>
+  </section>
+
+  <section id="sellside">
+    <div class="sec-head"><span class="sec-no">03</span><h2>卖方定价分歧</h2><span class="hint">仅两家已上市公司存在公开券商覆盖</span></div>
+    <p class="sec-desc">目标价区间本身就是研判素材：市场正在争论「中国 SOTA 看涨期权」如何定价。</p>
+    <div class="ss" id="ssbody"></div>
+  </section>
+
+  <section id="cred">
+    <div class="sec-head"><span class="sec-no">04</span><h2>数据可信度五档</h2><span class="hint">语料每条数据均标注来源与检索日期</span></div>
+    <div class="credgrid" id="credbody"></div>
+  </section>
+
+  <section id="trace">
+    <div class="sec-head"><span class="sec-no">05</span><h2>Deep Research 循环回放</h2><span class="hint">拆解 → 检索 → 自检 → 补检 → 汇总</span></div>
+    <div class="trace-stats" id="tracestats"></div>
+    <div class="compare">
+      <h4>Eval 驱动迭代 · 两次确定性修复</h4>
+      <div class="cmprow"><span class="lbl">v1 纯 TF-IDF · 首轮充分率</span><div class="bar"><i style="width:7%;background:var(--faint)"></i></div><span class="pct" style="color:var(--faint)">7%</span></div>
+      <div class="cmprow"><span class="lbl">v2 +维度锁 · 首轮充分率</span><div class="bar"><i style="width:100%;background:var(--down)"></i></div><span class="pct" style="color:var(--down)">100%</span></div>
+      <div class="cmprow"><span class="lbl">v2 无路由 · 开放检索 Hit@1</span><div class="bar"><i style="width:35%;background:var(--faint)"></i></div><span class="pct" style="color:var(--faint)">35%</span></div>
+      <div class="cmprow"><span class="lbl">v3 +厂商路由器 · Hit@1</span><div class="bar"><i style="width:100%;background:var(--down)"></i></div><span class="pct" style="color:var(--down)">100%</span></div>
+    </div>
+    <div class="tlwrap" id="tlwrap"><div id="tlbody"></div></div>
+  </section>
+
+  <footer>
+    <b>数据边界声明</b> · 检索日期 <span id="f-date"></span>。审计财报仅覆盖智谱（02513.HK）与 MiniMax（00100.HK）两家已上市公司；OpenAI / Anthropic / xAI / Kimi / DeepSeek / 字节为非上市公司，财务数字均来自媒体转述或分析师估算；Meta 不单独披露 AI 业务财务。本页为方法论演示（demo），数据为检索时点快照，不构成投资建议。
+  </footer>
+</div>
+
+<script>
+const DATA = __DATA__;
+const M = DATA.matrix, T = DATA.trace, META = DATA.meta;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('#h-nv').textContent = META.nVendors;
+$('#h-stamp').textContent = 'DATA SNAPSHOT ' + META.retrievedAt + ' · MODE ' + M.mode;
+$('#f-date').textContent = META.retrievedAt;
+
+/* Ticker：真实数据滚动带（红涨绿跌） */
+const TK = [
+  {nm:'智谱 02513.HK 营收', vl:'8.02亿港元', chg:'+137.7%', c:'u'},
+  {nm:'MiniMax 00100.HK 营收', vl:'6.15亿港元', chg:'+159.6%', c:'u'},
+  {nm:'智谱 目标价区间', vl:'688–2043', chg:'21家覆盖', c:'f'},
+  {nm:'MiniMax 目标均价/现价', vl:'800 / 197', chg:'背离≈3×', c:'d'},
+  {nm:'Kimi ARR', vl:'$3亿', chg:'据报道', c:'u'},
+  {nm:'阶跃 Pre-IPO', vl:'$25亿', chg:'拟港股', c:'f'},
+  {nm:'零一万物 2025收入', vl:'2.5亿', chg:'转型对照', c:'d'},
+  {nm:'豆包 MaaS 份额', vl:'IDC 第一', chg:'大厂生态', c:'f'},
+];
+const tkHTML = TK.map(t=>`<span class="tk-item"><span class="nm">${esc(t.nm)}</span><span class="vl">${esc(t.vl)}</span><span class="chg ${t.c}">${esc(t.chg)}</span></span>`).join('');
+$('#ticker').innerHTML = tkHTML + tkHTML;
+
+/* KPIs */
+const kpis = [
+  {v: META.nVendors, s:' 家', k:'覆盖厂商 · 核心 '+META.nCore+' + 对标 '+META.nOverseas, gold:true},
+  {v: META.nEvidence, s:' 条', k:'可溯源证据（矩阵层）'},
+  {v: 52, s:' 个', k:'Deep Research 子查询'},
+  {v: '100', s:'%', k:'首轮证据充分率（维度锁后）', gold:true},
+  {v: 5, s:' 档', k:'数据来源可信度分级'},
+];
+$('#kpis').innerHTML = kpis.map(x =>
+  `<div class="kpi${x.gold?' gold':''}"><div class="v">${x.v}<small>${x.s}</small></div><div class="k">${x.k}</div></div>`).join('');
+
+/* Matrix：摘要只露首句，点开看全文+证据 */
+const dims = M.dimensions;
+const tiers = M.tiers;
+const vendorNames = Object.keys(M.vendors);
+const coreV = vendorNames.filter(v => tiers[v] === '国内核心');
+const oversV = vendorNames.filter(v => tiers[v] === '海外对标');
+let curDim = dims[0];
+
+$('#dimtabs').innerHTML = dims.map(d =>
+  `<button class="tab${d===curDim?' on':''}" data-d="${esc(d)}">${esc(d)}</button>`).join('');
+$('#dimtabs').addEventListener('click', e => {
+  const b = e.target.closest('.tab'); if (!b) return;
+  curDim = b.dataset.d;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t === b));
+  renderMatrix();
+});
+
+function splitLead(text) {
+  const t = String(text || '—');
+  const i = t.search(/[。；;]/);
+  if (i < 0 || i > 130) return [t.slice(0, 130) + (t.length > 130 ? '…' : ''), t.length > 130 ? t : ''];
+  return [t.slice(0, i + 1), t.slice(i + 1).trim()];
+}
+function cardHTML(v) {
+  const cell = M.vendors[v][curDim] || {};
+  const evs = cell.evidence || [];
+  const isCore = tiers[v] === '国内核心';
+  const [lead, rest] = splitLead(cell.summary);
+  const evHTML = evs.map(e => `
+    <div class="ev">
+      <div class="evmeta"><span class="score num">SCORE ${e.score.toFixed(3)}</span>
+        <span class="sbar"><i style="width:${Math.min(100, e.score*400)}%"></i></span>
+        <span>§${esc(e.section)}</span><span>${esc(e.source)}</span></div>
+      <div class="etext">${esc(e.text)}</div>
+    </div>`).join('');
+  return `<div class="card">
+    <div class="top"><span class="vname">${esc(v)}</span><span class="badge${isCore?' core':''}">${esc(tiers[v]||'')}</span></div>
+    <div class="lead">${esc(lead)}</div>
+    ${rest ? `<div class="rest">${esc(rest)}</div>` : ''}
+    ${(rest || evs.length) ? `<button class="evtoggle">▸ 全文 + 证据 ${evs.length} 条</button><div class="evlist">${evHTML}</div>` : ''}
+  </div>`;
+}
+function renderMatrix() {
+  $('#matrixbody').innerHTML =
+    `<div class="tierlabel">CORE · 国内核心层 <span class="cnt">${coreV.length} 家</span></div><div class="cards">${coreV.map(cardHTML).join('')}</div>
+     <div class="tierlabel">BENCHMARK · 海外对标层 <span class="cnt">${oversV.length} 家</span></div><div class="cards">${oversV.map(cardHTML).join('')}</div>`;
+}
+renderMatrix();
+document.addEventListener('click', e => {
+  const t = e.target.closest('.evtoggle'); if (!t) return;
+  const card = t.closest('.card');
+  const list = t.nextElementSibling;
+  const open = list.classList.toggle('open');
+  card.classList.toggle('open', open);
+  t.textContent = (open ? '▾ 收起' : '▸ 全文 + 证据 ' + (list.children.length) + ' 条');
+});
+
+/* Tiers */
+const MODE_EN = {up:'RE-RATING', flat:'STEADY', down:'FALLING BEHIND'};
+$('#tierbody').innerHTML = DATA.tierModel.map((t, i) => {
+  const parts = t.name.match(/^(.+?)（(.+?)）$/) || [null, t.name, ''];
+  return `
+  <div class="tiercard ${t.tone}" style="grid-column:span ${t.vendors.length > 1 ? 2 : 1}">
+    <span class="tno">${String(i+1).padStart(2,'0')}</span>
+    <h3>${esc(parts[1])}</h3>
+    <div class="mode">${esc(parts[2] || '')} · ${MODE_EN[t.tone]}</div>
+    <div class="vs">${t.vendors.map(v => `<span class="vchip">${esc(v)}</span>`).join('')}</div>
+    <div class="note">${esc(t.note)}</div>
+  </div>`;
+}).join('');
+
+/* Sellside — 大数字 + 棒棒糖区间图 */
+function ssSVG(s) {
+  const W = 480, H = 110, padL = 18, padR = 18;
+  const min = Math.min(s.low, s.spot ?? s.low) * 0.8;
+  const max = s.high * 1.07;
+  const x = v => padL + (v - min) / (max - min) * (W - padL - padR);
+  const y = 56;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#2c2620" stroke-width="1"/>`;
+  svg += `<line x1="${x(s.low)}" y1="${y}" x2="${x(s.high)}" y2="${y}" stroke="#3a3229" stroke-width="8" stroke-linecap="round"/>`;
+  svg += `<line x1="${x(s.low)}" y1="${y}" x2="${x(s.avg)}" y2="${y}" stroke="#e8a33d" stroke-width="8" stroke-linecap="round" opacity=".9"/>`;
+  const marks = [
+    {v: s.low, lbl: s.low_label, c: '#8a7f6c', dy: -16},
+    {v: s.avg, lbl: s.avg_label, c: '#ffc562', dy: 30, big: true},
+    {v: s.high, lbl: s.high_label, c: '#8a7f6c', dy: -16},
+  ];
+  for (const m of marks) {
+    const cx = x(m.v);
+    svg += `<line x1="${cx}" y1="${y-8}" x2="${cx}" y2="${y+8}" stroke="${m.c}" stroke-width="${m.big?3:2}"/>`;
+    svg += `<circle cx="${cx}" cy="${y}" r="${m.big?6:4.5}" fill="${m.c}"/>`;
+    const anchor = cx < 95 ? 'start' : (cx > W - 95 ? 'end' : 'middle');
+    svg += `<text x="${cx}" y="${y + m.dy}" fill="${m.c}" font-size="${m.big?11.5:10.5}" font-weight="${m.big?700:400}" text-anchor="${anchor}" font-family="SF Mono,Menlo,monospace">${esc(m.lbl)}</text>`;
+  }
+  if (s.spot != null) {
+    const cx = x(s.spot);
+    svg += `<line x1="${cx}" y1="${y-22}" x2="${cx}" y2="${y+14}" stroke="#e5534b" stroke-width="3"/>`;
+    svg += `<text x="${cx}" y="${y+30}" fill="#e5534b" font-size="11.5" font-weight="700" text-anchor="${cx < 95 ? 'start' : 'middle'}" font-family="SF Mono,Menlo,monospace">现价 ${s.spot}</text>`;
+  }
+  svg += `</svg>`;
+  return svg;
+}
+$('#ssbody').innerHTML = DATA.sellside.map(s => `
+  <div class="sscard">
+    <div class="sshead"><span class="ssv">${esc(s.vendor)}</span><span class="sscov">${esc(s.coverage)} · ${esc(s.unit)}</span></div>
+    <div class="bignum"><span class="rng">${s.low}<span class="x">—</span>${s.high}</span></div>
+    <div class="bigsub">${s.spot != null ? '目标价区间 vs 现价 ' + s.spot : '目标价区间 · 高低分歧 ' + (s.high/s.low).toFixed(1) + '×'}</div>
+    ${ssSVG(s)}
+    <div class="extra">${s.spot != null ? s.extra.replace(/背离约 3 倍/, '<b>背离约 3 倍</b>') : esc(s.extra)}</div>
+  </div>`).join('');
+
+/* Credibility：阶梯列 */
+$('#credbody').innerHTML = DATA.credTiers.map((c, i) => `
+  <div class="credcol ${i < 3 ? 'ok' : 'warn'}" style="--i:${i}">
+    <div class="stair" style="width:${100 - i*17}%"></div>
+    <div class="lv">TIER ${c.level}</div>
+    <div class="nm">${esc(c.name)}</div>
+    <div class="ds">${esc(c.desc)}</div>
+    <div class="ex">${esc(c.examples)}</div><br>
+    <span class="use">${esc(c.use)}</span>
+  </div>`).join('');
+
+/* Trace */
+const st = T.stats || {};
+$('#tracestats').innerHTML = [
+  `<b class="num">52</b> 子查询（13 厂商 × 4 维）`,
+  `<b class="num">${st.initial_pass ?? '—'}</b> 首轮充分`,
+  `<b class="num">${st.refined ?? 0}</b> 触发补检`,
+  `<b class="num">0</b> 证据待补`,
+].map(x => `<div class="tstat">${x}</div>`).join('');
+
+const steps = T.trace || [];
+$('#tlbody').innerHTML = steps.map(s => {
+  const step = s.step || '';
+  const cls = ['拆解','检索','自检','汇总'].find(k => step.includes(k)) || '';
+  return `<div class="tlrow"><span class="stp s${cls}">${esc(step)}</span><span class="dtl">${esc(s.detail || '')}</span></div>`;
+}).join('');
+</script>
+</body>
+</html>

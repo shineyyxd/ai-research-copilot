@@ -1,0 +1,347 @@
+{
+  "summary": {
+    "date": "2026-07-28",
+    "goldset_size": 20,
+    "top_k": 3,
+    "baseline_no_router": {
+      "vendor_hit@1": 0.35,
+      "vendor_hit@3": 0.6,
+      "section_hit@1": 0.35,
+      "fact_recall@3": 0.7,
+      "full_fact_items": "12/20"
+    },
+    "open_retrieval": {
+      "vendor_hit@1": 1.0,
+      "vendor_hit@3": 1.0,
+      "section_hit@1": 1.0,
+      "fact_recall@3": 1.0,
+      "full_fact_items": "20/20"
+    },
+    "locked_retrieval": {
+      "fact_recall@3": 0.967,
+      "full_fact_items": "19/20"
+    }
+  },
+  "detail": [
+    {
+      "id": "g01",
+      "question": "智谱 IPO 募资了多少钱，在哪个交易所上市？",
+      "vendor": "智谱",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "智谱§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g02",
+      "question": "智谱 2025 年收入增速是多少？",
+      "vendor": "智谱",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "智谱§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g03",
+      "question": "券商给智谱的目标价分歧有多大？",
+      "vendor": "智谱",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "智谱§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g04",
+      "question": "智谱的模型技术路线是什么？",
+      "vendor": "智谱",
+      "dim": "技术路线",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "智谱§技术路线"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g05",
+      "question": "MiniMax 2025 年收入和增速如何？",
+      "vendor": "MiniMax",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "MiniMax§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g06",
+      "question": "MiniMax 的财务风险主要在哪里？",
+      "vendor": "MiniMax",
+      "dim": "生态壁垒",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "MiniMax§生态壁垒"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g07",
+      "question": "MiniMax 海外用户规模有多大？",
+      "vendor": "MiniMax",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "MiniMax§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g08",
+      "question": "Kimi 的 ARR 增长轨迹是怎样的？",
+      "vendor": "月之暗面（Kimi）",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "月之暗面（Kimi）§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g09",
+      "question": "Kimi K3 模型的参数规模和架构？",
+      "vendor": "月之暗面（Kimi）",
+      "dim": "技术路线",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "月之暗面（Kimi）§技术路线"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g10",
+      "question": "月之暗面创始人的持股和控制权情况？",
+      "vendor": "月之暗面（Kimi）",
+      "dim": "生态壁垒",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "月之暗面（Kimi）§生态壁垒"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g11",
+      "question": "DeepSeek 首轮外部融资的规模和投资方？",
+      "vendor": "DeepSeek",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "DeepSeek§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g12",
+      "question": "DeepSeek 团队规模有多精简？",
+      "vendor": "DeepSeek",
+      "dim": "生态壁垒",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "DeepSeek§生态壁垒"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g13",
+      "question": "DeepSeek 最新旗舰模型的参数量？",
+      "vendor": "DeepSeek",
+      "dim": "技术路线",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "DeepSeek§技术路线"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g14",
+      "question": "阶跃星辰的终端装机量和 Pre-IPO 融资情况？",
+      "vendor": "阶跃星辰",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "阶跃星辰§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "1/2"
+      }
+    },
+    {
+      "id": "g15",
+      "question": "阶跃星辰 Step 3 模型是什么架构？",
+      "vendor": "阶跃星辰",
+      "dim": "技术路线",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "阶跃星辰§技术路线"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g16",
+      "question": "零一万物转型后的收入和订单情况？",
+      "vendor": "零一万物",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "零一万物§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    },
+    {
+      "id": "g17",
+      "question": "字节豆包的用户规模在国内什么位置？",
+      "vendor": "字节豆包",
+      "dim": "产品定位",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "字节豆包§产品定位"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g18",
+      "question": "Anthropic 的估值和 ARR 到什么水平了？",
+      "vendor": "Anthropic",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "Anthropic§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g19",
+      "question": "xAI Grok 在美国市场的份额？",
+      "vendor": "xAI（Grok）",
+      "dim": "产品定位",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "1/1",
+        "top1": "xAI（Grok）§产品定位"
+      },
+      "locked": {
+        "fact_recall": "1/1"
+      }
+    },
+    {
+      "id": "g20",
+      "question": "华泰和美银给 MiniMax 的目标价分别是多少？",
+      "vendor": "MiniMax",
+      "dim": "商业化策略",
+      "open": {
+        "vendor_hit@1": true,
+        "vendor_hit@3": true,
+        "section_hit@1": true,
+        "fact_recall": "2/2",
+        "top1": "MiniMax§商业化策略"
+      },
+      "locked": {
+        "fact_recall": "2/2"
+      }
+    }
+  ]
+}

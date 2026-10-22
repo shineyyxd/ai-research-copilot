@@ -1,0 +1,825 @@
+{
+ "date": "2026-07-27",
+ "items": [
+  {
+   "src": "github",
+   "title": "xai-org/grok-build",
+   "url": "https://github.com/xai-org/grok-build",
+   "desc": "SpaceXAI's coding agent harness and TUI. Fullscreen, mouse interactive, extensible.",
+   "stars": 22916,
+   "lang": "Rust",
+   "created": "2026-07-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "lopopolo/harness-engineering",
+   "url": "https://github.com/lopopolo/harness-engineering",
+   "desc": "🐎 Ryan Lopopolo’s anthology, field guide, and agent context bundle for harness engineering",
+   "stars": 2372,
+   "lang": "Python",
+   "created": "2026-07-18",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "nethical6/conversation-steganography",
+   "url": "https://github.com/nethical6/conversation-steganography",
+   "desc": "Use LLMs to hide messages inside normal looking conversations",
+   "stars": 1138,
+   "lang": "Go",
+   "created": "2026-07-17",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Jakubantalik/thinking-orbs",
+   "url": "https://github.com/Jakubantalik/thinking-orbs",
+   "desc": "Dotted thought-orb loading indicators for AI & agent UIs — six tuned states, two sizes, auto dark/light",
+   "stars": 1131,
+   "lang": "TypeScript",
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "pyang5166/gbro-collage-broll",
+   "url": "https://github.com/pyang5166/gbro-collage-broll",
+   "desc": "半调纸拼贴 B-roll 生成 skill：三闸门审批，Gemini Omni Flash 首尾帧组装动画 | Editorial halftone paper-collage B-roll agent skill",
+   "stars": 819,
+   "lang": "Python",
+   "created": "2026-07-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "pireel/pireel",
+   "url": "https://github.com/pireel/pireel",
+   "desc": "Open-source, backend-free AI video editor for talking-head video — storyboarding, designed graphics, kinetic captions, themes and in-browser WebCodecs export. Drivable by any AI agent over MCP.",
+   "stars": 787,
+   "lang": "TypeScript",
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "makecindy/cindy",
+   "url": "https://github.com/makecindy/cindy",
+   "desc": "Consider it done. The open-source AI agent that works out of the box · 想到，就能做到。开源、开箱即用的 AI Agent。",
+   "stars": 768,
+   "lang": "TypeScript",
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "gnipbao/story-to-handdrawn-video",
+   "url": "https://github.com/gnipbao/story-to-handdrawn-video",
+   "desc": "Agent skill: convert Chinese story copy or ordered images into a hand-drawn diary-comic animation (silent MP4 picture track).",
+   "stars": 659,
+   "lang": "JavaScript",
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "stackblitz/bolt-slides",
+   "url": "https://github.com/stackblitz/bolt-slides",
+   "desc": "Use any agent to create stunning, interactive presentations",
+   "stars": 652,
+   "lang": "TypeScript",
+   "created": "2026-07-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "hahhforest/pi-textbook",
+   "url": "https://github.com/hahhforest/pi-textbook",
+   "desc": "《动手学 Pi》：沿 15 个真实 checkpoint 从零构建 Pi-style Agent",
+   "stars": 553,
+   "lang": "TypeScript",
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "0xsline/OpenChatCut",
+   "url": "https://github.com/0xsline/OpenChatCut",
+   "desc": "Local-first conversational AI video editor with a professional multi-track timeline, Agent Skills, MCP integration, and Remotion-powered rendering.",
+   "stars": 550,
+   "lang": "TypeScript",
+   "created": "2026-07-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "yc-duan/fastctx",
+   "url": "https://github.com/yc-duan/fastctx",
+   "desc": "Fast, context-efficient repository tools for AI agents (MCP)",
+   "stars": 548,
+   "lang": "Rust",
+   "created": "2026-07-17",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "VictorTaelin/OptMem",
+   "url": "https://github.com/VictorTaelin/OptMem",
+   "desc": "Permanent memory for AI agents. A 426-token prompt, a script, plug and play.",
+   "stars": 507,
+   "lang": "Python",
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "vshulcz/deja-vu",
+   "url": "https://github.com/vshulcz/deja-vu",
+   "desc": "Your agents already solved this. deja finds it — memory operations for seventeen coding agents: retroactive search and MCP recall (84.9% hit@1 on LongMemEval-S, no LLM), search by when it happened, a ",
+   "stars": 483,
+   "lang": "Go",
+   "created": "2026-07-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "mikehasa/agentacct",
+   "url": "https://github.com/mikehasa/agentacct",
+   "desc": "Local-first Agent Work Intelligence for coding agents: usage truth, recorded work, and honest joins. Read-only over coding-agent logs; zero-JavaScript localhost dashboard.",
+   "stars": 467,
+   "lang": "Python",
+   "created": "2026-07-24",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "SeanJ1ang/design-judge-skills",
+   "url": "https://github.com/SeanJ1ang/design-judge-skills",
+   "desc": "Evidence-driven Agent Skills for design award research, evaluation, award matching, entry writing, and submission readiness.",
+   "stars": 453,
+   "lang": "Python",
+   "created": "2026-07-18",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Kritt-ai/open-kritt",
+   "url": "https://github.com/Kritt-ai/open-kritt",
+   "desc": "Orchestrate AI agents to find real vulnerabilities in code.",
+   "stars": 428,
+   "lang": "JavaScript",
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "KinetiNode/claude-fable-5-system-prompt-clean",
+   "url": "https://github.com/KinetiNode/claude-fable-5-system-prompt-clean",
+   "desc": "the optimized, token-efficient version of the leaked Claude Fable 5 / Mythos 5 system prompt. Re-engineered into clean Markdown for universal execution on Gemini 3.1 Pro, ChatGPT 5.6, and advanced LLM",
+   "stars": 426,
+   "lang": null,
+   "created": "2026-07-19",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "EthanXiang777/circuit-framework",
+   "url": "https://github.com/EthanXiang777/circuit-framework",
+   "desc": "Circuit Framework — multi-agent LLM trading research system",
+   "stars": 399,
+   "lang": "Python",
+   "created": "2026-07-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "thesysdev/appless",
+   "url": "https://github.com/thesysdev/appless",
+   "desc": "What if your phone had no apps",
+   "stars": 338,
+   "lang": "TypeScript",
+   "created": "2026-07-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "RinDig/icm-architect",
+   "url": "https://github.com/RinDig/icm-architect",
+   "desc": "Claude skill: design any process, idea, or problem into an ICM workspace (folder structure as agent architecture), or restructure an existing folder into one",
+   "stars": 331,
+   "lang": null,
+   "created": "2026-07-18",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "KlaatAI/klaatcode",
+   "url": "https://github.com/KlaatAI/klaatcode",
+   "desc": "Open-source AI coding agent for the terminal. Claude Code-grade accuracy with smart model routing — uses the right AI model for each task, cutting costs 10x. Supports Claude, GPT, Gemini, DeepSeek & m",
+   "stars": 305,
+   "lang": "TypeScript",
+   "created": "2026-07-17",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "NVIDIA-NeMo/labs-OO-Agents",
+   "url": "https://github.com/NVIDIA-NeMo/labs-OO-Agents",
+   "desc": "labs-OO-agents",
+   "stars": 298,
+   "lang": "Python",
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "larashero3-dotcom/lieflat-charts",
+   "url": "https://github.com/larashero3-dotcom/lieflat-charts",
+   "desc": "面向 AI Agents 的单色数据可视化 Skill，将数据快速生成精致、可交互的 HTML 图表",
+   "stars": 295,
+   "lang": "HTML",
+   "created": "2026-07-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "joeseesun/qiaomu-cut-skill",
+   "url": "https://github.com/joeseesun/qiaomu-cut-skill",
+   "desc": "乔木智能视频导演 Skill：素材治理、双语字幕、品牌包装与可复现渲染 | Agent-native video director with governed sourcing and verifiable rendering",
+   "stars": 283,
+   "lang": "JavaScript",
+   "created": "2026-07-18",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "realfishsam/agent-notch",
+   "url": "https://github.com/realfishsam/agent-notch",
+   "desc": "The open-source alternative to vibe-island",
+   "stars": 281,
+   "lang": "Swift",
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Eversmile12/leaked-llm-prompts",
+   "url": "https://github.com/Eversmile12/leaked-llm-prompts",
+   "desc": "collections-of-leaked-prompts",
+   "stars": 276,
+   "lang": null,
+   "created": "2026-07-24",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TryCaspian/caspian-sdk",
+   "url": "https://github.com/TryCaspian/caspian-sdk",
+   "desc": "Agent communication SDK. The open-source agent communication layer for AI agents — email, WhatsApp, Slack, Discord, Telegram, SMS. Python & TypeScript.",
+   "stars": 258,
+   "lang": "Python",
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "PromptPartner/agentsmith",
+   "url": "https://github.com/PromptPartner/agentsmith",
+   "desc": "Universal, model-agnostic operating harness for AI agents (Claude, Codex, Gemini, …) — a lean core + work-type profiles assembled by one setup script.",
+   "stars": 255,
+   "lang": "Shell",
+   "created": "2026-07-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "CyberSunil/LLMVault",
+   "url": "https://github.com/CyberSunil/LLMVault",
+   "desc": "An intentionally vulnerable OWASP LLM Top 10 training platform for AI Security, Prompt Injection, RAG Security, Agent Security, and GenAI penetration testing.",
+   "stars": 253,
+   "lang": "Python",
+   "created": "2026-07-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Be skeptical of OpenAI's rogue hacker agent story",
+   "url": "https://www.theguardian.com/technology/2026/jul/24/openai-rogue-hacker",
+   "desc": "",
+   "points": 537,
+   "comments": 295,
+   "created": "2026-07-24",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Jack Dorsey launches Buzz to combine team chat, AI agents and Git hosting",
+   "url": "https://runtimewire.com/article/jack-dorsey-block-buzz-team-chat-ai-agents-git",
+   "desc": "",
+   "points": 376,
+   "comments": 338,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Agent swarms and the new model economics",
+   "url": "https://cursor.com/blog/agent-swarm-model-economics",
+   "desc": "",
+   "points": 276,
+   "comments": 143,
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: OneCLI – OSS credential gateway that keeps secrets out of AI agents",
+   "url": "https://github.com/onecli/onecli",
+   "desc": "",
+   "points": 109,
+   "comments": 32,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Screenpipe (YC S26) – Record how you work and turn that into agents",
+   "url": "https://news.ycombinator.com/item?id=49024620",
+   "desc": "",
+   "points": 85,
+   "comments": 63,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Fourth Circuit: Border Agents Can Search Your Phone by Hand, No Suspicion Needed",
+   "url": "https://www.eff.org/deeplinks/2026/07/fourth-circuit-says-border-agents-can-search-your-phone-hand-no-suspicion-required",
+   "desc": "",
+   "points": 67,
+   "comments": 15,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: DeepSQL – A self-hostable DBA agent for Postgres and MySQL",
+   "url": "https://deepsql.ai/",
+   "desc": "",
+   "points": 52,
+   "comments": 35,
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "AI Agent – TRMNL",
+   "url": "https://help.trmnl.com/en/articles/14130438-ai-agent",
+   "desc": "",
+   "points": 51,
+   "comments": 29,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Yorishiro – a macOS terminal where AI agents live",
+   "url": "https://github.com/sktkkoo/Yorishiro",
+   "desc": "",
+   "points": 42,
+   "comments": 13,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+   "url": "https://fireworks.ai/blog/kimik3-fable",
+   "desc": "",
+   "points": 877,
+   "comments": 447,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+   "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+   "desc": "",
+   "points": 757,
+   "comments": 575,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Echo – Fable-level results at 1/3 the cost using open-weight models",
+   "url": "https://news.ycombinator.com/item?id=49026810",
+   "desc": "",
+   "points": 476,
+   "comments": 222,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Palmier Pro – Open-source macOS video editor built for AI",
+   "url": "https://github.com/palmier-io/palmier-pro",
+   "desc": "",
+   "points": 190,
+   "comments": 39,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: A self-running space economy SIM in Rust and Bevy",
+   "url": "https://github.com/Kalcode/spaceprojectsim",
+   "desc": "",
+   "points": 110,
+   "comments": 30,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: CodeAlmanac – Karpathy-style codebase wiki from your conversations",
+   "url": "https://github.com/AlmanacCode/codealmanac/",
+   "desc": "",
+   "points": 60,
+   "comments": 21,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Unlayer (YC W22) – Add email and document builders to your app",
+   "url": "https://unlayer.com",
+   "desc": "",
+   "points": 56,
+   "comments": 39,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: I left Figma to build a diffusion-based UI design tool",
+   "url": "https://diffui.ai/blog/show-hn",
+   "desc": "",
+   "points": 46,
+   "comments": 12,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Distill and serve models with frontier quality for half the cost",
+   "url": "https://github.com/experientiallabs/world-model-optimizer",
+   "desc": "",
+   "points": 43,
+   "comments": 21,
+   "created": "2026-07-26",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Why Software Factories Fail (or: harness engineering is not enough)",
+   "url": "https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/wsff.md",
+   "desc": "",
+   "points": 390,
+   "comments": 270,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Gemini 3.6 Flash",
+   "url": "https://console.cloud.google.com/agent-platform/publishers/google/model-garden/gemini-3.6-flash",
+   "desc": "",
+   "points": 74,
+   "comments": 73,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Running a 28.9M parameter LLM on an $8 microcontroller",
+   "url": "https://github.com/slvDev/esp32-ai",
+   "desc": "",
+   "points": 277,
+   "comments": 70,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "LLM Usage in Debian: Three Proposals",
+   "url": "https://www.debian.org/vote/2026/vote_002",
+   "desc": "",
+   "points": 209,
+   "comments": 208,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Protecting our FLOSS commons from LLMs",
+   "url": "https://blog.codeberg.org/protecting-our-floss-commons-from-llms.html",
+   "desc": "",
+   "points": 199,
+   "comments": 144,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Hetzner is working on LLM Inference",
+   "url": "https://sliplane.io/blog/hetzner-inference",
+   "desc": "",
+   "points": 155,
+   "comments": 87,
+   "created": "2026-07-24",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Petals: Run LLMs at home, BitTorrent-style",
+   "url": "https://petals.dev/",
+   "desc": "",
+   "points": 137,
+   "comments": 38,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Can a MUD evaluate LLMs? A $99 proof of concept",
+   "url": "https://cruciblebench.ai/",
+   "desc": "",
+   "points": 109,
+   "comments": 78,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Controlling Reasoning Effort in LLMs",
+   "url": "https://magazine.sebastianraschka.com/p/controlling-reasoning-effort-in-llms",
+   "desc": "",
+   "points": 84,
+   "comments": 8,
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Becoming a Research Engineer at a Big LLM Lab",
+   "url": "https://www.maxmynter.com/pages/blog/jobhunt",
+   "desc": "",
+   "points": 50,
+   "comments": 18,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Codeberg: ToU extension to prohibit LLM-extrusions",
+   "url": "https://codeberg.org/Codeberg/org/pulls/1253",
+   "desc": "",
+   "points": 49,
+   "comments": 78,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: I simulated closing the Strait of Hormuz on real oil trade data",
+   "url": "https://globaloilnetwork.staffinganalytics.io/",
+   "desc": "",
+   "points": 242,
+   "comments": 128,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Bloomy (YC S26) – AI-powered mastery learning for K-12",
+   "url": "https://news.ycombinator.com/item?id=48981136",
+   "desc": "",
+   "points": 100,
+   "comments": 107,
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Brazilian farmers tokenized dairy cows to get loans, bypassing bank limits",
+   "url": "https://www.coindesk.com/markets/2026/07/24/brazilian-farmers-tokenized-dairy-cows-to-get-loans-bypassing-bank-lending-limits",
+   "desc": "",
+   "points": 60,
+   "comments": 52,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Cactus Hybrid: We taught Gemma 4 to know when it's wrong",
+   "url": "https://github.com/cactus-compute/cactus-hybrid",
+   "desc": "",
+   "points": 186,
+   "comments": 44,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Trifle – Open-source analytics that stores answers, not events",
+   "url": "https://trifle.io/",
+   "desc": "",
+   "points": 49,
+   "comments": 17,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "The front end framework for correctness: built on Effect, architected like Elm",
+   "url": "https://foldkit.dev/",
+   "desc": "",
+   "points": 93,
+   "comments": 50,
+   "created": "2026-07-24",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "I regret migrating to Codeberg",
+   "url": "https://xn--gckvb8fzb.com/i-regret-migrating-to-codeberg/",
+   "desc": "",
+   "points": 551,
+   "comments": 563,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Alphabet's cash burn raises alarm for Big Tech as AI spending climbs",
+   "url": "https://www.reuters.com/business/retail-consumer/alphabets-cash-burn-raises-alarm-big-tech-ai-spending-climbs-2026-07-23/",
+   "desc": "",
+   "points": 274,
+   "comments": 283,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "An ESP32 based plane radar for my desk",
+   "url": "https://blog.ktz.me/esp32-plane-radar/",
+   "desc": "",
+   "points": 261,
+   "comments": 54,
+   "created": "2026-07-26",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Bitchat is now on Radicle",
+   "url": "https://radicle.network/nodes/rosa.radicle.network/rad%3Az2v9tRJz1oknFAqCSY5W5c76nVvm6",
+   "desc": "",
+   "points": 258,
+   "comments": 146,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "It's a shame what's happened to radio",
+   "url": "https://blog.jimgrey.net/2026/07/21/its-a-shame-whats-happened-to-radio-3/",
+   "desc": "",
+   "points": 229,
+   "comments": 281,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Clinical failure rates over the decades: yikes",
+   "url": "https://www.science.org/content/blog-post/clinical-failure-rates-over-decades-yikes",
+   "desc": "",
+   "points": 141,
+   "comments": 131,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Jimothy the raccoon has a rare spinal condition. Here's what that means",
+   "url": "https://www.popsci.com/science/whats-jimothy-raccoon-condition/",
+   "desc": "",
+   "points": 119,
+   "comments": 59,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "A solid-state “atomic channel” for separating rare earth elements",
+   "url": "https://pme.uchicago.edu/news-events/news/cleaner-route-purifying-rare-earth-elements",
+   "desc": "",
+   "points": 102,
+   "comments": 32,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "My falling-out with the rationalist community",
+   "url": "https://lcamtuf.substack.com/p/my-falling-out-with-the-rationalist",
+   "desc": "",
+   "points": 90,
+   "comments": 159,
+   "created": "2026-07-20",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Imagin Raw – A 9MB Open-Source Alternative to Adobe Bridge for Mac",
+   "url": "https://github.com/cristibaluta/Imagin-Raw",
+   "desc": "",
+   "points": 74,
+   "comments": 25,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Neo Radar: A browser-based orbital mechanics engine with 41k real asteroids",
+   "url": "https://neoradar.space",
+   "desc": "",
+   "points": 59,
+   "comments": 25,
+   "created": "2026-07-22",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "What if the RAM/GPU shortage is deliberate?",
+   "url": "https://xn--vk5b17r.online/posts/ram-gpu-consp/",
+   "desc": "",
+   "points": 54,
+   "comments": 22,
+   "created": "2026-07-25",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "How Unix spell ran in 64 kB of RAM",
+   "url": "https://blog.codingconfessions.com/p/how-unix-spell-ran-in-64kb-ram",
+   "desc": "",
+   "points": 44,
+   "comments": 3,
+   "created": "2026-07-27",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Computational chemistry, Locally? My rant on SSH",
+   "url": "https://chillphysicsenjoyer.substack.com/p/computational-chemistry-locally",
+   "desc": "",
+   "points": 41,
+   "comments": 42,
+   "created": "2026-07-21",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Tell HN: Namecheap gave my account to an unverified third party",
+   "url": "https://news.ycombinator.com/item?id=49028037",
+   "desc": "",
+   "points": 493,
+   "comments": 175,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Physically accurate black hole you can put in your room",
+   "url": "https://blackhole.plav.in",
+   "desc": "",
+   "points": 361,
+   "comments": 108,
+   "created": "2026-07-23",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Brolly, a plain-text weather forecast site",
+   "url": "https://brolly.sh/forecast/RWFP2qW8",
+   "desc": "",
+   "points": 224,
+   "comments": 82,
+   "created": "2026-07-25",
+   "is_new": true
+  }
+ ]
+}

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 投研 Copilot · 大模型厂商竞品研究终端</title>
+<style>
+  /* ============ v2 · 投研终端风 ============
+     暖黑底 + 琥珀主色 + 衬线中文大标题 + 等宽数字
+     红涨绿跌（中国市场惯例）                     */
+  :root{
+    --bg:#100e0b; --bg2:#161310; --panel:#1a1712; --panel2:#211d17;
+    --border:#2c2620; --border2:#3a3229;
+    --text:#ede7dc; --sub:#b3a893; --muted:#8a7f6c; --faint:#5f574a;
+    --amber:#e8a33d; --amber-hi:#ffc562; --amber-dim:rgba(232,163,61,.10);
+    --up:#e5534b; --up-dim:rgba(229,83,75,.12);
+    --down:#4cae8a; --down-dim:rgba(76,174,138,.12);
+    --ink:#100e0b;
+    --serif:"Songti SC","STSong","Noto Serif SC","SimSun",serif;
+    --sans:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    --mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(1100px 480px at 78% -8%, rgba(232,163,61,.07), transparent 60%)}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+
+  /* ---- ticker：真实数据行情带 ---- */
+  .ticker{border-bottom:1px solid var(--border);background:var(--bg2);overflow:hidden;white-space:nowrap}
+  .ticker .inner{display:inline-block;padding:7px 0;animation:tk 46s linear infinite}
+  @keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .tk-item{display:inline-flex;gap:8px;align-items:baseline;margin:0 26px;font-family:var(--mono);font-size:12px}
+  .tk-item .nm{color:var(--sub)}
+  .tk-item .vl{color:var(--text);font-weight:600}
+  .tk-item .chg.u{color:var(--up)}
+  .tk-item .chg.d{color:var(--down)}
+  .tk-item .chg.f{color:var(--amber)}
+
+  /* ---- header ---- */
+  header{position:sticky;top:0;background:rgba(16,14,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:50}
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{width:26px;height:26px;border:1.5px solid var(--amber);color:var(--amber);display:grid;place-items:center;font-family:var(--serif);font-size:15px;font-weight:700}
+  .brand .t1{font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.04em}
+  .brand .t2{font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase}
+  nav{display:flex;gap:2px}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 13px;border-radius:4px;transition:.15s}
+  nav a:hover{color:var(--amber-hi);background:var(--amber-dim)}
+
+  /* ---- hero ---- */
+  .hero{padding:64px 0 12px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .kicker::after{content:"";width:56px;height:1px;background:linear-gradient(90deg,var(--amber),transparent)}
+  .hero h1{font-family:var(--serif);font-size:clamp(30px,4.4vw,44px);font-weight:700;line-height:1.25;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--amber-hi)}
+  .hero p.sub{color:var(--sub);margin-top:16px;max-width:700px;font-size:14.5px}
+  .hero p.sub b{color:var(--text)}
+  .stamp{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:11.5px;color:var(--faint);font-family:var(--mono)}
+  .stamp::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 8px var(--up)}
+
+  /* ---- kpi 数字墙 ---- */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);margin:44px 0 6px;border:1px solid var(--border);background:var(--panel)}
+  .kpi{padding:22px 22px 18px;border-right:1px solid var(--border);position:relative}
+  .kpi:last-child{border-right:none}
+  .kpi .v{font-size:38px;font-weight:700;font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1.05;color:var(--text)}
+  .kpi .v small{font-size:14px;color:var(--muted);font-weight:400;margin-left:3px}
+  .kpi .k{font-size:12px;color:var(--muted);margin-top:8px}
+  .kpi.gold .v{color:var(--amber-hi)}
+  .kpi.gold::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--amber)}
+
+  section{padding:58px 0 6px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-no{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.1em}
+  .sec-head h2{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:.02em}
+  .sec-head .hint{font-size:12px;color:var(--faint);margin-left:auto}
+  .sec-desc{color:var(--muted);font-size:13px;margin-bottom:22px;max-width:780px}
+
+  /* ---- matrix ---- */
+  .tabs{display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);width:fit-content;background:var(--panel)}
+  .tab{border:none;border-right:1px solid var(--border);background:transparent;color:var(--muted);font-size:13.5px;padding:10px 26px;cursor:pointer;font-family:var(--sans);transition:.15s}
+  .tab:last-child{border-right:none}
+  .tab:hover{color:var(--text)}
+  .tab.on{background:var(--amber);color:var(--ink);font-weight:700}
+  .tierlabel{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.18em;margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+  .tierlabel::after{content:"";flex:1;height:1px;background:var(--border)}
+  .tierlabel .cnt{color:var(--faint)}
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--border);padding:18px 20px;transition:.18s;position:relative}
+  .card:hover{border-color:var(--border2);background:var(--panel2)}
+  .card .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+  .card .vname{font-family:var(--serif);font-weight:700;font-size:16.5px;letter-spacing:.02em}
+  .badge{font-size:10px;padding:2px 8px;border:1px solid var(--border2);color:var(--muted);font-family:var(--mono);letter-spacing:.08em}
+  .badge.core{color:var(--amber);border-color:rgba(232,163,61,.45);background:var(--amber-dim)}
+  .card .lead{color:var(--text);font-size:13.5px;line-height:1.75}
+  .card .rest{color:var(--muted);font-size:12.5px;line-height:1.7;margin-top:6px;display:none}
+  .card.open .rest{display:block}
+  .evtoggle{margin-top:12px;font-size:11.5px;color:var(--amber);cursor:pointer;user-select:none;background:none;border:none;font-family:var(--mono);padding:0;letter-spacing:.06em}
+  .evtoggle:hover{color:var(--amber-hi)}
+  .evlist{display:none;margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+  .evlist.open{display:block}
+  .ev{margin-bottom:10px;padding:11px 13px;background:var(--bg2);border-left:2px solid var(--amber)}
+  .ev .evmeta{display:flex;gap:10px;align-items:center;font-size:10.5px;font-family:var(--mono);color:var(--faint);margin-bottom:6px}
+  .ev .score{color:var(--amber)}
+  .ev .sbar{flex:0 0 70px;height:3px;background:var(--border);overflow:hidden}
+  .ev .sbar i{display:block;height:100%;background:var(--amber)}
+  .ev .etext{font-size:12px;color:var(--sub);line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+  /* ---- tiers：色块化 ---- */
+  .tiers{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+  .tiercard{padding:20px 18px;border:1px solid var(--border);position:relative;overflow:hidden}
+  .tiercard.up{background:linear-gradient(180deg,var(--up-dim),var(--panel) 55%);border-top:3px solid var(--up)}
+  .tiercard.flat{background:linear-gradient(180deg,var(--amber-dim),var(--panel) 55%);border-top:3px solid var(--amber)}
+  .tiercard.down{background:linear-gradient(180deg,var(--down-dim),var(--panel) 55%);border-top:3px solid var(--down)}
+  .tiercard .tno{font-family:var(--mono);font-size:34px;font-weight:700;position:absolute;right:12px;top:6px;opacity:.14;letter-spacing:-.04em}
+  .tiercard.up .tno{color:var(--up)}
+  .tiercard.flat .tno{color:var(--amber)}
+  .tiercard.down .tno{color:var(--down)}
+  .tiercard h3{font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.45;margin-bottom:4px}
+  .tiercard .mode{font-size:11px;font-family:var(--mono);letter-spacing:.08em;margin-bottom:12px}
+  .tiercard.up .mode{color:var(--up)}
+  .tiercard.flat .mode{color:var(--amber)}
+  .tiercard.down .mode{color:var(--down)}
+  .tiercard .vs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .tiercard .vchip{font-size:12px;font-weight:600;padding:3px 10px;background:var(--bg2);border:1px solid var(--border2)}
+  .tiercard .note{font-size:12px;color:var(--muted);line-height:1.7}
+
+  /* ---- sellside ---- */
+  .ss{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .sscard{background:var(--panel);border:1px solid var(--border);padding:22px 24px}
+  .sscard .sshead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .sscard .ssv{font-family:var(--serif);font-weight:700;font-size:17px}
+  .sscard .sscov{font-size:11px;color:var(--muted);font-family:var(--mono)}
+  .sscard .bignum{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:-.02em;margin:6px 0 2px}
+  .sscard .bignum .rng{color:var(--amber-hi)}
+  .sscard .bignum .x{color:var(--faint);font-size:16px;margin:0 6px}
+  .sscard .bigsub{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .sscard svg{width:100%;height:auto;display:block}
+  .sscard .extra{font-size:12.5px;color:var(--sub);margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)}
+  .sscard .extra b{color:var(--up);font-weight:700}
+
+  /* ---- credibility：阶梯 ---- */
+  .credgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border)}
+  .credcol{padding:18px 16px 16px;border-right:1px solid var(--border);background:var(--panel);position:relative}
+  .credcol:last-child{border-right:none}
+  .credcol::before{content:"";position:absolute;top:0;left:0;right:0;height:var(--h,100%);background:var(--amber);opacity:.0}
+  .credcol .stair{height:8px;background:var(--amber);margin-bottom:14px;opacity:calc(1.05 - var(--i)*0.19)}
+  .credcol .lv{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.1em}
+  .credcol .nm{font-family:var(--serif);font-size:15.5px;font-weight:700;margin:3px 0 8px}
+  .credcol .ds{font-size:11.5px;color:var(--muted);line-height:1.65;margin-bottom:10px}
+  .credcol .ex{font-size:11px;color:var(--faint);line-height:1.6;padding-top:8px;border-top:1px dashed var(--border)}
+  .credcol .use{display:inline-block;font-size:10.5px;font-family:var(--mono);margin-top:10px;padding:2px 8px;border:1px solid}
+  .credcol.ok .use{color:var(--down);border-color:rgba(76,174,138,.4)}
+  .credcol.warn .use{color:var(--amber);border-color:rgba(232,163,61,.4)}
+
+  /* ---- trace ---- */
+  .trace-stats{display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);width:fit-content;background:var(--panel)}
+  .tstat{padding:12px 22px;font-size:12.5px;border-right:1px solid var(--border);color:var(--muted)}
+  .tstat:last-child{border-right:none}
+  .tstat b{font-family:var(--mono);color:var(--amber-hi);font-size:17px;margin-right:2px}
+  .compare{background:var(--panel);border:1px solid var(--border);padding:22px 24px;margin-bottom:20px}
+  .compare h4{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:16px}
+  .cmprow{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .cmprow .lbl{width:200px;font-size:12px;color:var(--muted);text-align:right;flex-shrink:0;font-family:var(--mono)}
+  .cmprow .bar{flex:1;height:26px;background:var(--bg2);overflow:hidden;position:relative}
+  .cmprow .bar i{display:block;height:100%}
+  .cmprow .pct{font-family:var(--mono);font-size:17px;width:64px;font-weight:700}
+  .tlwrap{max-height:360px;overflow-y:auto;border:1px solid var(--border);background:var(--panel)}
+  .tlrow{display:flex;gap:12px;padding:9px 20px;font-size:12.5px;border-bottom:1px solid rgba(44,38,32,.55)}
+  .tlrow:last-child{border-bottom:none}
+  .tlrow .stp{font-family:var(--mono);font-size:10.5px;color:var(--ink);background:var(--muted);padding:1px 9px;height:fit-content;white-space:nowrap;flex-shrink:0;margin-top:3px;letter-spacing:.06em}
+  .tlrow .stp.s拆解{background:#7fa8d9}
+  .tlrow .stp.s检索{background:var(--amber)}
+  .tlrow .stp.s自检{background:var(--down)}
+  .tlrow .stp.s汇总{background:var(--up);color:#fff}
+  .tlrow .dtl{color:var(--sub);line-height:1.65}
+
+  footer{margin-top:64px;border-top:1px solid var(--border);padding:26px 0 40px;color:var(--faint);font-size:12px;line-height:1.9}
+  footer b{color:var(--muted);font-family:var(--serif)}
+
+  @media(max-width:980px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .kpi{border-bottom:1px solid var(--border)}
+    .cards,.ss{grid-template-columns:1fr}
+    .tiers{grid-template-columns:repeat(2,1fr)}
+    .credgrid{grid-template-columns:1fr}
+    .credcol{border-right:none;border-bottom:1px solid var(--border)}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker"><div class="inner" id="ticker"></div></div>
+
+<header><div class="wrap hbar">
+  <div class="brand">
+    <span class="mark">研</span>
+    <div><div class="t1">AI 投研 Copilot</div><div class="t2">Deep Research Terminal</div></div>
+  </div>
+  <nav>
+    <a href="#matrix">四维矩阵</a><a href="#tiers">梯队分化</a><a href="#sellside">卖方定价</a><a href="#cred">数据可信度</a><a href="#trace">研究循环</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">LLM Vendor Competitive Research</div>
+    <h1>大模型厂商竞品研究<br>基于<em>可溯源证据</em>的四维研判</h1>
+    <p class="sub">「<b>技术路线 — 产品定位 — 商业化策略 — 生态壁垒</b>」四维框架，覆盖国内核心 + 海外对标共 <b id="h-nv"></b> 家厂商。语料来自公开财报、券商研报与权威数据源，每一格结论可溯源至证据 chunk，<b>全程零编造</b>。</p>
+    <div class="stamp" id="h-stamp"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section id="matrix">
+    <div class="sec-head"><span class="sec-no">01</span><h2>四维对比矩阵</h2><span class="hint">点卡片可展开全文与证据溯源</span></div>
+    <p class="sec-desc">维度锁（确定性规则）保证每格命中对应维度章节；相关度分数为原始 TF-IDF 余弦值，未虚高。</p>
+    <div class="tabs" id="dimtabs"></div>
+    <div id="matrixbody"></div>
+  </section>
+
+  <section id="tiers">
+    <div class="sec-head"><span class="sec-no">02</span><h2>梯队分化 · 五类获利模式</h2><span class="hint">研判层为人工结论，依据均来自语料真实数据</span></div>
+    <div class="tiers" id="tierbody"></div>
+  </section>
+
+  <section id="sellside">
+    <div class="sec-head"><span class="sec-no">03</span><h2>卖方定价分歧</h2><span class="hint">仅两家已上市公司存在公开券商覆盖</span></div>
+    <p class="sec-desc">目标价区间本身就是研判素材：市场正在争论「中国 SOTA 看涨期权」如何定价。</p>
+    <div class="ss" id="ssbody"></div>
+  </section>
+
+  <section id="cred">
+    <div class="sec-head"><span class="sec-no">04</span><h2>数据可信度五档</h2><span class="hint">语料每条数据均标注来源与检索日期</span></div>
+    <div class="credgrid" id="credbody"></div>
+  </section>
+
+  <section id="trace">
+    <div class="sec-head"><span class="sec-no">05</span><h2>Deep Research 循环回放</h2><span class="hint">拆解 → 检索 → 自检 → 补检 → 汇总</span></div>
+    <div class="trace-stats" id="tracestats"></div>
+    <div class="compare">
+      <h4>Eval 驱动迭代 · 两次确定性修复</h4>
+      <div class="cmprow"><span class="lbl">v1 纯 TF-IDF · 首轮充分率</span><div class="bar"><i style="width:7%;background:var(--faint)"></i></div><span class="pct" style="color:var(--faint)">7%</span></div>
+      <div class="cmprow"><span class="lbl">v2 +维度锁 · 首轮充分率</span><div class="bar"><i style="width:100%;background:var(--down)"></i></div><span class="pct" style="color:var(--down)">100%</span></div>
+      <div class="cmprow"><span class="lbl">v2 无路由 · 开放检索 Hit@1</span><div class="bar"><i style="width:35%;background:var(--faint)"></i></div><span class="pct" style="color:var(--faint)">35%</span></div>
+      <div class="cmprow"><span class="lbl">v3 +厂商路由器 · Hit@1</span><div class="bar"><i style="width:100%;background:var(--down)"></i></div><span class="pct" style="color:var(--down)">100%</span></div>
+    </div>
+    <div class="tlwrap" id="tlwrap"><div id="tlbody"></div></div>
+  </section>
+
+  <footer>
+    <b>数据边界声明</b> · 检索日期 <span id="f-date"></span>。审计财报仅覆盖智谱（02513.HK）与 MiniMax（00100.HK）两家已上市公司；OpenAI / Anthropic / xAI / Kimi / DeepSeek / 字节为非上市公司，财务数字均来自媒体转述或分析师估算；Meta 不单独披露 AI 业务财务。本页为方法论演示（demo），数据为检索时点快照，不构成投资建议。
+  </footer>
+</div>
+
+<script>
+const DATA = {"matrix": {"mode": "抽取式摘要(未配置API Key)", "dimensions": ["技术路线", "产品定位", "商业化策略", "生态壁垒"], "tiers": {"智谱": "国内核心", "月之暗面（Kimi）": "国内核心", "MiniMax": "国内核心", "DeepSeek": "国内核心", "阿里通义（Qwen）": "国内核心", "字节豆包": "国内核心", "阶跃星辰": "国内核心", "零一万物": "国内核心", "Anthropic": "海外对标", "Google Gemini": "海外对标", "Meta（Llama）": "海外对标", "OpenAI": "海外对标", "xAI（Grok）": "海外对标"}, "vendors": {"智谱": {"技术路线": {"evidence": [{"score": 0.1528, "section": "技术路线", "source": "zhipu.md", "text": "GLM 系列自研大模型，走「预训练基座 + 全栈自研」路线，清华 KEG 实验室技术班底（公司前身即清华孵化）。产品覆盖文本、代码、多模态方向。研发投入大：2025 年归母净亏损 52.02 亿元人民币（港元口径 -52.0 亿，财报截止 …"}, {"score": 0.0101, "section": "生态壁垒", "source": "zhipu.md", "text": "股东阵容强：腾讯、美团（三快科技）、君联资本、中科创星、启明创投等产业与国资背景机构（2025 年报股东列表，天眼查）。清华系学术生态 + 政企客户关系是核心护城河；对外投资 29 家企业、招投标 297 次（天眼查），政企渠道渗透深。风险…"}, {"score": 0.0078, "section": "产品定位", "source": "zhipu.md", "text": "定位「大模型全栈供应商」：底座模型（GLM）+ MaaS 开放平台 + B 端行业解决方案 + C 端智能助手（智谱清言）。相比纯 C 端玩家更偏 B 端与政企市场。公司 500-999 人规模、参保 789 人（天眼查 2026），在国内…"}], "summary": "GLM 系列自研大模型，走「预训练基座 + 全栈自研」路线，清华 KEG 实验室技术班底（公司前身即清华孵化）。产品覆盖文本、代码、多模态方向。"}, "产品定位": {"evidence": [{"score": 0.1616, "section": "产品定位", "source": "zhipu.md", "text": "定位「大模型全栈供应商」：底座模型（GLM）+ MaaS 开放平台 + B 端行业解决方案 + C 端智能助手（智谱清言）。相比纯 C 端玩家更偏 B 端与政企市场。公司 500-999 人规模、参保 789 人（天眼查 2026），在国内…"}, {"score": 0.046, "section": "商业化策略", "source": "zhipu.md", "text": "「全球大模型第一股」：2026-01-08 于香港交易所主板上市（HK.02513），IPO 募资 43.48 亿港元（天眼查上市信息）。2025 年营业收入 8.02 亿港元、同比增长 137.7%，销售毛利率 40.96%，但销售净利率…"}, {"score": 0.0302, "section": "商业化策略", "source": "zhipu.md", "text": "券商研报观点（卖方覆盖，2026-07 口径）：共 21 家机构发布观点、17 家给出目标价，目标均价 1682 港元（最高 2304 / 最低 999），买入或增持占比 81%。分歧极大是关键特征——中金首次覆盖仅给「跑赢行业」、目标价 …"}], "summary": "定位「大模型全栈供应商」：底座模型（GLM）+ MaaS 开放平台 + B 端行业解决方案 + C 端智能助手（智谱清言）。相比纯 C 端玩家更偏 B 端与政企市场。"}, "商业化策略": {"evidence": [{"score": 0.1491, "section": "商业化策略", "source": "zhipu.md", "text": "「全球大模型第一股」：2026-01-08 于香港交易所主板上市（HK.02513），IPO 募资 43.48 亿港元（天眼查上市信息）。2025 年营业收入 8.02 亿港元、同比增长 137.7%，销售毛利率 40.96%，但销售净利率…"}, {"score": 0.0564, "section": "商业化策略", "source": "zhipu.md", "text": "券商研报观点（卖方覆盖，2026-07 口径）：共 21 家机构发布观点、17 家给出目标价，目标均价 1682 港元（最高 2304 / 最低 999），买入或增持占比 81%。分歧极大是关键特征——中金首次覆盖仅给「跑赢行业」、目标价 …"}, {"score": 0.0154, "section": "生态壁垒", "source": "zhipu.md", "text": "股东阵容强：腾讯、美团（三快科技）、君联资本、中科创星、启明创投等产业与国资背景机构（2025 年报股东列表，天眼查）。清华系学术生态 + 政企客户关系是核心护城河；对外投资 29 家企业、招投标 297 次（天眼查），政企渠道渗透深。风险…"}], "summary": "「全球大模型第一股」：2026-01-08 于香港交易所主板上市（HK.02513），IPO 募资 43.48 亿港元（天眼查上市信息）。2025 年营业收入 8.02 亿港元、同比增长 137.7%，销售毛利率 40.96%，但销售净利率 -651%、归母净亏损 52.02 亿（2025 年报）。"}, "生态壁垒": {"evidence": [{"score": 0.1168, "section": "生态壁垒", "source": "zhipu.md", "text": "股东阵容强：腾讯、美团（三快科技）、君联资本、中科创星、启明创投等产业与国资背景机构（2025 年报股东列表，天眼查）。清华系学术生态 + 政企客户关系是核心护城河；对外投资 29 家企业、招投标 297 次（天眼查），政企渠道渗透深。风险…"}], "summary": "股东阵容强：腾讯、美团（三快科技）、君联资本、中科创星、启明创投等产业与国资背景机构（2025 年报股东列表，天眼查）。清华系学术生态 + 政企客户关系是核心护城河；"}}, "月之暗面（Kimi）": {"技术路线": {"evidence": [{"score": 0.1238, "section": "技术路线", "source": "moonshot-kimi.md", "text": "旗舰模型 Kimi K3（2026-07-16/17 发布）：总参数 2.8 万亿，全球首个开源 3 万亿级别模型；MoE 稀疏架构，896 个专家每次推理仅激活 16 个；自研 KDA 混合线性注意力机制，扩展效率较上一代提升约 2.5 …"}, {"score": 0.0923, "section": "券商研报观点", "source": "moonshot-kimi.md", "text": "国信证券行业深度（2026-04）对月之暗面的画像：团队约 300 人，组织文化「共识驱动——少数精英的共识能引领方向」；核心优势为长上下文能力与智能体（Agent）集群协同，正迈向原生多模态。K2.5 代模型总参数 1 万亿、激活 328…"}, {"score": 0.027, "section": "生态壁垒", "source": "moonshot-kimi.md", "text": "创始人杨植麟（清华系）持股 51.83%，为控股股东——国内大模型公司中创始人控制权最强的之一。壁垒：开源社区心智（K3 全球第一的编程榜单）+ 12 万企业客户 + 200 多国海外覆盖。投资方含美团龙珠、阿里等。风险：估值半年涨超 7 …"}], "summary": "旗舰模型 Kimi K3（2026-07-16/17 发布）：总参数 2.8 万亿，全球首个开源 3 万亿级别模型；MoE 稀疏架构，896 个专家每次推理仅激活 16 个；"}, "产品定位": {"evidence": [{"score": 0.1343, "section": "产品定位", "source": "moonshot-kimi.md", "text": "C 端以 Kimi 智能助手起家（长文本处理心智），2026 年重心转向「开源模型 + API 平台」双轮：API 收入占比已超七成，产品覆盖 200 多个国家和地区。企业客户数量截至 2026-06 突破 12 万家（腾讯新闻 2026-…"}, {"score": 0.0268, "section": "商业化策略", "source": "moonshot-kimi.md", "text": "ARR 三级跳：2026-03 突破 1 亿美元 → 2026-05 达 2 亿美元 → 2026-06 中旬站稳 3 亿美元，三个月翻三倍；海外付费用户同期增长 400%（今日头条 2026-07-22）。融资历程：2023-06 天使轮…"}, {"score": 0.0222, "section": "生态壁垒", "source": "moonshot-kimi.md", "text": "创始人杨植麟（清华系）持股 51.83%，为控股股东——国内大模型公司中创始人控制权最强的之一。壁垒：开源社区心智（K3 全球第一的编程榜单）+ 12 万企业客户 + 200 多国海外覆盖。投资方含美团龙珠、阿里等。风险：估值半年涨超 7 …"}], "summary": "C 端以 Kimi 智能助手起家（长文本处理心智），2026 年重心转向「开源模型 + API 平台」双轮：API 收入占比已超七成，产品覆盖 200 多个国家和地区。企业客户数量截至 2026-06 突破 12 万家（腾讯新闻 2026-07-27）。"}, "商业化策略": {"evidence": [{"score": 0.0957, "section": "商业化策略", "source": "moonshot-kimi.md", "text": "ARR 三级跳：2026-03 突破 1 亿美元 → 2026-05 达 2 亿美元 → 2026-06 中旬站稳 3 亿美元，三个月翻三倍；海外付费用户同期增长 400%（今日头条 2026-07-22）。融资历程：2023-06 天使轮…"}, {"score": 0.0468, "section": "产品定位", "source": "moonshot-kimi.md", "text": "C 端以 Kimi 智能助手起家（长文本处理心智），2026 年重心转向「开源模型 + API 平台」双轮：API 收入占比已超七成，产品覆盖 200 多个国家和地区。企业客户数量截至 2026-06 突破 12 万家（腾讯新闻 2026-…"}, {"score": 0.0241, "section": "生态壁垒", "source": "moonshot-kimi.md", "text": "创始人杨植麟（清华系）持股 51.83%，为控股股东——国内大模型公司中创始人控制权最强的之一。壁垒：开源社区心智（K3 全球第一的编程榜单）+ 12 万企业客户 + 200 多国海外覆盖。投资方含美团龙珠、阿里等。风险：估值半年涨超 7 …"}], "summary": "ARR 三级跳：2026-03 突破 1 亿美元 → 2026-05 达 2 亿美元 → 2026-06 中旬站稳 3 亿美元，三个月翻三倍；海外付费用户同期增长 400%（今日头条 2026-07-22）。"}, "生态壁垒": {"evidence": [{"score": 0.1513, "section": "生态壁垒", "source": "moonshot-kimi.md", "text": "创始人杨植麟（清华系）持股 51.83%，为控股股东——国内大模型公司中创始人控制权最强的之一。壁垒：开源社区心智（K3 全球第一的编程榜单）+ 12 万企业客户 + 200 多国海外覆盖。投资方含美团龙珠、阿里等。风险：估值半年涨超 7 …"}, {"score": 0.0274, "section": "券商研报观点", "source": "moonshot-kimi.md", "text": "国信证券行业深度（2026-04）对月之暗面的画像：团队约 300 人，组织文化「共识驱动——少数精英的共识能引领方向」；核心优势为长上下文能力与智能体（Agent）集群协同，正迈向原生多模态。K2.5 代模型总参数 1 万亿、激活 328…"}, {"score": 0.0186, "section": "产品定位", "source": "moonshot-kimi.md", "text": "C 端以 Kimi 智能助手起家（长文本处理心智），2026 年重心转向「开源模型 + API 平台」双轮：API 收入占比已超七成，产品覆盖 200 多个国家和地区。企业客户数量截至 2026-06 突破 12 万家（腾讯新闻 2026-…"}], "summary": "创始人杨植麟（清华系）持股 51.83%，为控股股东——国内大模型公司中创始人控制权最强的之一。壁垒：开源社区心智（K3 全球第一的编程榜单）+ 12 万企业客户 + 200 多国海外覆盖。"}}, "MiniMax": {"技术路线": {"evidence": [{"score": 0.1407, "section": "技术路线", "source": "minimax.md", "text": "多模态路线为特色：文本大模型 + 语音 + 视频生成（海螺 AI 视频）并行，是国内独立厂商中多模态产品线最全的之一。2025 年报显示销售毛利率 25.40%，明显低于智谱的 40.96%（港股财报对比），推测与多模态推理成本更高有关。2…"}, {"score": 0.0694, "section": "生态壁垒", "source": "minimax.md", "text": "壁垒主要在 C 端产品心智（陪伴类出海产品 Talkie 曾居美国下载榜前列）与多模态技术栈。风险显著：资产负债率 343%、每股净资产 -189.67 港元（2025 年报），资金压力为头部厂商中最大；C 端陪伴赛道竞争激烈且监管敏感；股…"}, {"score": 0.0042, "section": "产品定位", "source": "minimax.md", "text": "C 端 + 海外双轮：星野/Talkie（AI 陪伴）、海螺 AI（视频生成与助手）等 C 端产品矩阵，海外收入占比在国内厂商中领先。B 端提供开放平台 API。整体定位偏「AI 原生应用公司」而非纯基座模型公司。…"}], "summary": "多模态路线为特色：文本大模型 + 语音 + 视频生成（海螺 AI 视频）并行，是国内独立厂商中多模态产品线最全的之一。2025 年报显示销售毛利率 25.40%，明显低于智谱的 40.96%（港股财报对比），推测与多模态推理成本更高有关。"}, "产品定位": {"evidence": [{"score": 0.2802, "section": "产品定位", "source": "minimax.md", "text": "C 端 + 海外双轮：星野/Talkie（AI 陪伴）、海螺 AI（视频生成与助手）等 C 端产品矩阵，海外收入占比在国内厂商中领先。B 端提供开放平台 API。整体定位偏「AI 原生应用公司」而非纯基座模型公司。…"}, {"score": 0.0421, "section": "生态壁垒", "source": "minimax.md", "text": "壁垒主要在 C 端产品心智（陪伴类出海产品 Talkie 曾居美国下载榜前列）与多模态技术栈。风险显著：资产负债率 343%、每股净资产 -189.67 港元（2025 年报），资金压力为头部厂商中最大；C 端陪伴赛道竞争激烈且监管敏感；股…"}, {"score": 0.0201, "section": "商业化策略", "source": "minimax.md", "text": "券商研报观点（卖方覆盖，2026-07 口径）：16 家机构给出目标价，目标均价 800 港元（最高 1317 / 最低 160）、现价约 197 港元，7 月 19 家发布观点、买入或增持占比 84%——目标均价较现价高 3 倍，说明卖方…"}], "summary": "C 端 + 海外双轮：星野/Talkie（AI 陪伴）、海螺 AI（视频生成与助手）等 C 端产品矩阵，海外收入占比在国内厂商中领先。B 端提供开放平台 API。"}, "商业化策略": {"evidence": [{"score": 0.1035, "section": "商业化策略", "source": "minimax.md", "text": "已上市：MINIMAX-W（HK.00100，港股）。2025 年营业收入 6.15 亿港元、同比增长 159.6%——增速高于智谱（137.7%）但收入规模更小；归母净亏损 145.6 亿港元、资产负债率 343.31%（2025 年报，…"}, {"score": 0.0527, "section": "商业化策略", "source": "minimax.md", "text": "券商研报观点（卖方覆盖，2026-07 口径）：16 家机构给出目标价，目标均价 800 港元（最高 1317 / 最低 160）、现价约 197 港元，7 月 19 家发布观点、买入或增持占比 84%——目标均价较现价高 3 倍，说明卖方…"}, {"score": 0.0258, "section": "产品定位", "source": "minimax.md", "text": "C 端 + 海外双轮：星野/Talkie（AI 陪伴）、海螺 AI（视频生成与助手）等 C 端产品矩阵，海外收入占比在国内厂商中领先。B 端提供开放平台 API。整体定位偏「AI 原生应用公司」而非纯基座模型公司。…"}], "summary": "已上市：MINIMAX-W（HK.00100，港股）。2025 年营业收入 6.15 亿港元、同比增长 159.6%——增速高于智谱（137.7%）但收入规模更小；"}, "生态壁垒": {"evidence": [{"score": 0.1257, "section": "生态壁垒", "source": "minimax.md", "text": "壁垒主要在 C 端产品心智（陪伴类出海产品 Talkie 曾居美国下载榜前列）与多模态技术栈。风险显著：资产负债率 343%、每股净资产 -189.67 港元（2025 年报），资金压力为头部厂商中最大；C 端陪伴赛道竞争激烈且监管敏感；股…"}], "summary": "壁垒主要在 C 端产品心智（陪伴类出海产品 Talkie 曾居美国下载榜前列）与多模态技术栈。风险显著：资产负债率 343%、每股净资产 -189.67 港元（2025 年报），资金压力为头部厂商中最大；"}}, "DeepSeek": {"技术路线": {"evidence": [{"score": 0.093, "section": "技术路线", "source": "deepseek.md", "text": "坚持开源路线的头部代表。最新旗舰 DeepSeek V4-Pro：1.6 万亿参数 MoE，被海外媒体列为「leading non-US open-weight lab」（artificialintelligencecompanies.co…"}, {"score": 0.0418, "section": "券商研报观点", "source": "deepseek.md", "text": "国信证券行业深度（2026-04）对 DeepSeek 的画像：团队约 150 人（含关联主体，宽于天眼查杭州主体参保 46 人口径），「组织不超过两层，研究实验室，轻松反内卷」；定位「算法架构积极创新，开源为国产模型提供基石」，最新方向为…"}, {"score": 0.0177, "section": "生态壁垒", "source": "deepseek.md", "text": "开源社区全球心智 + 极致人效（46 人参保团队）+ 幻方系算力储备。股权结构极简：创始人梁文锋 1%、宁波程恩企业管理咨询合伙企业 99%（天眼查年报），创始人通过合伙企业实际控制。风险：低价策略压低全行业毛利、自身变现节奏慢；科创板 I…"}], "summary": "坚持开源路线的头部代表。最新旗舰 DeepSeek V4-Pro：1.6 万亿参数 MoE，被海外媒体列为「leading non-US open-weight lab」（artificialintelligencecompanies.com 2026 年榜单）；"}, "产品定位": {"evidence": [{"score": 0.1591, "section": "产品定位", "source": "deepseek.md", "text": "C 端「DeepSeek 智能助手」App：国内 AI 产品榜 App 月活第一梯队（QuestMobile 2026 半年报：1.30 亿月活，居豆包 3.82 亿、千问 1.67 亿之后第三）；出海总榜 App 端第一（1.39 亿 M…"}, {"score": 0.0586, "section": "生态壁垒", "source": "deepseek.md", "text": "开源社区全球心智 + 极致人效（46 人参保团队）+ 幻方系算力储备。股权结构极简：创始人梁文锋 1%、宁波程恩企业管理咨询合伙企业 99%（天眼查年报），创始人通过合伙企业实际控制。风险：低价策略压低全行业毛利、自身变现节奏慢；科创板 I…"}, {"score": 0.0325, "section": "券商研报观点", "source": "deepseek.md", "text": "国信证券行业深度（2026-04）对 DeepSeek 的画像：团队约 150 人（含关联主体，宽于天眼查杭州主体参保 46 人口径），「组织不超过两层，研究实验室，轻松反内卷」；定位「算法架构积极创新，开源为国产模型提供基石」，最新方向为…"}], "summary": "C 端「DeepSeek 智能助手」App：国内 AI 产品榜 App 月活第一梯队（QuestMobile 2026 半年报：1.30 亿月活，居豆包 3.82 亿、千问 1.67 亿之后第三）；出海总榜 App 端第一（1.39 亿 MAU，AICPB 2026-06），Web 端月访问量 4.84 亿。"}, "商业化策略": {"evidence": [{"score": 0.1485, "section": "商业化策略", "source": "deepseek.md", "text": "长期不融资（幻方量化背景自供资金），2026 年完成首轮外部融资：A 轮交易金额 510 亿人民币，引入腾讯、宁德时代、国家 AI 产业基金等（天眼查 2026；今日头条 2026-07-22 报道估值 450-490 亿美元，为国内独立 …"}, {"score": 0.0407, "section": "生态壁垒", "source": "deepseek.md", "text": "开源社区全球心智 + 极致人效（46 人参保团队）+ 幻方系算力储备。股权结构极简：创始人梁文锋 1%、宁波程恩企业管理咨询合伙企业 99%（天眼查年报），创始人通过合伙企业实际控制。风险：低价策略压低全行业毛利、自身变现节奏慢；科创板 I…"}, {"score": 0.0154, "section": "产品定位", "source": "deepseek.md", "text": "C 端「DeepSeek 智能助手」App：国内 AI 产品榜 App 月活第一梯队（QuestMobile 2026 半年报：1.30 亿月活，居豆包 3.82 亿、千问 1.67 亿之后第三）；出海总榜 App 端第一（1.39 亿 M…"}], "summary": "长期不融资（幻方量化背景自供资金），2026 年完成首轮外部融资：A 轮交易金额 510 亿人民币，引入腾讯、宁德时代、国家 AI 产业基金等（天眼查 2026；今日头条 2026-07-22 报道估值 450-490 亿美元，为国内独立 AI 初创第一），同时启动科创板 IPO 筹备。"}, "生态壁垒": {"evidence": [{"score": 0.0936, "section": "生态壁垒", "source": "deepseek.md", "text": "开源社区全球心智 + 极致人效（46 人参保团队）+ 幻方系算力储备。股权结构极简：创始人梁文锋 1%、宁波程恩企业管理咨询合伙企业 99%（天眼查年报），创始人通过合伙企业实际控制。风险：低价策略压低全行业毛利、自身变现节奏慢；科创板 I…"}], "summary": "开源社区全球心智 + 极致人效（46 人参保团队）+ 幻方系算力储备。股权结构极简：创始人梁文锋 1%、宁波程恩企业管理咨询合伙企业 99%（天眼查年报），创始人通过合伙企业实际控制。"}}, "阿里通义（Qwen）": {"技术路线": {"evidence": [{"score": 0.1083, "section": "技术路线", "source": "alibaba-qwen.md", "text": "Qwen（通义千问）系列开源 + 闭源双线：开源版本是全球下载量最大的开源模型家族之一，闭源旗舰通过百炼平台输出。依托阿里云自研算力体系（含平头哥芯片），是国内唯一「云 + 芯片 + 模型 + 应用」全栈自持的厂商。…"}, {"score": 0.0784, "section": "券商研报观点", "source": "alibaba-qwen.md", "text": "国信证券行业深度（2026-04）对阿里的画像：「开源全家桶，架构创新驱动，在国内首先实现原生多模态」；2026-03 以 Token 整合上下游帮助组织快速协调（Token Hub 事业群）。Qwen3.5 总参 3970 亿、激活 17…"}, {"score": 0.0154, "section": "商业化策略", "source": "alibaba-qwen.md", "text": "B 端是 AI 收入支柱：阿里云 AI 相关收入约 358 亿元人民币（媒体 2026-07 报道口径）；百炼 MaaS 平台模型与应用服务 ARR 预计 2026 年 6 月季度突破 100 亿元、年底突破 300 亿元（阿里业绩电话会披…"}], "summary": "Qwen（通义千问）系列开源 + 闭源双线：开源版本是全球下载量最大的开源模型家族之一，闭源旗舰通过百炼平台输出。依托阿里云自研算力体系（含平头哥芯片），是国内唯一「云 + 芯片 + 模型 + 应用」全栈自持的厂商。"}, "产品定位": {"evidence": [{"score": 0.1029, "section": "产品定位", "source": "alibaba-qwen.md", "text": "C 端千问 App：月活 1.67 亿（QuestMobile 2026 半年报），同比增长率 5792.9%——增长主要靠阿里生态导流。2026-02 发布「千问 AI 眼镜」并全球首发，IDC 评价其核心优势是打通千问大模型与电商、支付…"}, {"score": 0.0384, "section": "商业化策略", "source": "alibaba-qwen.md", "text": "B 端是 AI 收入支柱：阿里云 AI 相关收入约 358 亿元人民币（媒体 2026-07 报道口径）；百炼 MaaS 平台模型与应用服务 ARR 预计 2026 年 6 月季度突破 100 亿元、年底突破 300 亿元（阿里业绩电话会披…"}, {"score": 0.0151, "section": "技术路线", "source": "alibaba-qwen.md", "text": "Qwen（通义千问）系列开源 + 闭源双线：开源版本是全球下载量最大的开源模型家族之一，闭源旗舰通过百炼平台输出。依托阿里云自研算力体系（含平头哥芯片），是国内唯一「云 + 芯片 + 模型 + 应用」全栈自持的厂商。…"}], "summary": "C 端千问 App：月活 1.67 亿（QuestMobile 2026 半年报），同比增长率 5792.9%——增长主要靠阿里生态导流。2026-02 发布「千问 AI 眼镜」并全球首发，IDC 评价其核心优势是打通千问大模型与电商、支付生态、硬件作为生态入口。"}, "商业化策略": {"evidence": [{"score": 0.0772, "section": "商业化策略", "source": "alibaba-qwen.md", "text": "B 端是 AI 收入支柱：阿里云 AI 相关收入约 358 亿元人民币（媒体 2026-07 报道口径）；百炼 MaaS 平台模型与应用服务 ARR 预计 2026 年 6 月季度突破 100 亿元、年底突破 300 亿元（阿里业绩电话会披…"}, {"score": 0.0055, "section": "券商研报观点", "source": "alibaba-qwen.md", "text": "国信证券行业深度（2026-04）对阿里的画像：「开源全家桶，架构创新驱动，在国内首先实现原生多模态」；2026-03 以 Token 整合上下游帮助组织快速协调（Token Hub 事业群）。Qwen3.5 总参 3970 亿、激活 17…"}], "summary": "B 端是 AI 收入支柱：阿里云 AI 相关收入约 358 亿元人民币（媒体 2026-07 报道口径）；百炼 MaaS 平台模型与应用服务 ARR 预计 2026 年 6 月季度突破 100 亿元、年底突破 300 亿元（阿里业绩电话会披露）。"}, "生态壁垒": {"evidence": [{"score": 0.1107, "section": "生态壁垒", "source": "alibaba-qwen.md", "text": "最强分发生态：电商 + 支付 + 钉钉 + 高德全家桶导流；被苹果选中为国行 iPhone AI 合作方（腾讯新闻 2026-07-16 标题事实）。开源 Qwen 社区全球开发者基础 + 阿里云在中国公有云的市场地位构成双重壁垒。风险：传…"}, {"score": 0.0371, "section": "产品定位", "source": "alibaba-qwen.md", "text": "C 端千问 App：月活 1.67 亿（QuestMobile 2026 半年报），同比增长率 5792.9%——增长主要靠阿里生态导流。2026-02 发布「千问 AI 眼镜」并全球首发，IDC 评价其核心优势是打通千问大模型与电商、支付…"}, {"score": 0.025, "section": "商业化策略", "source": "alibaba-qwen.md", "text": "B 端是 AI 收入支柱：阿里云 AI 相关收入约 358 亿元人民币（媒体 2026-07 报道口径）；百炼 MaaS 平台模型与应用服务 ARR 预计 2026 年 6 月季度突破 100 亿元、年底突破 300 亿元（阿里业绩电话会披…"}], "summary": "最强分发生态：电商 + 支付 + 钉钉 + 高德全家桶导流；被苹果选中为国行 iPhone AI 合作方（腾讯新闻 2026-07-16 标题事实）。"}}, "字节豆包": {"技术路线": {"evidence": [{"score": 0.065, "section": "技术路线", "source": "bytedance-doubao.md", "text": "豆包大模型（火山引擎输出）：2026-06 日均 Token 调用量突破 180 万亿，较发布时增长超 1500 倍（腾讯新闻 2026-07-17）——调用量为国内第一。多模态覆盖文本/语音/图像/视频，配套即梦（图像视频生成）等产品线。…"}, {"score": 0.0546, "section": "券商研报观点", "source": "bytedance-doubao.md", "text": "国信证券行业深度（2026-04）对字节的画像：模型团队 1000+ 人，2025 年起「研产分离、扁平设计强化基础研究地位」的组织转型；打法为「深度定制工程栈，通过性价比抢份额」，多模态与视觉理解为技术长板，预计年中编程能力快速提升、年底…"}], "summary": "豆包大模型（火山引擎输出）：2026-06 日均 Token 调用量突破 180 万亿，较发布时增长超 1500 倍（腾讯新闻 2026-07-17）——调用量为国内第一。多模态覆盖文本/语音/图像/视频，配套即梦（图像视频生成）等产品线。"}, "产品定位": {"evidence": [{"score": 0.0872, "section": "产品定位", "source": "bytedance-doubao.md", "text": "C 端流量之王：豆包 App 月活 3.82 亿（QuestMobile 2026 半年报），国内 AI App 总榜第一（AICPB 2026-06：3.24 亿 MAU 口径），同比增长 172.1%。打法是「算法硬推 + 抖音生态导流…"}, {"score": 0.0287, "section": "商业化策略", "source": "bytedance-doubao.md", "text": "C 端付费 2026-05-04 上线三档：68/200/500 元每月；上线后月活从 3.45 亿降至约 3.3 亿、流失约 610 万用户；摩根士丹利中性预期付费订阅年收入仅 4.26-6.84 亿美元——付费天花板明显，仅能作营收补充…"}, {"score": 0.0143, "section": "技术路线", "source": "bytedance-doubao.md", "text": "豆包大模型（火山引擎输出）：2026-06 日均 Token 调用量突破 180 万亿，较发布时增长超 1500 倍（腾讯新闻 2026-07-17）——调用量为国内第一。多模态覆盖文本/语音/图像/视频，配套即梦（图像视频生成）等产品线。…"}], "summary": "C 端流量之王：豆包 App 月活 3.82 亿（QuestMobile 2026 半年报），国内 AI App 总榜第一（AICPB 2026-06：3.24 亿 MAU 口径），同比增长 172.1%。打法是「算法硬推 + 抖音生态导流」的流量式入侵。"}, "商业化策略": {"evidence": [{"score": 0.0693, "section": "商业化策略", "source": "bytedance-doubao.md", "text": "C 端付费 2026-05-04 上线三档：68/200/500 元每月；上线后月活从 3.45 亿降至约 3.3 亿、流失约 610 万用户；摩根士丹利中性预期付费订阅年收入仅 4.26-6.84 亿美元——付费天花板明显，仅能作营收补充…"}, {"score": 0.0145, "section": "生态壁垒", "source": "bytedance-doubao.md", "text": "抖音系流量分发是最大护城河：免费策略 + 算法推荐让豆包获客成本远低于竞对。风险：C 端付费意愿低（付费版与免费版差异「不够硬」，官方明确免费版保留核心功能）；MaaS 高份额低收入的剪刀差待解；巨额资本开支下集团利润承压，属典型「烧钱换卡…"}, {"score": 0.0115, "section": "券商研报观点", "source": "bytedance-doubao.md", "text": "国信证券行业深度（2026-04）对字节的画像：模型团队 1000+ 人，2025 年起「研产分离、扁平设计强化基础研究地位」的组织转型；打法为「深度定制工程栈，通过性价比抢份额」，多模态与视觉理解为技术长板，预计年中编程能力快速提升、年底…"}], "summary": "C 端付费 2026-05-04 上线三档：68/200/500 元每月；上线后月活从 3.45 亿降至约 3.3 亿、流失约 610 万用户；"}, "生态壁垒": {"evidence": [{"score": 0.1088, "section": "生态壁垒", "source": "bytedance-doubao.md", "text": "抖音系流量分发是最大护城河：免费策略 + 算法推荐让豆包获客成本远低于竞对。风险：C 端付费意愿低（付费版与免费版差异「不够硬」，官方明确免费版保留核心功能）；MaaS 高份额低收入的剪刀差待解；巨额资本开支下集团利润承压，属典型「烧钱换卡…"}, {"score": 0.0246, "section": "产品定位", "source": "bytedance-doubao.md", "text": "C 端流量之王：豆包 App 月活 3.82 亿（QuestMobile 2026 半年报），国内 AI App 总榜第一（AICPB 2026-06：3.24 亿 MAU 口径），同比增长 172.1%。打法是「算法硬推 + 抖音生态导流…"}, {"score": 0.0184, "section": "技术路线", "source": "bytedance-doubao.md", "text": "豆包大模型（火山引擎输出）：2026-06 日均 Token 调用量突破 180 万亿，较发布时增长超 1500 倍（腾讯新闻 2026-07-17）——调用量为国内第一。多模态覆盖文本/语音/图像/视频，配套即梦（图像视频生成）等产品线。…"}], "summary": "抖音系流量分发是最大护城河：免费策略 + 算法推荐让豆包获客成本远低于竞对。风险：C 端付费意愿低（付费版与免费版差异「不够硬」，官方明确免费版保留核心功能）；"}}, "阶跃星辰": {"技术路线": {"evidence": [{"score": 0.1104, "section": "技术路线", "source": "stepfun.md", "text": "「多模态卷王」路线：已发布 38 款基座模型，其中 31 款为多模态模型（网易 2026-07）。Step 3 系列采用 MoE 架构，总参数 321B、激活约 38B，在视觉语言推理、语音生成、视频理解方向取得开源成绩。2026-06-0…"}, {"score": 0.021, "section": "产品定位", "source": "stepfun.md", "text": "差异化锚定「AI+终端」：模型嵌入手机与汽车终端而非主打 Chatbot App。与 OPPO、荣耀、中兴等合作覆盖国内约 60% 头部手机品牌，累计装机量超 4200 万台，日均服务近 2000 万人次（多家媒体交叉印证）。汽车端与千里科…"}, {"score": 0.0039, "section": "商业化策略", "source": "stepfun.md", "text": "2025 年收入约 5 亿元人民币，2026 年预计约 10-12 亿元（《财经》报道口径，公司未官方回应；对比：2025 年智谱营收 7.24 亿元、MiniMax 约 5.43 亿元）。终端 Agent API 调用量截至 2025 年…"}], "summary": "「多模态卷王」路线：已发布 38 款基座模型，其中 31 款为多模态模型（网易 2026-07）。Step 3 系列采用 MoE 架构，总参数 321B、激活约 38B，在视觉语言推理、语音生成、视频理解方向取得开源成绩。"}, "产品定位": {"evidence": [{"score": 0.0624, "section": "产品定位", "source": "stepfun.md", "text": "差异化锚定「AI+终端」：模型嵌入手机与汽车终端而非主打 Chatbot App。与 OPPO、荣耀、中兴等合作覆盖国内约 60% 头部手机品牌，累计装机量超 4200 万台，日均服务近 2000 万人次（多家媒体交叉印证）。汽车端与千里科…"}, {"score": 0.0179, "section": "商业化策略", "source": "stepfun.md", "text": "2025 年收入约 5 亿元人民币，2026 年预计约 10-12 亿元（《财经》报道口径，公司未官方回应；对比：2025 年智谱营收 7.24 亿元、MiniMax 约 5.43 亿元）。终端 Agent API 调用量截至 2025 年…"}, {"score": 0.0066, "section": "生态壁垒", "source": "stepfun.md", "text": "产业链资本深度绑定是最大特色：Pre-IPO 轮引入华勤、龙旗（全球手机代工第一梯队）、豪威（图像传感器）、中兴等消费电子产业链公司，覆盖整机制造到上游核心器件（腾讯新闻 2026-05-08）。早期股东含红杉中国、启明创投、IDG、五源、…"}], "summary": "差异化锚定「AI+终端」：模型嵌入手机与汽车终端而非主打 Chatbot App。与 OPPO、荣耀、中兴等合作覆盖国内约 60% 头部手机品牌，累计装机量超 4200 万台，日均服务近 2000 万人次（多家媒体交叉印证）。"}, "商业化策略": {"evidence": [{"score": 0.0933, "section": "商业化策略", "source": "stepfun.md", "text": "2025 年收入约 5 亿元人民币，2026 年预计约 10-12 亿元（《财经》报道口径，公司未官方回应；对比：2025 年智谱营收 7.24 亿元、MiniMax 约 5.43 亿元）。终端 Agent API 调用量截至 2025 年…"}, {"score": 0.0043, "section": "生态壁垒", "source": "stepfun.md", "text": "产业链资本深度绑定是最大特色：Pre-IPO 轮引入华勤、龙旗（全球手机代工第一梯队）、豪威（图像传感器）、中兴等消费电子产业链公司，覆盖整机制造到上游核心器件（腾讯新闻 2026-05-08）。早期股东含红杉中国、启明创投、IDG、五源、…"}], "summary": "2025 年收入约 5 亿元人民币，2026 年预计约 10-12 亿元（《财经》报道口径，公司未官方回应；对比：2025 年智谱营收 7.24 亿元、MiniMax 约 5.43 亿元）。"}, "生态壁垒": {"evidence": [{"score": 0.0633, "section": "生态壁垒", "source": "stepfun.md", "text": "产业链资本深度绑定是最大特色：Pre-IPO 轮引入华勤、龙旗（全球手机代工第一梯队）、豪威（图像传感器）、中兴等消费电子产业链公司，覆盖整机制造到上游核心器件（腾讯新闻 2026-05-08）。早期股东含红杉中国、启明创投、IDG、五源、…"}, {"score": 0.0068, "section": "技术路线", "source": "stepfun.md", "text": "「多模态卷王」路线：已发布 38 款基座模型，其中 31 款为多模态模型（网易 2026-07）。Step 3 系列采用 MoE 架构，总参数 321B、激活约 38B，在视觉语言推理、语音生成、视频理解方向取得开源成绩。2026-06-0…"}], "summary": "产业链资本深度绑定是最大特色：Pre-IPO 轮引入华勤、龙旗（全球手机代工第一梯队）、豪威（图像传感器）、中兴等消费电子产业链公司，覆盖整机制造到上游核心器件（腾讯新闻 2026-05-08）。早期股东含红杉中国、启明创投、IDG、五源、顺为、联想创投、腾讯、上海国投等。"}}, "零一万物": {"技术路线": {"evidence": [{"score": 0.0949, "section": "技术路线", "source": "01ai.md", "text": "已放弃自研万亿参数基座：2025 年初将大部分预训练团队与 AI Infra 团队并入阿里云，成立「产业大模型联合实验室」，不再从零研发基础模型（网易 2026-07）。现基于 DeepSeek、通义千问、智谱 GLM 等开源模型做行业微调…"}, {"score": 0.0451, "section": "生态壁垒", "source": "01ai.md", "text": "壁垒来自深度绑定大客户而非模型能力：与正大集团合资绑定农业场景，复制 Palantir「深度绑定政府与大企业数据基础设施」路径。阿里云为重要产业股东兼基座供给方（预训练团队并入阿里云后形成依赖+合作双重关系）。风险与代价：放弃基础模型竞赛意…"}, {"score": 0.0346, "section": "商业化策略", "source": "01ai.md", "text": "2025 年经审计收入 2.5 亿元人民币、合同订单 5 亿元；截至 2026-05 累计订单突破 15 亿元、冲刺 20 亿元全年目标，其中近半为重复性订阅（ARR）收入（腾讯新闻 2026-07-23）。年度营运成本约 2 亿元——放弃…"}], "summary": "已放弃自研万亿参数基座：2025 年初将大部分预训练团队与 AI Infra 团队并入阿里云，成立「产业大模型联合实验室」，不再从零研发基础模型（网易 2026-07）。现基于 DeepSeek、通义千问、智谱 GLM 等开源模型做行业微调定制，走轻资产路线。"}, "产品定位": {"evidence": [{"score": 0.0965, "section": "产品定位", "source": "01ai.md", "text": "从「中国版 OpenAI」四年转向「中国版 Palantir」：聚焦政企产业 AI 落地，主打私有化本地部署。面向企业管理者推出「一号位AI」产品矩阵：老板AI、销冠AI、投资官AI（分别对应企业经营、销售、投资决策场景）。行业聚焦农业、工…"}, {"score": 0.0285, "section": "技术路线", "source": "01ai.md", "text": "已放弃自研万亿参数基座：2025 年初将大部分预训练团队与 AI Infra 团队并入阿里云，成立「产业大模型联合实验室」，不再从零研发基础模型（网易 2026-07）。现基于 DeepSeek、通义千问、智谱 GLM 等开源模型做行业微调…"}, {"score": 0.0226, "section": "生态壁垒", "source": "01ai.md", "text": "壁垒来自深度绑定大客户而非模型能力：与正大集团合资绑定农业场景，复制 Palantir「深度绑定政府与大企业数据基础设施」路径。阿里云为重要产业股东兼基座供给方（预训练团队并入阿里云后形成依赖+合作双重关系）。风险与代价：放弃基础模型竞赛意…"}], "summary": "从「中国版 OpenAI」四年转向「中国版 Palantir」：聚焦政企产业 AI 落地，主打私有化本地部署。面向企业管理者推出「一号位AI」产品矩阵：老板AI、销冠AI、投资官AI（分别对应企业经营、销售、投资决策场景）。"}, "商业化策略": {"evidence": [{"score": 0.1069, "section": "商业化策略", "source": "01ai.md", "text": "2025 年经审计收入 2.5 亿元人民币、合同订单 5 亿元；截至 2026-05 累计订单突破 15 亿元、冲刺 20 亿元全年目标，其中近半为重复性订阅（ARR）收入（腾讯新闻 2026-07-23）。年度营运成本约 2 亿元——放弃…"}], "summary": "2025 年经审计收入 2.5 亿元人民币、合同订单 5 亿元；截至 2026-05 累计订单突破 15 亿元、冲刺 20 亿元全年目标，其中近半为重复性订阅（ARR）收入（腾讯新闻 2026-07-23）。"}, "生态壁垒": {"evidence": [{"score": 0.0633, "section": "生态壁垒", "source": "01ai.md", "text": "壁垒来自深度绑定大客户而非模型能力：与正大集团合资绑定农业场景，复制 Palantir「深度绑定政府与大企业数据基础设施」路径。阿里云为重要产业股东兼基座供给方（预训练团队并入阿里云后形成依赖+合作双重关系）。风险与代价：放弃基础模型竞赛意…"}], "summary": "壁垒来自深度绑定大客户而非模型能力：与正大集团合资绑定农业场景，复制 Palantir「深度绑定政府与大企业数据基础设施」路径。阿里云为重要产业股东兼基座供给方（预训练团队并入阿里云后形成依赖+合作双重关系）。"}}, "Anthropic": {"技术路线": {"evidence": [{"score": 0.0691, "section": "技术路线", "source": "anthropic.md", "text": "闭源 + 安全优先路线，旗舰 Claude Opus 4.8：多项核心指标超越 GPT-5.5 与 Gemini 3.1 Pro，被评「全球最强商用智能体模型」（证券时报 2026-05-29）；SWE-bench Verified 72.…"}, {"score": 0.0181, "section": "生态壁垒", "source": "anthropic.md", "text": "企业新增 AI 合同份额超 65%（vs OpenAI，2026-02）；企业客户粘性高、客单价稳定；「财务资本 + 云巨头 + 存储芯片产业资本」多元投资联盟。安全合规心智对金融/法律/医疗行业吸引力强。风险：年算力成本约 150 亿美元…"}, {"score": 0.0168, "section": "商业化策略", "source": "anthropic.md", "text": "营收爬升为行业历史级：ARR 2022 约 1000 万美元 → 2023 约 1 亿 → 2024-12 约 10 亿 → 2025-09 约 70 亿 → 2026-02 约 140 亿 → 2026-04 约 300 亿 → 2026…"}], "summary": "闭源 + 安全优先路线，旗舰 Claude Opus 4.8：多项核心指标超越 GPT-5.5 与 Gemini 3.1 Pro，被评「全球最强商用智能体模型」（证券时报 2026-05-29）；SWE-bench Verified 72.7% 为编程第一。"}, "产品定位": {"evidence": [{"score": 0.0898, "section": "产品定位", "source": "anthropic.md", "text": "B 端绝对主导：企业端收入占比约 80-85%，个人端不足 20%。财富 10 强中 8 家是 Claude 客户；年消费超 100 万美元的企业客户从两年前十几家扩至逾千家；年消费超 10 万美元客户一年增长 7 倍（SemiAnalys…"}, {"score": 0.0307, "section": "生态壁垒", "source": "anthropic.md", "text": "企业新增 AI 合同份额超 65%（vs OpenAI，2026-02）；企业客户粘性高、客单价稳定；「财务资本 + 云巨头 + 存储芯片产业资本」多元投资联盟。安全合规心智对金融/法律/医疗行业吸引力强。风险：年算力成本约 150 亿美元…"}, {"score": 0.0093, "section": "商业化策略", "source": "anthropic.md", "text": "营收爬升为行业历史级：ARR 2022 约 1000 万美元 → 2023 约 1 亿 → 2024-12 约 10 亿 → 2025-09 约 70 亿 → 2026-02 约 140 亿 → 2026-04 约 300 亿 → 2026…"}], "summary": "B 端绝对主导：企业端收入占比约 80-85%，个人端不足 20%。财富 10 强中 8 家是 Claude 客户；"}, "商业化策略": {"evidence": [{"score": 0.1119, "section": "商业化策略", "source": "anthropic.md", "text": "营收爬升为行业历史级：ARR 2022 约 1000 万美元 → 2023 约 1 亿 → 2024-12 约 10 亿 → 2025-09 约 70 亿 → 2026-02 约 140 亿 → 2026-04 约 300 亿 → 2026…"}, {"score": 0.055, "section": "生态壁垒", "source": "anthropic.md", "text": "企业新增 AI 合同份额超 65%（vs OpenAI，2026-02）；企业客户粘性高、客单价稳定；「财务资本 + 云巨头 + 存储芯片产业资本」多元投资联盟。安全合规心智对金融/法律/医疗行业吸引力强。风险：年算力成本约 150 亿美元…"}, {"score": 0.0092, "section": "产品定位", "source": "anthropic.md", "text": "B 端绝对主导：企业端收入占比约 80-85%，个人端不足 20%。财富 10 强中 8 家是 Claude 客户；年消费超 100 万美元的企业客户从两年前十几家扩至逾千家；年消费超 10 万美元客户一年增长 7 倍（SemiAnalys…"}], "summary": "营收爬升为行业历史级：ARR 2022 约 1000 万美元 → 2023 约 1 亿 → 2024-12 约 10 亿 → 2025-09 约 70 亿 → 2026-02 约 140 亿 → 2026-04 约 300 亿 → 2026-05 超 440-470 亿美元（CEO Dario Amodei 披露口径，27 个月增长约 5400 倍）。2026-04 营收反超 OpenAI。"}, "生态壁垒": {"evidence": [{"score": 0.0869, "section": "生态壁垒", "source": "anthropic.md", "text": "企业新增 AI 合同份额超 65%（vs OpenAI，2026-02）；企业客户粘性高、客单价稳定；「财务资本 + 云巨头 + 存储芯片产业资本」多元投资联盟。安全合规心智对金融/法律/医疗行业吸引力强。风险：年算力成本约 150 亿美元…"}], "summary": "企业新增 AI 合同份额超 65%（vs OpenAI，2026-02）；企业客户粘性高、客单价稳定；"}}, "Google Gemini": {"技术路线": {"evidence": [{"score": 0.1806, "section": "技术路线", "source": "google-gemini.md", "text": "Gemini 3.1 Pro 旗舰（另有 Gemini 3.6 Flash 等），闭源路线，1M token 上下文，单一模型家族覆盖文本/图像/视频/代码的多模态能力为特色。背靠 DeepMind + Brain 合并后的研究实力与自研 …"}, {"score": 0.0182, "section": "生态壁垒", "source": "google-gemini.md", "text": "分发壁垒无人能敌：搜索、Android、Chrome、Workspace 数十亿用户入口 + 自研 TPU 供应链闭环 + Google Cloud 企业渠道。风险：反垄断审查可能强制改变 AI 与自家产品的捆绑方式；大组织复杂度导致发布速…"}], "summary": "Gemini 3.1 Pro 旗舰（另有 Gemini 3.6 Flash 等），闭源路线，1M token 上下文，单一模型家族覆盖文本/图像/视频/代码的多模态能力为特色。背靠 DeepMind + Brain 合并后的研究实力与自研 TPU 算力体系——唯一不依赖英伟达也能训练前沿模型的大厂。"}, "产品定位": {"evidence": [{"score": 0.0576, "section": "产品定位", "source": "google-gemini.md", "text": "消费级覆盖仅次于 ChatGPT 且增速更快：Gemini App 月活 2026-05 达 9 亿（8 个月前仅 3.5 亿）；美国聊天机器人份额约 25-29.4%、稳居第二（similarweb 2026-01 口径），14 个月内从…"}, {"score": 0.0311, "section": "生态壁垒", "source": "google-gemini.md", "text": "分发壁垒无人能敌：搜索、Android、Chrome、Workspace 数十亿用户入口 + 自研 TPU 供应链闭环 + Google Cloud 企业渠道。风险：反垄断审查可能强制改变 AI 与自家产品的捆绑方式；大组织复杂度导致发布速…"}, {"score": 0.0182, "section": "商业化策略", "source": "google-gemini.md", "text": "不单独融资、依托 Alphabet：2026 Q1 生成式 AI 产品收入同比增长 800%；Google Cloud 收入同比 +63% 达 200.3 亿美元（fast.io 转述财报）。变现路径：Gemini 订阅（One AI Pr…"}], "summary": "消费级覆盖仅次于 ChatGPT 且增速更快：Gemini App 月活 2026-05 达 9 亿（8 个月前仅 3.5 亿）；美国聊天机器人份额约 25-29.4%、稳居第二（similarweb 2026-01 口径），14 个月内从 5.7% 升至 25%+。"}, "商业化策略": {"evidence": [{"score": 0.1512, "section": "商业化策略", "source": "google-gemini.md", "text": "不单独融资、依托 Alphabet：2026 Q1 生成式 AI 产品收入同比增长 800%；Google Cloud 收入同比 +63% 达 200.3 亿美元（fast.io 转述财报）。变现路径：Gemini 订阅（One AI Pr…"}], "summary": "不单独融资、依托 Alphabet：2026 Q1 生成式 AI 产品收入同比增长 800%；Google Cloud 收入同比 +63% 达 200.3 亿美元（fast.io 转述财报）。"}, "生态壁垒": {"evidence": [{"score": 0.0904, "section": "生态壁垒", "source": "google-gemini.md", "text": "分发壁垒无人能敌：搜索、Android、Chrome、Workspace 数十亿用户入口 + 自研 TPU 供应链闭环 + Google Cloud 企业渠道。风险：反垄断审查可能强制改变 AI 与自家产品的捆绑方式；大组织复杂度导致发布速…"}], "summary": "分发壁垒无人能敌：搜索、Android、Chrome、Workspace 数十亿用户入口 + 自研 TPU 供应链闭环 + Google Cloud 企业渠道。风险：反垄断审查可能强制改变 AI 与自家产品的捆绑方式；"}}, "Meta（Llama）": {"技术路线": {"evidence": [{"score": 0.1886, "section": "技术路线", "source": "meta-llama.md", "text": "开源权重路线的大厂代表：Llama 4 家族（Scout / Maverick），原生多模态 MoE 架构；Llama 4 Scout 上下文窗口达 1000 万 token（2026 年公开模型中最长），可在单张 H100 上运行——主打…"}, {"score": 0.054, "section": "生态壁垒", "source": "meta-llama.md", "text": "开源社区标准制定权 + 数十亿级社交分发 + 广告现金流供血。开源策略压制闭源厂商定价能力的同时为自身生态输血。风险：开源路线的领先地位正被 DeepSeek、Qwen、Kimi 等中国开源模型挑战（2026 年多个编程/推理榜单被中国开源…"}, {"score": 0.0153, "section": "产品定位", "source": "meta-llama.md", "text": "不直接卖模型：Llama 4 是全球下载量最大的开源模型家族（fast.io 2026），定位是 AI 基础设施的「安卓」——让全行业在其权重上做二次开发，从而掌握生态标准。Meta AI 助手嵌入 Facebook/Instagram/W…"}], "summary": "开源权重路线的大厂代表：Llama 4 家族（Scout / Maverick），原生多模态 MoE 架构；Llama 4 Scout 上下文窗口达 1000 万 token（2026 年公开模型中最长），可在单张 H100 上运行——主打「可自托管的前沿能力」。"}, "产品定位": {"evidence": [{"score": 0.1153, "section": "产品定位", "source": "meta-llama.md", "text": "不直接卖模型：Llama 4 是全球下载量最大的开源模型家族（fast.io 2026），定位是 AI 基础设施的「安卓」——让全行业在其权重上做二次开发，从而掌握生态标准。Meta AI 助手嵌入 Facebook/Instagram/W…"}, {"score": 0.0281, "section": "商业化策略", "source": "meta-llama.md", "text": "模型本身免费开源，变现路径间接：AI 提升广告投放效率（集团核心收入）+ 社交产品内 AI 功能留存用户。不参与模型 API 直接竞价。2025 年起组建「超级智能实验室」高薪挖角（公开报道），资本开支巨大但由广告业务现金流支撑——与初创厂…"}], "summary": "不直接卖模型：Llama 4 是全球下载量最大的开源模型家族（fast.io 2026），定位是 AI 基础设施的「安卓」——让全行业在其权重上做二次开发，从而掌握生态标准。Meta AI 助手嵌入 Facebook/Instagram/WhatsApp 三大社交入口触达数十亿用户。"}, "商业化策略": {"evidence": [{"score": 0.1137, "section": "商业化策略", "source": "meta-llama.md", "text": "模型本身免费开源，变现路径间接：AI 提升广告投放效率（集团核心收入）+ 社交产品内 AI 功能留存用户。不参与模型 API 直接竞价。2025 年起组建「超级智能实验室」高薪挖角（公开报道），资本开支巨大但由广告业务现金流支撑——与初创厂…"}, {"score": 0.0153, "section": "生态壁垒", "source": "meta-llama.md", "text": "开源社区标准制定权 + 数十亿级社交分发 + 广告现金流供血。开源策略压制闭源厂商定价能力的同时为自身生态输血。风险：开源路线的领先地位正被 DeepSeek、Qwen、Kimi 等中国开源模型挑战（2026 年多个编程/推理榜单被中国开源…"}], "summary": "模型本身免费开源，变现路径间接：AI 提升广告投放效率（集团核心收入）+ 社交产品内 AI 功能留存用户。不参与模型 API 直接竞价。"}, "生态壁垒": {"evidence": [{"score": 0.0986, "section": "生态壁垒", "source": "meta-llama.md", "text": "开源社区标准制定权 + 数十亿级社交分发 + 广告现金流供血。开源策略压制闭源厂商定价能力的同时为自身生态输血。风险：开源路线的领先地位正被 DeepSeek、Qwen、Kimi 等中国开源模型挑战（2026 年多个编程/推理榜单被中国开源…"}, {"score": 0.0248, "section": "商业化策略", "source": "meta-llama.md", "text": "模型本身免费开源，变现路径间接：AI 提升广告投放效率（集团核心收入）+ 社交产品内 AI 功能留存用户。不参与模型 API 直接竞价。2025 年起组建「超级智能实验室」高薪挖角（公开报道），资本开支巨大但由广告业务现金流支撑——与初创厂…"}, {"score": 0.0218, "section": "产品定位", "source": "meta-llama.md", "text": "不直接卖模型：Llama 4 是全球下载量最大的开源模型家族（fast.io 2026），定位是 AI 基础设施的「安卓」——让全行业在其权重上做二次开发，从而掌握生态标准。Meta AI 助手嵌入 Facebook/Instagram/W…"}], "summary": "开源社区标准制定权 + 数十亿级社交分发 + 广告现金流供血。开源策略压制闭源厂商定价能力的同时为自身生态输血。"}}, "OpenAI": {"技术路线": {"evidence": [{"score": 0.1212, "section": "技术路线", "source": "openai.md", "text": "闭源路线，旗舰 GPT-5.4 / GPT-5 Pro 系列，多模态能力覆盖最广（文本/图像/语音/视频），旗舰上下文窗口 400K tokens。MMLU 91.4% 领先（valueaddvc.com 2026 对比），但编程基准 SW…"}, {"score": 0.0127, "section": "生态壁垒", "source": "openai.md", "text": "最大消费者品牌心智 + 最深开发者生态（工具链、插件市场、人才池）+ 微软 Azure 分发。企业收入占比已超 40% 且年底有望与消费端持平。风险：估值与营收被 Anthropic 反超（2026-04 起），企业 AI 支出份额从主导地…"}, {"score": 0.0121, "section": "商业化策略", "source": "openai.md", "text": "2026-03 完成 1220 亿美元融资、估值 8520 亿美元（英伟达、亚马逊、软银领衔，微软持续参与）；月收入 20 亿美元、年化约 240-250 亿美元；2026 全年营收目标 300 亿美元。已秘密递交 IPO 文件，目标 20…"}], "summary": "闭源路线，旗舰 GPT-5.4 / GPT-5 Pro 系列，多模态能力覆盖最广（文本/图像/语音/视频），旗舰上下文窗口 400K tokens。MMLU 91.4% 领先（valueaddvc.com 2026 对比），但编程基准 SWE-bench Verified 65-67% 落后于 Claude（72.7%）。"}, "产品定位": {"evidence": [{"score": 0.0513, "section": "产品定位", "source": "openai.md", "text": "全球最大消费级 AI 入口：ChatGPT 周活超 9 亿、付费订阅超 5000 万（2026 年中口径）。收入结构约 70% 来自消费端、30% 来自 API 与企业合同——与 Anthropic 正好相反。美国聊天机器人市场份额约 45…"}], "summary": "全球最大消费级 AI 入口：ChatGPT 周活超 9 亿、付费订阅超 5000 万（2026 年中口径）。收入结构约 70% 来自消费端、30% 来自 API 与企业合同——与 Anthropic 正好相反。"}, "商业化策略": {"evidence": [{"score": 0.1339, "section": "商业化策略", "source": "openai.md", "text": "2026-03 完成 1220 亿美元融资、估值 8520 亿美元（英伟达、亚马逊、软银领衔，微软持续参与）；月收入 20 亿美元、年化约 240-250 亿美元；2026 全年营收目标 300 亿美元。已秘密递交 IPO 文件，目标 20…"}, {"score": 0.0406, "section": "产品定位", "source": "openai.md", "text": "全球最大消费级 AI 入口：ChatGPT 周活超 9 亿、付费订阅超 5000 万（2026 年中口径）。收入结构约 70% 来自消费端、30% 来自 API 与企业合同——与 Anthropic 正好相反。美国聊天机器人市场份额约 45…"}, {"score": 0.0374, "section": "生态壁垒", "source": "openai.md", "text": "最大消费者品牌心智 + 最深开发者生态（工具链、插件市场、人才池）+ 微软 Azure 分发。企业收入占比已超 40% 且年底有望与消费端持平。风险：估值与营收被 Anthropic 反超（2026-04 起），企业 AI 支出份额从主导地…"}], "summary": "2026-03 完成 1220 亿美元融资、估值 8520 亿美元（英伟达、亚马逊、软银领衔，微软持续参与）；月收入 20 亿美元、年化约 240-250 亿美元；"}, "生态壁垒": {"evidence": [{"score": 0.1185, "section": "生态壁垒", "source": "openai.md", "text": "最大消费者品牌心智 + 最深开发者生态（工具链、插件市场、人才池）+ 微软 Azure 分发。企业收入占比已超 40% 且年底有望与消费端持平。风险：估值与营收被 Anthropic 反超（2026-04 起），企业 AI 支出份额从主导地…"}, {"score": 0.0196, "section": "技术路线", "source": "openai.md", "text": "闭源路线，旗舰 GPT-5.4 / GPT-5 Pro 系列，多模态能力覆盖最广（文本/图像/语音/视频），旗舰上下文窗口 400K tokens。MMLU 91.4% 领先（valueaddvc.com 2026 对比），但编程基准 SW…"}], "summary": "最大消费者品牌心智 + 最深开发者生态（工具链、插件市场、人才池）+ 微软 Azure 分发。企业收入占比已超 40% 且年底有望与消费端持平。"}}, "xAI（Grok）": {"技术路线": {"evidence": [{"score": 0.1013, "section": "技术路线", "source": "xai-grok.md", "text": "Grok 4 系列（部分开放权重的 Mixed 路线），差异化在「实时数据 + 推理」：唯一深度接入 X（推特）实时数据流的前沿模型。算力自建激进：Colossus 孟菲斯超算约 55.5 万 GPU，为全球最大训练集群之一；计划再投 18…"}], "summary": "Grok 4 系列（部分开放权重的 Mixed 路线），差异化在「实时数据 + 推理」：唯一深度接入 X（推特）实时数据流的前沿模型。算力自建激进：Colossus 孟菲斯超算约 55.5 万 GPU，为全球最大训练集群之一；"}, "产品定位": {"evidence": [{"score": 0.086, "section": "产品定位", "source": "xai-grok.md", "text": "借 X 分发快速起量：美国聊天机器人份额从 2025-01 的 1.9% 飙至 2026-01 的 17.8%（Apptopia/Reuters），一年 9 倍，居美国第三（次于 ChatGPT 52.9%、Gemini 29.4%）；月用…"}, {"score": 0.0446, "section": "生态壁垒", "source": "xai-grok.md", "text": "X 平台 4 亿活跃用户的免费分发 + 独有实时社交数据语料 + 马斯克个人品牌与 SpaceX 合并后的「AI + 基础设施」联合体。风险：烧钱速率/收入比极端失衡；与 SpaceX 合并的整合复杂度与监管审批不确定；内容风格争议（「更少…"}], "summary": "借 X 分发快速起量：美国聊天机器人份额从 2025-01 的 1.9% 飙至 2026-01 的 17.8%（Apptopia/Reuters），一年 9 倍，居美国第三（次于 ChatGPT 52.9%、Gemini 29.4%）；月用户约 6400 万，grok.com 月访问量 2026-01 约 3.14 亿次。"}, "商业化策略": {"evidence": [{"score": 0.1317, "section": "商业化策略", "source": "xai-grok.md", "text": "2026-01 完成 200 亿美元 Series E（估值 2300 亿美元，投资方含英伟达、思科、富达、卡塔尔投资局），累计融资超 400 亿美元。随后与 SpaceX 合并、合并后估值 1.25 万亿美元，以 SPCX 代码在纳斯达克…"}, {"score": 0.0063, "section": "生态壁垒", "source": "xai-grok.md", "text": "X 平台 4 亿活跃用户的免费分发 + 独有实时社交数据语料 + 马斯克个人品牌与 SpaceX 合并后的「AI + 基础设施」联合体。风险：烧钱速率/收入比极端失衡；与 SpaceX 合并的整合复杂度与监管审批不确定；内容风格争议（「更少…"}], "summary": "2026-01 完成 200 亿美元 Series E（估值 2300 亿美元，投资方含英伟达、思科、富达、卡塔尔投资局），累计融资超 400 亿美元。随后与 SpaceX 合并、合并后估值 1.25 万亿美元，以 SPCX 代码在纳斯达克申报 IPO，预计 2026 年中定价。"}, "生态壁垒": {"evidence": [{"score": 0.0896, "section": "生态壁垒", "source": "xai-grok.md", "text": "X 平台 4 亿活跃用户的免费分发 + 独有实时社交数据语料 + 马斯克个人品牌与 SpaceX 合并后的「AI + 基础设施」联合体。风险：烧钱速率/收入比极端失衡；与 SpaceX 合并的整合复杂度与监管审批不确定；内容风格争议（「更少…"}, {"score": 0.0427, "section": "技术路线", "source": "xai-grok.md", "text": "Grok 4 系列（部分开放权重的 Mixed 路线），差异化在「实时数据 + 推理」：唯一深度接入 X（推特）实时数据流的前沿模型。算力自建激进：Colossus 孟菲斯超算约 55.5 万 GPU，为全球最大训练集群之一；计划再投 18…"}], "summary": "X 平台 4 亿活跃用户的免费分发 + 独有实时社交数据语料 + 马斯克个人品牌与 SpaceX 合并后的「AI + 基础设施」联合体。风险：烧钱速率/收入比极端失衡；"}}}}, "trace": {"question": "系统评估各厂商在技术路线、产品定位、商业化策略、生态壁垒四个维度的竞争力", "mode": "规则驱动(未配置API Key，确定性兜底)", "stats": {"initial_pass": 52, "refined": 0, "refine_success": 0}, "trace": [{"step": "拆解", "detail": "问题拆成 52 个子查询（13 厂商 × 4 维度）"}, {"step": "智谱·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "智谱·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "智谱·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "智谱·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "月之暗面（Kimi）·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "月之暗面（Kimi）·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "月之暗面（Kimi）·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "月之暗面（Kimi）·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "MiniMax·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "MiniMax·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "MiniMax·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "MiniMax·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "DeepSeek·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "DeepSeek·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "DeepSeek·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "DeepSeek·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "阿里通义（Qwen）·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "阿里通义（Qwen）·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "阿里通义（Qwen）·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "阿里通义（Qwen）·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "字节豆包·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "字节豆包·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "字节豆包·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "字节豆包·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "阶跃星辰·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "阶跃星辰·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "阶跃星辰·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "阶跃星辰·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "零一万物·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "零一万物·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "零一万物·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "零一万物·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "Anthropic·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "Anthropic·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "Anthropic·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "Anthropic·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "Google Gemini·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "Google Gemini·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "Google Gemini·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "Google Gemini·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "Meta（Llama）·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "Meta（Llama）·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "Meta（Llama）·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "Meta（Llama）·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "OpenAI·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "OpenAI·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "OpenAI·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "OpenAI·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}, {"step": "xAI（Grok）·技术路线", "rounds": 1, "final": "充分", "queries": ["技术路线 自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力"]}, {"step": "xAI（Grok）·产品定位", "rounds": 1, "final": "充分", "queries": ["产品定位 定位 C端 B端 用户 场景 产品矩阵 助手 平台 客户 行业"]}, {"step": "xAI（Grok）·商业化策略", "rounds": 1, "final": "充分", "queries": ["商业化策略 收入 融资 商业化 变现 订阅 API计费 客单价 上市 IPO 估值"]}, {"step": "xAI（Grok）·生态壁垒", "rounds": 1, "final": "充分", "queries": ["生态壁垒 壁垒 生态 护城河 社区 心智 留存 风险 竞争 数据飞轮"]}]}, "tierModel": [{"name": "通用基座（吃估值红利）", "vendors": ["智谱", "DeepSeek"], "note": "智谱已上市（02513.HK，2025 营收 8.02 亿港元 +137.7%，21 家机构覆盖）；DeepSeek 开源心智最强、拟科创板 IPO。", "tone": "up"}, {"name": "出海应用（吃增速红利）", "vendors": ["月之暗面（Kimi）", "MiniMax"], "note": "Kimi ARR 三级跳至 3 亿美元（据报道）、拟港股；MiniMax 已上市（00100.HK，2025 营收 6.15 亿港元 +159.6%，2.36 亿用户 200+ 国家）。", "tone": "up"}, {"name": "混合业态（吃稳健红利）", "vendors": ["阶跃星辰"], "note": "AI+终端差异化：OPPO/荣耀/中兴装机超 4200 万台；2026-05 Pre-IPO 近 25 亿美元，拟港股「大模型第三股」。", "tone": "flat"}, {"name": "大厂生态（吃场景红利）", "vendors": ["阿里通义（Qwen）", "字节豆包"], "note": "非独立创业公司：通义依托阿里云 MaaS，豆包居 IDC 公有云 MaaS 份额第一、C 端月活领跑（QuestMobile）。", "tone": "flat"}, {"name": "转型掉队（对照样本）", "vendors": ["零一万物"], "note": "六小虎中首个退出基模赛道：预训练团队并入阿里云，转「中国版 Palantir」企业 AI；2025 审计收入 2.5 亿、订单 15 亿，拟 2027 港股。", "tone": "down"}], "sellside": [{"vendor": "智谱 02513.HK", "coverage": "21 家机构覆盖", "low": 688, "avg": 1682, "high": 2043, "low_label": "中金 688（跑赢行业）", "avg_label": "17 家目标均价 1682", "high_label": "SOTP 上限 2043", "extra": "瑞银「买入」1160，预测 2025-27 收入 CAGR 231%", "spot": null, "unit": "港元"}, {"vendor": "MiniMax 00100.HK", "coverage": "16 家给出目标价", "low": 500, "avg": 800, "high": 1133, "low_label": "美银 500", "avg_label": "目标均价 800", "high_label": "华泰 1133", "extra": "现价约 197 港元 — 卖方与二级市场定价背离约 3 倍", "spot": 197, "unit": "港元"}], "credTiers": [{"level": "①", "name": "审计财报", "desc": "港交所公开年报（经审计）", "examples": "智谱 02513.HK / MiniMax 00100.HK 2025 年报", "use": "可直接引用"}, {"level": "②", "name": "券商研报", "desc": "卖方评级、目标价、盈利预测", "examples": "中金/瑞银/华泰/美银/长江/国信/华创，逐条标注券商+日期", "use": "引用注明机构"}, {"level": "③", "name": "工商/榜单", "desc": "可独立验证的第三方数据库", "examples": "天眼查工商、QuestMobile / IDC / AICPB 榜单", "use": "引用注明口径"}, {"level": "④", "name": "媒体转述", "desc": "主流媒体转述一手信源", "examples": "证券时报 / Reuters / 腾讯新闻：估值、ARR、融资", "use": "需带「据报道」"}, {"level": "⑤", "name": "前瞻估算", "desc": "分析师/媒体估算，未经公司确认", "examples": "阶跃 2026E 收入 10-12 亿、Kimi 目标估值 500 亿美元", "use": "仅作研判线索"}], "meta": {"nVendors": 13, "nCore": 8, "nOverseas": 5, "nSubqueries": 52, "initialPass": 52, "nEvidence": 125, "retrievedAt": "2026-07-27 / 07-28"}};
+const M = DATA.matrix, T = DATA.trace, META = DATA.meta;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('#h-nv').textContent = META.nVendors;
+$('#h-stamp').textContent = 'DATA SNAPSHOT ' + META.retrievedAt + ' · MODE ' + M.mode;
+$('#f-date').textContent = META.retrievedAt;
+
+/* Ticker：真实数据滚动带（红涨绿跌） */
+const TK = [
+  {nm:'智谱 02513.HK 营收', vl:'8.02亿港元', chg:'+137.7%', c:'u'},
+  {nm:'MiniMax 00100.HK 营收', vl:'6.15亿港元', chg:'+159.6%', c:'u'},
+  {nm:'智谱 目标价区间', vl:'688–2043', chg:'21家覆盖', c:'f'},
+  {nm:'MiniMax 目标均价/现价', vl:'800 / 197', chg:'背离≈3×', c:'d'},
+  {nm:'Kimi ARR', vl:'$3亿', chg:'据报道', c:'u'},
+  {nm:'阶跃 Pre-IPO', vl:'$25亿', chg:'拟港股', c:'f'},
+  {nm:'零一万物 2025收入', vl:'2.5亿', chg:'转型对照', c:'d'},
+  {nm:'豆包 MaaS 份额', vl:'IDC 第一', chg:'大厂生态', c:'f'},
+];
+const tkHTML = TK.map(t=>`<span class="tk-item"><span class="nm">${esc(t.nm)}</span><span class="vl">${esc(t.vl)}</span><span class="chg ${t.c}">${esc(t.chg)}</span></span>`).join('');
+$('#ticker').innerHTML = tkHTML + tkHTML;
+
+/* KPIs */
+const kpis = [
+  {v: META.nVendors, s:' 家', k:'覆盖厂商 · 核心 '+META.nCore+' + 对标 '+META.nOverseas, gold:true},
+  {v: META.nEvidence, s:' 条', k:'可溯源证据（矩阵层）'},
+  {v: 52, s:' 个', k:'Deep Research 子查询'},
+  {v: '100', s:'%', k:'首轮证据充分率（维度锁后）', gold:true},
+  {v: 5, s:' 档', k:'数据来源可信度分级'},
+];
+$('#kpis').innerHTML = kpis.map(x =>
+  `<div class="kpi${x.gold?' gold':''}"><div class="v">${x.v}<small>${x.s}</small></div><div class="k">${x.k}</div></div>`).join('');
+
+/* Matrix：摘要只露首句，点开看全文+证据 */
+const dims = M.dimensions;
+const tiers = M.tiers;
+const vendorNames = Object.keys(M.vendors);
+const coreV = vendorNames.filter(v => tiers[v] === '国内核心');
+const oversV = vendorNames.filter(v => tiers[v] === '海外对标');
+let curDim = dims[0];
+
+$('#dimtabs').innerHTML = dims.map(d =>
+  `<button class="tab${d===curDim?' on':''}" data-d="${esc(d)}">${esc(d)}</button>`).join('');
+$('#dimtabs').addEventListener('click', e => {
+  const b = e.target.closest('.tab'); if (!b) return;
+  curDim = b.dataset.d;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t === b));
+  renderMatrix();
+});
+
+function splitLead(text) {
+  const t = String(text || '—');
+  const i = t.search(/[。；;]/);
+  if (i < 0 || i > 130) return [t.slice(0, 130) + (t.length > 130 ? '…' : ''), t.length > 130 ? t : ''];
+  return [t.slice(0, i + 1), t.slice(i + 1).trim()];
+}
+function cardHTML(v) {
+  const cell = M.vendors[v][curDim] || {};
+  const evs = cell.evidence || [];
+  const isCore = tiers[v] === '国内核心';
+  const [lead, rest] = splitLead(cell.summary);
+  const evHTML = evs.map(e => `
+    <div class="ev">
+      <div class="evmeta"><span class="score num">SCORE ${e.score.toFixed(3)}</span>
+        <span class="sbar"><i style="width:${Math.min(100, e.score*400)}%"></i></span>
+        <span>§${esc(e.section)}</span><span>${esc(e.source)}</span></div>
+      <div class="etext">${esc(e.text)}</div>
+    </div>`).join('');
+  return `<div class="card">
+    <div class="top"><span class="vname">${esc(v)}</span><span class="badge${isCore?' core':''}">${esc(tiers[v]||'')}</span></div>
+    <div class="lead">${esc(lead)}</div>
+    ${rest ? `<div class="rest">${esc(rest)}</div>` : ''}
+    ${(rest || evs.length) ? `<button class="evtoggle">▸ 全文 + 证据 ${evs.length} 条</button><div class="evlist">${evHTML}</div>` : ''}
+  </div>`;
+}
+function renderMatrix() {
+  $('#matrixbody').innerHTML =
+    `<div class="tierlabel">CORE · 国内核心层 <span class="cnt">${coreV.length} 家</span></div><div class="cards">${coreV.map(cardHTML).join('')}</div>
+     <div class="tierlabel">BENCHMARK · 海外对标层 <span class="cnt">${oversV.length} 家</span></div><div class="cards">${oversV.map(cardHTML).join('')}</div>`;
+}
+renderMatrix();
+document.addEventListener('click', e => {
+  const t = e.target.closest('.evtoggle'); if (!t) return;
+  const card = t.closest('.card');
+  const list = t.nextElementSibling;
+  const open = list.classList.toggle('open');
+  card.classList.toggle('open', open);
+  t.textContent = (open ? '▾ 收起' : '▸ 全文 + 证据 ' + (list.children.length) + ' 条');
+});
+
+/* Tiers */
+const MODE_EN = {up:'RE-RATING', flat:'STEADY', down:'FALLING BEHIND'};
+$('#tierbody').innerHTML = DATA.tierModel.map((t, i) => {
+  const parts = t.name.match(/^(.+?)（(.+?)）$/) || [null, t.name, ''];
+  return `
+  <div class="tiercard ${t.tone}" style="grid-column:span ${t.vendors.length > 1 ? 2 : 1}">
+    <span class="tno">${String(i+1).padStart(2,'0')}</span>
+    <h3>${esc(parts[1])}</h3>
+    <div class="mode">${esc(parts[2] || '')} · ${MODE_EN[t.tone]}</div>
+    <div class="vs">${t.vendors.map(v => `<span class="vchip">${esc(v)}</span>`).join('')}</div>
+    <div class="note">${esc(t.note)}</div>
+  </div>`;
+}).join('');
+
+/* Sellside — 大数字 + 棒棒糖区间图 */
+function ssSVG(s) {
+  const W = 480, H = 110, padL = 18, padR = 18;
+  const min = Math.min(s.low, s.spot ?? s.low) * 0.8;
+  const max = s.high * 1.07;
+  const x = v => padL + (v - min) / (max - min) * (W - padL - padR);
+  const y = 56;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#2c2620" stroke-width="1"/>`;
+  svg += `<line x1="${x(s.low)}" y1="${y}" x2="${x(s.high)}" y2="${y}" stroke="#3a3229" stroke-width="8" stroke-linecap="round"/>`;
+  svg += `<line x1="${x(s.low)}" y1="${y}" x2="${x(s.avg)}" y2="${y}" stroke="#e8a33d" stroke-width="8" stroke-linecap="round" opacity=".9"/>`;
+  const marks = [
+    {v: s.low, lbl: s.low_label, c: '#8a7f6c', dy: -16},
+    {v: s.avg, lbl: s.avg_label, c: '#ffc562', dy: 30, big: true},
+    {v: s.high, lbl: s.high_label, c: '#8a7f6c', dy: -16},
+  ];
+  for (const m of marks) {
+    const cx = x(m.v);
+    svg += `<line x1="${cx}" y1="${y-8}" x2="${cx}" y2="${y+8}" stroke="${m.c}" stroke-width="${m.big?3:2}"/>`;
+    svg += `<circle cx="${cx}" cy="${y}" r="${m.big?6:4.5}" fill="${m.c}"/>`;
+    const anchor = cx < 95 ? 'start' : (cx > W - 95 ? 'end' : 'middle');
+    svg += `<text x="${cx}" y="${y + m.dy}" fill="${m.c}" font-size="${m.big?11.5:10.5}" font-weight="${m.big?700:400}" text-anchor="${anchor}" font-family="SF Mono,Menlo,monospace">${esc(m.lbl)}</text>`;
+  }
+  if (s.spot != null) {
+    const cx = x(s.spot);
+    svg += `<line x1="${cx}" y1="${y-22}" x2="${cx}" y2="${y+14}" stroke="#e5534b" stroke-width="3"/>`;
+    svg += `<text x="${cx}" y="${y+30}" fill="#e5534b" font-size="11.5" font-weight="700" text-anchor="${cx < 95 ? 'start' : 'middle'}" font-family="SF Mono,Menlo,monospace">现价 ${s.spot}</text>`;
+  }
+  svg += `</svg>`;
+  return svg;
+}
+$('#ssbody').innerHTML = DATA.sellside.map(s => `
+  <div class="sscard">
+    <div class="sshead"><span class="ssv">${esc(s.vendor)}</span><span class="sscov">${esc(s.coverage)} · ${esc(s.unit)}</span></div>
+    <div class="bignum"><span class="rng">${s.low}<span class="x">—</span>${s.high}</span></div>
+    <div class="bigsub">${s.spot != null ? '目标价区间 vs 现价 ' + s.spot : '目标价区间 · 高低分歧 ' + (s.high/s.low).toFixed(1) + '×'}</div>
+    ${ssSVG(s)}
+    <div class="extra">${s.spot != null ? s.extra.replace(/背离约 3 倍/, '<b>背离约 3 倍</b>') : esc(s.extra)}</div>
+  </div>`).join('');
+
+/* Credibility：阶梯列 */
+$('#credbody').innerHTML = DATA.credTiers.map((c, i) => `
+  <div class="credcol ${i < 3 ? 'ok' : 'warn'}" style="--i:${i}">
+    <div class="stair" style="width:${100 - i*17}%"></div>
+    <div class="lv">TIER ${c.level}</div>
+    <div class="nm">${esc(c.name)}</div>
+    <div class="ds">${esc(c.desc)}</div>
+    <div class="ex">${esc(c.examples)}</div><br>
+    <span class="use">${esc(c.use)}</span>
+  </div>`).join('');
+
+/* Trace */
+const st = T.stats || {};
+$('#tracestats').innerHTML = [
+  `<b class="num">52</b> 子查询（13 厂商 × 4 维）`,
+  `<b class="num">${st.initial_pass ?? '—'}</b> 首轮充分`,
+  `<b class="num">${st.refined ?? 0}</b> 触发补检`,
+  `<b class="num">0</b> 证据待补`,
+].map(x => `<div class="tstat">${x}</div>`).join('');
+
+const steps = T.trace || [];
+$('#tlbody').innerHTML = steps.map(s => {
+  const step = s.step || '';
+  const cls = ['拆解','检索','自检','汇总'].find(k => step.includes(k)) || '';
+  return `<div class="tlrow"><span class="stp s${cls}">${esc(step)}</span><span class="dtl">${esc(s.detail || '')}</span></div>`;
+}).join('');
+</script>
+</body>
+</html>

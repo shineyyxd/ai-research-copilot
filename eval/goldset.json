@@ -1,0 +1,25 @@
+{
+  "description": "RAG 检索评测金标集。每条 = 自然语言问题 + 期望厂商 + 期望维度章节 + 金标事实（语料中真实存在的可验证子串，any-of 语义）。标注日期 2026-07-28，全部事实已用 grep 逐条验证存在于 corpus。",
+  "items": [
+    {"id": "g01", "question": "智谱 IPO 募资了多少钱，在哪个交易所上市？", "vendor": "智谱", "dim": "商业化策略", "facts": [["43.48"], ["02513", "HK.02513"]]},
+    {"id": "g02", "question": "智谱 2025 年收入增速是多少？", "vendor": "智谱", "dim": "商业化策略", "facts": [["137.7"], ["8.02"]]},
+    {"id": "g03", "question": "券商给智谱的目标价分歧有多大？", "vendor": "智谱", "dim": "商业化策略", "facts": [["688"], ["1160", "2043"]]},
+    {"id": "g04", "question": "智谱的模型技术路线是什么？", "vendor": "智谱", "dim": "技术路线", "facts": [["GLM"]]},
+    {"id": "g05", "question": "MiniMax 2025 年收入和增速如何？", "vendor": "MiniMax", "dim": "商业化策略", "facts": [["6.15"], ["159.6"]]},
+    {"id": "g06", "question": "MiniMax 的财务风险主要在哪里？", "vendor": "MiniMax", "dim": "生态壁垒", "facts": [["343"]]},
+    {"id": "g07", "question": "MiniMax 海外用户规模有多大？", "vendor": "MiniMax", "dim": "商业化策略", "facts": [["2.36 亿", "2.36亿"]]},
+    {"id": "g08", "question": "Kimi 的 ARR 增长轨迹是怎样的？", "vendor": "月之暗面（Kimi）", "dim": "商业化策略", "facts": [["1 亿美元", "1亿美元"], ["3 亿美元", "3亿美元"]]},
+    {"id": "g09", "question": "Kimi K3 模型的参数规模和架构？", "vendor": "月之暗面（Kimi）", "dim": "技术路线", "facts": [["2.8 万亿", "2.8万亿"], ["896"]]},
+    {"id": "g10", "question": "月之暗面创始人的持股和控制权情况？", "vendor": "月之暗面（Kimi）", "dim": "生态壁垒", "facts": [["51.83"]]},
+    {"id": "g11", "question": "DeepSeek 首轮外部融资的规模和投资方？", "vendor": "DeepSeek", "dim": "商业化策略", "facts": [["510"], ["腾讯", "宁德时代"]]},
+    {"id": "g12", "question": "DeepSeek 团队规模有多精简？", "vendor": "DeepSeek", "dim": "生态壁垒", "facts": [["46 人", "46人"]]},
+    {"id": "g13", "question": "DeepSeek 最新旗舰模型的参数量？", "vendor": "DeepSeek", "dim": "技术路线", "facts": [["1.6 万亿", "1.6万亿"]]},
+    {"id": "g14", "question": "阶跃星辰的终端装机量和 Pre-IPO 融资情况？", "vendor": "阶跃星辰", "dim": "商业化策略", "facts": [["4200 万", "4200万"], ["25 亿美元", "25亿美元"]]},
+    {"id": "g15", "question": "阶跃星辰 Step 3 模型是什么架构？", "vendor": "阶跃星辰", "dim": "技术路线", "facts": [["321B"]]},
+    {"id": "g16", "question": "零一万物转型后的收入和订单情况？", "vendor": "零一万物", "dim": "商业化策略", "facts": [["2.5 亿", "2.5亿"], ["15 亿", "15亿"]]},
+    {"id": "g17", "question": "字节豆包的用户规模在国内什么位置？", "vendor": "字节豆包", "dim": "产品定位", "facts": [["豆包"]]},
+    {"id": "g18", "question": "Anthropic 的估值和 ARR 到什么水平了？", "vendor": "Anthropic", "dim": "商业化策略", "facts": [["9650"]]},
+    {"id": "g19", "question": "xAI Grok 在美国市场的份额？", "vendor": "xAI（Grok）", "dim": "产品定位", "facts": [["17.8"]]},
+    {"id": "g20", "question": "华泰和美银给 MiniMax 的目标价分别是多少？", "vendor": "MiniMax", "dim": "商业化策略", "facts": [["1133"], ["500"]]}
+  ]
+}
