@@ -9,7 +9,7 @@
 
 | 维度 | v1（2026-07） | v2（2026-10） |
 |---|---|---|
-| 数据源 | 手工整理静态语料（13 家） | **真实接口接入**：天眼查（工商/融资）+ Wind（财务/公告），13 家 L2 厂商（无真实数据层的一律不做）+ 70 家产业链厂商池 |
+| 数据源 | 手工整理静态语料（13 家） | **真实接口接入**：天眼查（工商/融资）+ Wind（财务/公告），L2 深挖 13 家 + L1 指标卡 21 家（**34 家有真实数据**）+ 66 家产业链厂商池 |
 | 证据模型 | source/section/score | **六元组信封**：trust_tier/as_of/caliber/src，每条事实机器可验证 |
 | Agent 架构 | 单脚本 for 循环 | **节点式 Harness**（`rag/harness.py`）：supervisor→planner→[interrupt 审批]→researcher→critic→reporter，SQLite 断点恢复 + JSONL 审计日志 |
 | 评测 | 20 条金标检索评测 | + **金标防腐化**（stable/time-sensitive + as_of）+ **端到端 faithfulness 评测**（数字回指率/信封完整率） |
@@ -95,6 +95,7 @@ python tracker/run.py && python scripts/quality_gate.py
 ```
 rag/            检索与研究循环（ingest/query/research + harness/research_graph）
 rag/corpus_v2/  L2 模型层 13 家语料（实时数据层 + v1 叙事层，六元组信封）
+rag/track/L1/   L1 算力层 21 家指标卡（跟踪层轻量卡，六元组信封）
 tracker/        赛道追踪器（GitHub/HN 双源，快照回溯）
 eval/           金标评测 + 端到端忠实性评测
 dashboard/      零依赖离线 Dashboard（build_dashboard.py 重新生成）
