@@ -1,0 +1,138 @@
+[
+  {
+    "vendor": "智谱",
+    "key": "zhipu",
+    "market": "港股",
+    "T1": 3,
+    "T3": 21,
+    "v1": 1
+  },
+  {
+    "vendor": "MiniMax",
+    "key": "minimax",
+    "market": "港股",
+    "T1": 3,
+    "T3": 11,
+    "v1": 1
+  },
+  {
+    "vendor": "月之暗面（Kimi）",
+    "key": "moonshot-kimi",
+    "market": "未上市",
+    "T1": 0,
+    "T3": 10,
+    "v1": 1
+  },
+  {
+    "vendor": "DeepSeek",
+    "key": "deepseek",
+    "market": "未上市",
+    "T1": 0,
+    "T3": 4,
+    "v1": 1
+  },
+  {
+    "vendor": "阶跃星辰",
+    "key": "stepfun",
+    "market": "未上市",
+    "T1": 0,
+    "T3": 8,
+    "v1": 1
+  },
+  {
+    "vendor": "零一万物",
+    "key": "01ai",
+    "market": "未上市",
+    "T1": 0,
+    "T3": 4,
+    "v1": 1
+  },
+  {
+    "vendor": "阿里通义（Qwen）",
+    "key": "alibaba-qwen",
+    "market": "港股",
+    "T1": 3,
+    "T3": 1,
+    "v1": 1
+  },
+  {
+    "vendor": "百度文心",
+    "key": "baidu",
+    "market": "港股",
+    "T1": 3,
+    "T3": 1,
+    "v1": 0
+  },
+  {
+    "vendor": "科大讯飞（星火）",
+    "key": "iflytek",
+    "market": "A股",
+    "T1": 3,
+    "T3": 1,
+    "v1": 0
+  },
+  {
+    "vendor": "腾讯（混元）",
+    "key": "tencent",
+    "market": "港股",
+    "T1": 3,
+    "T3": 1,
+    "v1": 0
+  },
+  {
+    "vendor": "字节豆包",
+    "key": "bytedance-doubao",
+    "market": "未上市",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "OpenAI",
+    "key": "openai",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "Anthropic",
+    "key": "anthropic",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "Google Gemini",
+    "key": "google-gemini",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "Meta（Llama）",
+    "key": "meta-llama",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "xAI（Grok）",
+    "key": "xai-grok",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 1
+  },
+  {
+    "vendor": "Mistral AI",
+    "key": "mistral",
+    "market": "美股基准",
+    "T1": 0,
+    "T3": 0,
+    "v1": 0
+  }
+]
