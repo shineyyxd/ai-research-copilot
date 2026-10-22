@@ -10,8 +10,9 @@ from pathlib import Path
 from ingest import tokenize
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT.parent / "output"
-OUT.mkdir(exist_ok=True)
+OUT = Path(os.environ.get("OUT_DIR", ROOT.parent / "output"))
+OUT.mkdir(parents=True, exist_ok=True)
+INDEX_PATH = Path(os.environ.get("INDEX_PATH", ROOT / "index.json"))
 
 DIMENSIONS = {
     "技术路线": "自研 预训练 模型架构 开源 多模态 长上下文 推理 MoE 技术栈 算力",
@@ -24,7 +25,8 @@ TOP_K = 3
 
 # ---- 厂商分层：国内核心（A/H 已上市或拟 IPO 的大模型公司）vs 海外对标 ----
 CORE_VENDORS = ["智谱", "月之暗面（Kimi）", "MiniMax", "DeepSeek",
-                "阿里通义（Qwen）", "字节豆包", "阶跃星辰", "零一万物"]
+                "阿里通义（Qwen）", "字节豆包", "阶跃星辰", "零一万物",
+                "百度文心", "科大讯飞（星火）", "腾讯（混元）"]
 
 # ---- 厂商路由器：问题中的厂商名/别名 → 确定性路由到该厂商的 chunk ----
 # 背景：eval 金标集发现厂商名会在其他厂商语料中交叉出现（如 minimax.md 里
@@ -44,6 +46,10 @@ VENDOR_ALIASES = {
     "Google Gemini": ["Gemini", "gemini", "谷歌", "Google", "DeepMind"],
     "xAI（Grok）": ["xAI", "Grok", "grok", "马斯克"],
     "Meta（Llama）": ["Meta", "Llama", "llama", "扎克伯格"],
+    "百度文心": ["百度", "文心", "ERNIE", "Ernie", "Baidu"],
+    "科大讯飞（星火）": ["科大讯飞", "讯飞", "星火", "SparkDesk", "iFlytek"],
+    "腾讯（混元）": ["腾讯", "混元", "Hunyuan", "hunyuan"],
+    "Mistral AI": ["Mistral", "mistral", "米斯特拉尔"],
 }
 
 
@@ -127,7 +133,7 @@ def llm_summary(vendor, dim, evidences, api_key):
 
 
 def main():
-    idx = json.loads((ROOT / "index.json").read_text(encoding="utf-8"))
+    idx = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
     chunks = idx["chunks"]
     all_vendors = sorted({c["vendor"] for c in chunks})
     # 分层排序：国内核心在前（按 CORE_VENDORS 顺序），海外对标在后

@@ -4,13 +4,26 @@ ingest.py — 竞品研究 RAG 的入库脚本
 把 corpus/ 下的 .md/.txt（可扩展 pdf）切块、建 TF-IDF 倒排索引，存成 index.json。
 零外部依赖：中文用字符 bigram 分词，英文按单词，纯标准库实现。
 """
-import json, math, re, sys
+import json, math, os, re, sys
 from pathlib import Path
 from collections import Counter, defaultdict
 
 ROOT = Path(__file__).resolve().parent
-CORPUS = ROOT / "corpus"
-INDEX_FILE = ROOT / "index.json"
+CORPUS = Path(os.environ.get("CORPUS_DIR", ROOT / "corpus"))
+INDEX_FILE = Path(os.environ.get("INDEX_PATH", ROOT / "index.json"))
+
+
+def parse_front_matter(text):
+    """解析 v2 语料的 YAML 头（---...---），返回 metadata dict；无头返回 {}。"""
+    m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+    if not m:
+        return {}
+    meta = {}
+    for line in m.group(1).splitlines():
+        if ":" in line:
+            k, v = line.split(":", 1)
+            meta[k.strip()] = v.strip()
+    return meta
 
 
 def tokenize(text: str):
@@ -27,10 +40,12 @@ def tokenize(text: str):
     return tokens
 
 
-def chunk_markdown(text: str, source: str):
-    """按 ## 标题切块；块内再按 ~400 字二次切分，保留出处。"""
+def chunk_markdown(text: str, source: str, meta: dict = None):
+    """按 ## 标题切块；块内再按 ~400 字二次切分，保留出处。
+    meta（v2 YAML 头）中的 market/layer/depth_tier/as_of 会写入每个 chunk。"""
+    meta = meta or {}
     chunks = []
-    vendor = None
+    vendor = meta.get("vendor")
     m = re.search(r"^#\s+(.+)$", text, re.M)
     if m:
         vendor = m.group(1).strip()
@@ -57,7 +72,14 @@ def build_index():
     all_chunks = []
     for f in sorted(CORPUS.glob("*")):
         if f.suffix.lower() in (".md", ".txt"):
-            all_chunks += chunk_markdown(f.read_text(encoding="utf-8"), f.name)
+            raw = f.read_text(encoding="utf-8")
+            meta = parse_front_matter(raw)
+            chunks = chunk_markdown(raw, f.name, meta)
+            for c in chunks:  # v2 元数据落 chunk（检索/矩阵可按层过滤）
+                for k in ("market", "layer", "depth_tier", "as_of"):
+                    if meta.get(k):
+                        c[k] = meta[k]
+            all_chunks += chunks
         elif f.suffix.lower() == ".pdf":
             try:
                 from pypdf import PdfReader

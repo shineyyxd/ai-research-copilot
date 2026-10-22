@@ -25,8 +25,9 @@ from query import (DIMENSIONS, CORE_VENDORS, tier_of, retrieve, query_vec,
                    cosine, extractive_summary, llm_summary)
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT.parent / "output"
-OUT.mkdir(exist_ok=True)
+OUT = Path(os.environ.get("OUT_DIR", ROOT.parent / "output"))
+OUT.mkdir(parents=True, exist_ok=True)
+INDEX_PATH = Path(os.environ.get("INDEX_PATH", ROOT / "index.json"))
 
 # ---- 自检阈值（可调，eval 金标集建好后可回归验证）----
 MIN_TOP_SCORE = 0.18     # top-1 相关度低于此值 → 判定证据不足
@@ -35,7 +36,7 @@ MAX_DEPTH = 2            # 最多补检轮数（对应 deep-research 的 depth�
 
 
 def load_chunks():
-    idx = json.loads((ROOT / "index.json").read_text(encoding="utf-8"))
+    idx = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
     return idx["chunks"]
 
 

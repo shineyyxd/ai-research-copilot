@@ -8,14 +8,14 @@ run.py — Agent 赛道追踪器（真实数据）
 4. 产出：output/digest_YYYY-MM-DD.md 周报 + history/ 快照（支持"这个框架N周前什么样"回溯）
 零依赖、无需 API Key。注意：本机代理已失效，运行时需 env -u http_proxy -u https_proxy。
 """
-import json, re, ssl, urllib.request, urllib.parse
+import json, os, re, ssl, urllib.request, urllib.parse
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 HIST = ROOT / "history"
-OUT = ROOT.parent / "output"
-HIST.mkdir(exist_ok=True); OUT.mkdir(exist_ok=True)
+OUT = Path(os.environ.get("OUT_DIR", ROOT.parent / "output"))
+HIST.mkdir(exist_ok=True); OUT.mkdir(parents=True, exist_ok=True)
 TODAY = date.today().isoformat()
 CTX = ssl.create_default_context()
 

@@ -1,0 +1,120 @@
+{
+  "summary": {
+    "date": "2026-10-23",
+    "number_grounding": {
+      "rate": 1.0,
+      "hit": 190,
+      "total": 190,
+      "cells_with_missing": []
+    },
+    "envelope_completeness": {
+      "rate": 1.0,
+      "ok": 80,
+      "total": 80
+    }
+  },
+  "envelope_by_file": [
+    {
+      "file": "01ai.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "alibaba-qwen.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "anthropic.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "baidu.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "bytedance-doubao.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "deepseek.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "google-gemini.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "iflytek.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "meta-llama.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "minimax.md",
+      "facts": 14,
+      "enveloped": 14,
+      "rate": 1.0
+    },
+    {
+      "file": "mistral.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "moonshot-kimi.md",
+      "facts": 10,
+      "enveloped": 10,
+      "rate": 1.0
+    },
+    {
+      "file": "openai.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "stepfun.md",
+      "facts": 8,
+      "enveloped": 8,
+      "rate": 1.0
+    },
+    {
+      "file": "tencent.md",
+      "facts": 4,
+      "enveloped": 4,
+      "rate": 1.0
+    },
+    {
+      "file": "xai-grok.md",
+      "facts": 0,
+      "enveloped": 0,
+      "rate": null
+    },
+    {
+      "file": "zhipu.md",
+      "facts": 24,
+      "enveloped": 24,
+      "rate": 1.0
+    }
+  ]
+}

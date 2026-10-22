@@ -4,11 +4,11 @@ build_dashboard.py — 把 output/matrix.json + research_trace.json 内嵌进单
 零外部依赖（无 CDN、无构建链），双击 index.html 即可离线演示。
 数据更新后重跑本脚本即可同步。
 """
-import json
+import json, os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "output"
+OUT = Path(os.environ.get("OUT_DIR", ROOT / "output"))
 
 matrix = json.loads((OUT / "matrix.json").read_text(encoding="utf-8"))
 trace = json.loads((OUT / "research_trace.json").read_text(encoding="utf-8"))

@@ -12,12 +12,13 @@ eval.py — RAG 检索评测 harness（金标集驱动）
 
 输出 output/eval_report.md + eval_report.json。零 LLM 依赖、可复现。
 """
-import json, sys
+import json, os, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent          # eval/
 RAG = ROOT.parent / "rag"
-OUT = ROOT.parent / "output"
+OUT = Path(os.environ.get("OUT_DIR", ROOT.parent / "output"))
+INDEX_PATH = Path(os.environ.get("INDEX_PATH", RAG / "index.json"))
 sys.path.insert(0, str(RAG))
 
 from query import query_vec, cosine, retrieve, DIMENSIONS, route_vendor  # noqa: E402
@@ -47,7 +48,7 @@ def fact_recall(fact_groups, texts):
 
 
 def main():
-    idx = json.loads((RAG / "index.json").read_text(encoding="utf-8"))
+    idx = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
     chunks = idx["chunks"]
     gold = json.loads((ROOT / "goldset.json").read_text(encoding="utf-8"))
     items = gold["items"]
@@ -87,6 +88,13 @@ def main():
         agg["fa_hit"] += fa_h; agg["fa_tot"] += fa_t; agg["fa_full"] += (fa_h == fa_t)
         agg["fb_hit"] += fb_h; agg["fb_tot"] += fb_t; agg["fb_full"] += (fb_h == fb_t)
 
+        # v2：按 stable / time-sensitive 分组统计（金标防腐化）
+        tp = it.get("type", "stable")
+        agg.setdefault(f"{tp}_n", 0)
+        agg.setdefault(f"{tp}_full", 0)
+        agg[f"{tp}_n"] += 1
+        agg[f"{tp}_full"] += (fa_h == fa_t)
+
         rows.append({"id": it["id"], "question": q, "vendor": v_exp, "dim": d_exp,
                      "open": {"vendor_hit@1": v1, "vendor_hit@3": v3, "section_hit@1": s1,
                               "fact_recall": f"{fa_h}/{fa_t}",
@@ -114,6 +122,10 @@ def main():
             "fact_recall@3": round(agg["fb_hit"] / agg["fb_tot"], 3),
             "full_fact_items": f"{agg['fb_full']}/{n}",
         },
+        "by_type": {
+            "stable": f"{agg.get('stable_full',0)}/{agg.get('stable_n',0)}",
+            "time-sensitive": f"{agg.get('time-sensitive_full',0)}/{agg.get('time-sensitive_n',0)}",
+        },
     }
 
     OUT.mkdir(exist_ok=True)
@@ -132,6 +144,9 @@ def main():
         f"| 维度章节命中 Hit@1 | {sb['section_hit@1']:.0%} | **{so['section_hit@1']:.0%}** | 100%（确定性锁） |",
         f"| 事实召回 Recall@3 | {sb['fact_recall@3']:.0%} | **{so['fact_recall@3']:.0%}** | **{sl['fact_recall@3']:.0%}** |",
         f"| 全事实命中条目 | {sb['full_fact_items']} | **{so['full_fact_items']}** | {sl['full_fact_items']} |",
+        "",
+        f"> 金标防腐化（v2）：稳定型 {summary['by_type']['stable']} 全命中 ｜ 时效型 {summary['by_type']['time-sensitive']} 全命中",
+        "> 时效型题目（收入/月活/估值等）已标注 as_of 快照日期，语料更新后需同步刷新对应金标事实。",
         "",
         "> 迭代记录：初版评测发现厂商名在跨厂商语料中交叉出现（如 minimax.md 含「增速高于智谱」），",
         "> TF-IDF 将厂商名当普通词稀释，Hit@1 仅 35%。加入确定性厂商路由器（别名表→先路由再排序）后修复。",

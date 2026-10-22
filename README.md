@@ -1,79 +1,84 @@
 # AI 投研 Copilot（ai-research-copilot）
 
-> 把「券商实习期间手工做的投研工作」工程化为一个可复跑的 Deep Research Agent：
-> **四维拆解 → 检索 → 自检 → 补检 → 汇总**，每条结论都可溯源到证据 chunk。
+> 把「券商实习期间手工做的投研工作」工程化为一个**接真实数据源、可复跑、可审计**的
+> Deep Research Agent：**四维拆解 → 检索 → 自检 → 补检 → 汇总**，每条结论携带
+> `[trust_tier|as_of|caliber|src]` 证据信封，可溯源到证据 chunk。
 > 纯 Python 标准库实现，零第三方依赖、无需 API Key 即可跑通全流程；配置 `DEEPSEEK_API_KEY` 后自动升级为 LLM 汇总。
 
-## 它解决什么问题
+## v2（2026-10）升级了什么
 
-投研中的竞品研究有两个老大难：**大模型会幻觉**、**手工追赛道太费时**。本项目用两个机制对抗：
-
-1. **证据链机制**：13 家国内外头部大模型厂商语料库，每条证据标注来源与五档可信度（审计财报 → 券商研报 → 工商/榜单 → 媒体转述 → 前瞻估算），矩阵每一格都可回指具体文档 chunk（来源文件 + 章节 + 相关度分数）。
-2. **评测驱动迭代**：自建 20 条人工标注金标问答集，所有指标一条命令可复现（见下方评测结果）。
-
-## 模块总览
-
-| 模块 | 路径 | 作用 |
+| 维度 | v1（2026-07） | v2（2026-10） |
 |---|---|---|
-| 竞品研究 RAG | `rag/` | 语料入库 → 四维（技术路线/产品定位/商业化策略/生态壁垒）检索 → 生成对比矩阵 |
-| Deep Research 循环 | `rag/research.py` | 移植 dzhng/deep-research 的 breadth/depth 范式：拆解 → 检索 → 自检 → 补检 → 汇总 |
-| 赛道追踪器 | `tracker/` | 定时抓取 GitHub / Hacker News 双源动态，去重、聚类为 6 大主题周报 |
-| 评测集 | `eval/` | 20 条金标问答驱动检索质量迭代，指标可复跑 |
-| 离线 Dashboard | `dashboard/` | 零依赖单文件 HTML，矩阵/周报/梯队研判一屏总览 |
-| 产出样例 | `output/` | 真实运行产物：对比矩阵、Deep Research 报告、梯队研判、周报、评测报告 |
+| 数据源 | 手工整理静态语料（13 家） | **真实接口接入**：天眼查（工商/融资）+ Wind（财务/公告），17 家 L2 厂商 + 70 家产业链厂商池 |
+| 证据模型 | source/section/score | **六元组信封**：trust_tier/as_of/caliber/src，每条事实机器可验证 |
+| Agent 架构 | 单脚本 for 循环 | **节点式 Harness**（`rag/harness.py`）：supervisor→planner→[interrupt 审批]→researcher→critic→reporter，SQLite 断点恢复 + JSONL 审计日志 |
+| 评测 | 20 条金标检索评测 | + **金标防腐化**（stable/time-sensitive + as_of）+ **端到端 faithfulness 评测**（数字回指率/信封完整率） |
+| 自动化 | 无 | **GitHub Actions**：每日追踪器 cron 自动 commit 周报（带质量门禁）+ 每次 push 评测回归 |
+| 厂商池 | 13 家模型厂商 | 三维分类（市场×产业链层×研究深度）：L2 模型层 17 家深挖 + L1/L3/L4 跟踪层，见 [厂商池](docs/vendor-pool-v2.md) |
 
 ## 快速开始
 
 ```bash
-# 模块 A：竞品研究 RAG
-python rag/ingest.py        # 语料入库（.md/.txt/.pdf 丢进 rag/corpus/ 即可）
-python rag/query.py         # 四维检索 + 生成矩阵 → output/matrix.md
+# 入库（v2 语料）→ 矩阵 → 节点式 Deep Research → 双层评测
+export CORPUS_DIR=rag/corpus_v2 INDEX_PATH=rag/index_v2.json OUT_DIR=output_v2
+python rag/ingest.py            # 18 文档 → chunk 索引
+python rag/query.py             # 四维对比矩阵 → output_v2/matrix.md
+python rag/research_graph.py    # 节点式研究循环（断点恢复+审计）→ research_report.md
+python eval/eval.py             # 金标回归：Hit@1 35%→100%
+python eval/faithfulness.py     # 忠实性：数字回指率/信封完整率
 
-# 模块 A+：Deep Research 多轮研究循环
-python rag/research.py                              # 全矩阵研究（52 子查询）
-python rag/research.py "对比三家厂商的商业化策略"      # 单问题模式
+# 带人工审批点的运行（计划生成后暂停，编辑计划后放行）
+REQUIRE_APPROVAL=1 python rag/research_graph.py
+APPROVED=1 python rag/research_graph.py    # 审批放行，从断点续跑
 
-# 模块 B：Agent 赛道追踪周报
-env -u http_proxy -u https_proxy python tracker/run.py   # → output/digest_YYYY-MM-DD.md
-
-# 评测：金标集复跑
-python eval/eval.py         # → output/eval_report.md
-
-# Dashboard：重新生成离线看板
-python dashboard/build_dashboard.py   # → dashboard/index.html（双击即开，零依赖）
+# 赛道追踪周报（GitHub/HN 双源，Actions 每日自动运行）
+python tracker/run.py && python scripts/quality_gate.py
 ```
 
-## 评测结果（评测驱动迭代的真实记录）
+## 评测结果（一条命令可复现）
 
-金标集 20 条人工标注问答（事实均已验证存在于语料），Top-K=3：
+**检索层**（20 条金标问答，v2 语料 68 chunk / 16 厂商回归通过）：
 
-| 指标 | 无路由 baseline | +厂商路由器 | 维度锁定（矩阵组格） |
+| 指标 | 无路由 baseline | +厂商路由器 | 维度锁定 |
 |---|---|---|---|
-| 厂商命中 Hit@1 | 35% | **100%** | —（厂商已知） |
-| 厂商命中 Hit@3 | 60% | **100%** | — |
-| 维度章节命中 Hit@1 | 35% | **100%** | 100%（确定性锁） |
-| 事实召回 Recall@3 | 70% | **100%** | 97% |
-| 全事实命中条目 | 12/20 | **20/20** | 19/20 |
+| 厂商命中 Hit@1 | 35% | **100%** | — |
+| 事实召回 Recall@3 | 70% | **100%** | 96.7% |
+| 金标防腐化 | — | stable 7/7 · time-sensitive 13/13 | — |
 
-**迭代根因**：初版评测发现厂商名在跨厂商语料中交叉出现（如 minimax.md 含「增速高于智谱」），TF-IDF 把厂商名当普通词稀释，Hit@1 仅 35%。加入确定性厂商路由器（别名表 → 先路由再排序）后修复——用规则修检索，而不是靠换更大的模型。
+**生成层**（v2 新增，端到端忠实性）：
 
-## 技术要点
+| 检查项 | 结果 |
+|---|---|
+| 数字回指率（汇总数字 ↔ 证据原文） | **190/190 = 100%** |
+| 信封完整率（事实携带四要素） | **80/80 = 100%** |
 
-- **检索**：TF-IDF + 余弦相似度，中文字符 bigram / 英文单词混合分词（自实现，无依赖）；确定性厂商路由器 + 维度章节锁
-- **Deep Research 循环**：研究问题按「四维 × 厂商」展开为 52 个子查询；每格证据做充分性检查（top-1 相关度阈值 + 证据覆盖数），不充分的格子自动生成扩展查询补检，最多加深 2 轮；输出带完整迭代日志（每格的查询演化、每轮命中与判定原因）
-- **汇总**：有 `DEEPSEEK_API_KEY` → deepseek-chat 按 JSON Schema 输出（带引用约束，禁止编造证据外信息）；无 Key → 抽取式摘要兜底，报告头部诚实标注运行模式
-- **赛道追踪**：GitHub Search API（近 14 天新建 agent/LLM 仓库 × star 排序）+ HN Algolia API（近 7 天 >40 分热帖），均为真实 API 无需 Key；URL 归一化去重、与上一期快照对比标记 🆕 与 star 增量、关键词规则聚类为 6 大主题；历史快照存 `tracker/history/` 支持回溯
-- **产出**：单轮 80+ 条动态聚类为 6 大主题周报；52 格研判结论 100% 可溯源；零依赖离线 Dashboard 一屏总览
+## 数据源与合规边界
 
-## 诚实标注
+- **真实数据接口**：天眼查（工商登记/融资历史）、Wind（市值估值/公司公告），
+  快照日期 2026-10-23；GitHub Search / HN Algolia（赛道动态，无需 Key）
+- **合规边界**：原始数据快照（`data/`）仅本地留存、不入公开仓库；
+  仓库内只放研判结论 + 证据指针（来源/时点/口径），引用而非搬运
+- **诚实标注**：未上市厂商（DeepSeek/月之暗面/阶跃/零一/Mistral）无审计财报，
+  证据弱于上市厂商，矩阵中显式标注 ⚠️证据待补；未配 LLM Key 时为确定性规则兜底，
+  报告头部注明运行模式
 
-- 当前语料为公开信息整理的演示文档（13 家厂商），替换为真实财报/发布会实录即可用于实战
-- 未配置 `DEEPSEEK_API_KEY` 时为规则驱动的确定性兜底，报告头部会注明模式
-- 聚类为关键词规则分桶，非语义聚类（见下方路线图）
+## 目录
+
+```
+rag/            检索与研究循环（ingest/query/research + harness/research_graph）
+rag/corpus_v2/  L2 模型层 17 家语料（实时数据层 + v1 叙事层，六元组信封）
+tracker/        赛道追踪器（GitHub/HN 双源，快照回溯）
+eval/           金标评测 + 端到端忠实性评测
+dashboard/      零依赖离线 Dashboard（build_dashboard.py 重新生成）
+docs/           厂商池 v2（三维分类 70 家）
+scripts/        build_corpus_v2.py（语料组装器）+ quality_gate.py（质量门禁）
+.github/        Actions：daily-tracker（每日周报）+ eval-regression（push 回归）
+output/         v1 产物归档 ｜ output_v2/  v2 产物（矩阵/报告/审计/断点）
+```
 
 ## 路线图
 
-1. LLM 层：配 DeepSeek Key → 矩阵总结/周报导语质量升级
-2. 检索层：TF-IDF → embedding 向量（API 或本地模型）+ 混合检索
-3. 聚类层：关键词规则 → embedding 聚类（HDBSCAN/K-means）
-4. 调度层：接系统级定时任务实现每日自动抓取 + 周报推送
+- P1 检索层：TF-IDF → 混合检索（BM25+向量+rerank），厂商路由器保留为 metadata filter
+- P1 数据层：跟踪层 L1/L3/L4 批量接入；scholar 论文源补技术维度
+- P2 聚类层：关键词规则 → embedding 聚类；Harness 迁移至官方 LangGraph（节点函数原样保留）
+- P2 调度层：公告/财报日历驱动的增量语料更新
