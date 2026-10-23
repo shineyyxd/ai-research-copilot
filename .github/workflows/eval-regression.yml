@@ -1,0 +1,52 @@
+# 评测回归：每次 push 自动跑金标集 + 忠实性评测，指标退化则失败
+name: eval-regression
+on:
+  push:
+    paths:
+      - "rag/**"
+      - "eval/**"
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 入库（v2 语料）
+        run: python rag/ingest.py
+        env:
+          CORPUS_DIR: rag/corpus_v2
+          INDEX_PATH: rag/index_v2.json
+
+      - name: 金标集回归（Hit@1 必须 100%）
+        run: |
+          python eval/eval.py
+          python - <<'EOF'
+          import json
+          s = json.load(open("output_v2/eval_report.json"))["summary"]
+          assert s["open_retrieval"]["vendor_hit@1"] == 1.0, "厂商 Hit@1 退化！"
+          assert s["open_retrieval"]["fact_recall@3"] == 1.0, "事实召回退化！"
+          print("金标回归通过：Hit@1=100%, Recall@3=100%")
+          EOF
+        env:
+          INDEX_PATH: rag/index_v2.json
+          OUT_DIR: output_v2
+
+      - name: 忠实性评测（数字回指率/信封完整率必须 100%）
+        run: |
+          python eval/faithfulness.py
+          python - <<'EOF'
+          import json
+          s = json.load(open("output_v2/faithfulness_report.json"))["summary"]
+          assert s["number_grounding"]["rate"] == 1.0, "数字回指率退化！"
+          assert s["envelope_completeness"]["rate"] == 1.0, "信封完整率退化！"
+          print("忠实性评测通过")
+          EOF
+        env:
+          INDEX_PATH: rag/index_v2.json
+          OUT_DIR: output_v2
+          CORPUS_DIR: rag/corpus_v2

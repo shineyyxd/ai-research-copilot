@@ -1,0 +1,41 @@
+# 每日赛道追踪：抓 GitHub/HN → 生成周报 → 质量门禁 → 自动 commit
+# 北京時間 06:17（UTC 22:17）运行，避开整点/半点拥堵
+name: daily-tracker
+on:
+  schedule:
+    - cron: "17 22 * * *"
+  workflow_dispatch:   # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 运行赛道追踪器（GitHub/HN 双源抓取）
+        run: python tracker/run.py
+        env:
+          OUT_DIR: output_v2
+
+      - name: 质量门禁：周报不达标则不提交
+        run: python scripts/quality_gate.py
+        env:
+          OUT_DIR: output_v2
+
+      - name: 提交周报与快照
+        run: |
+          git config user.name "ai-research-copilot-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add output_v2/digest_*.md tracker/history/snapshot_*.json
+          if git diff --cached --quiet; then
+            echo "无新增动态，跳过提交"
+          else
+            git commit -m "chore(tracker): $(date +%F) 赛道周报（Actions 自动运行）"
+            git push
+          fi
