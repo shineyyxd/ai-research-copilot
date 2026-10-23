@@ -7,7 +7,7 @@
 
 | # | 问题 | 状态 | 说明 |
 |---|---|---|---|
-| 1 | **GitHub Actions 未上线** | ⛔ | 两个 workflow 因 token 缺 `workflow` scope 未推送，每日自动化尚未生效。修复：`gh auth refresh -s workflow` 后推送，或网页端粘贴 `.github/workflows/` 两个 yml |
+| 1 | ~~GitHub Actions 未上线~~ | ✅ | 2026-10-23 已解决：workflow scope 授权完成，两个 workflow 推送成功；daily-tracker 云端首跑 success 并产生首个机器人 commit；eval-regression 随后续 push 自动触发 |
 | 2 | 百度/讯飞/腾讯语料只有实时数据层、缺四维叙事章节 | 🔧 | 52 子查询中 12 格补检失败（即这 3 家 × 4 维），矩阵对应格 ⚠️证据待补。补检成功率 0% 的根源：补检关键词扩展在无叙事语料时无米下锅。P1 用公告/研报源补齐 |
 | 3 | 字节豆包仅有工商基础信息 | 📌 | 豆包是产品非独立主体，无独立财报/融资记录。设计取舍：依赖媒体源，标注 T4 |
 
