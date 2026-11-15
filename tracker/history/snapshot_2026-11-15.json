@@ -1,0 +1,840 @@
+{
+ "date": "2026-11-15",
+ "items": [
+  {
+   "src": "github",
+   "title": "janestreet/agent_skills",
+   "url": "https://github.com/janestreet/agent_skills",
+   "desc": "Agent skills",
+   "stars": 8642,
+   "lang": null,
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 342
+  },
+  {
+   "src": "github",
+   "title": "KKKKhazix/agent-autoloop",
+   "url": "https://github.com/KKKKhazix/agent-autoloop",
+   "desc": "让你的命令行 Agent 在后台自己接活、自己跟进到底；平时不烦你，遇到拿不准的事才发卡片找你拍板。",
+   "stars": 5345,
+   "lang": "TypeScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 211
+  },
+  {
+   "src": "github",
+   "title": "expo/exact",
+   "url": "https://github.com/expo/exact",
+   "desc": "Write an app once. It runs natively on the web, macOS, iOS, and Linux, and an AI agent can build it, run it, see it, and test it on every one of them.",
+   "stars": 4190,
+   "lang": "Rust",
+   "created": "2026-11-02",
+   "is_new": false,
+   "star_delta": 168
+  },
+  {
+   "src": "github",
+   "title": "shanselman/gputaskman",
+   "url": "https://github.com/shanselman/gputaskman",
+   "desc": "A GPU task manager for Windows, Linux, and WSL: per-process VRAM, GPU activity, and LLM model/KV-cache insights (Windows AMD and NVIDIA).",
+   "stars": 3228,
+   "lang": "Python",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 142
+  },
+  {
+   "src": "github",
+   "title": "sarpstar/cinecode",
+   "url": "https://github.com/sarpstar/cinecode",
+   "desc": "Films made with code. Short films, long YouTube videos, ads, explainers and music videos: an AI coding agent writes the script, builds every frame in code, designs the sound and hands you an MP4.",
+   "stars": 2509,
+   "lang": "Python",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 90
+  },
+  {
+   "src": "github",
+   "title": "DIYgod/pinky",
+   "url": "https://github.com/DIYgod/pinky",
+   "desc": "Let AI use your iPhone or Android phone, with you in the loop: any MCP agent from macOS, Windows or Linux, or Pinky itself, right on the phone.",
+   "stars": 2153,
+   "lang": "Go",
+   "created": "2026-11-06",
+   "is_new": false,
+   "star_delta": 72
+  },
+  {
+   "src": "github",
+   "title": "Sandflow-ai/sand3d",
+   "url": "https://github.com/Sandflow-ai/sand3d",
+   "desc": "3D modeling in Python, built for LLMs.",
+   "stars": 1999,
+   "lang": "HTML",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 38
+  },
+  {
+   "src": "github",
+   "title": "voyager-so/vork",
+   "url": "https://github.com/voyager-so/vork",
+   "desc": "Headless 3D and VFX engine for agents. Research preview.",
+   "stars": 1575,
+   "lang": "Rust",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 54
+  },
+  {
+   "src": "github",
+   "title": "agentes-chat/agentes-chat",
+   "url": "https://github.com/agentes-chat/agentes-chat",
+   "desc": "Open-source, self-hosted Slack alternative where your team and AI agents work together in channels and DMs. Agents run on Claude, ChatGPT/Codex, Gemini or Grok, with MCP tools, their own computer and ",
+   "stars": 1405,
+   "lang": "TypeScript",
+   "created": "2026-11-09",
+   "is_new": false,
+   "star_delta": 60
+  },
+  {
+   "src": "github",
+   "title": "JosssphZhou/poki",
+   "url": "https://github.com/JosssphZhou/poki",
+   "desc": "Let AI agents operate a real iPhone. Local MCP server and agent, no jailbreak, no extra hardware.",
+   "stars": 1263,
+   "lang": "Swift",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 164
+  },
+  {
+   "src": "github",
+   "title": "andrew-babo/muse4ai",
+   "url": "https://github.com/andrew-babo/muse4ai",
+   "desc": "Muse4AI — let your AI agent make the pictures and the videos. Local Windows bridge for Muse via REST, MCP, and OAuth.",
+   "stars": 836,
+   "lang": "TypeScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 69
+  },
+  {
+   "src": "github",
+   "title": "kubai087/kubai-icons",
+   "url": "https://github.com/kubai087/kubai-icons",
+   "desc": "An agent skill that draws animated icons in one consistent style, for Claude Code, Codex and other coding agents. Comes with 2,600+ open-source icons for React, Vue and SVG, and a website to browse th",
+   "stars": 831,
+   "lang": "JavaScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 15
+  },
+  {
+   "src": "github",
+   "title": "majorminorlabs/hermes-voice",
+   "url": "https://github.com/majorminorlabs/hermes-voice",
+   "desc": "Talk to a Hermes Agent profile through Home Assistant Assist",
+   "stars": 700,
+   "lang": "Python",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 5
+  },
+  {
+   "src": "github",
+   "title": "hyperionaidev/smolmaxxing",
+   "url": "https://github.com/hyperionaidev/smolmaxxing",
+   "desc": "maxxing the ability to run different LLMs on the smallest devices possible",
+   "stars": 699,
+   "lang": "C",
+   "created": "2026-11-04",
+   "is_new": false,
+   "star_delta": 60
+  },
+  {
+   "src": "github",
+   "title": "Topkiflare74/ai--manus2.0",
+   "url": "https://github.com/Topkiflare74/ai--manus2.0",
+   "desc": "AI Manus is a general-purpose AI Agent system that supports running various tools and operations in a sandbox environment.",
+   "stars": 677,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "trackboatwrightplan/GitHub-Copilot-app",
+   "url": "https://github.com/trackboatwrightplan/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 672,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TrapAccountant/GitHub-Copilot-app",
+   "url": "https://github.com/TrapAccountant/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 670,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "topapothecarycanal/ai--manus2.0",
+   "url": "https://github.com/topapothecarycanal/ai--manus2.0",
+   "desc": "AI Manus is a general-purpose AI Agent system that supports running various tools and operations in a sandbox environment.",
+   "stars": 666,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "trackersnailgrip/GitHub-Copilot-app",
+   "url": "https://github.com/trackersnailgrip/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 666,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "toppatronweave/GitHub-Copilot-app",
+   "url": "https://github.com/toppatronweave/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 665,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "toppatronweave/ai--manus2.0",
+   "url": "https://github.com/toppatronweave/ai--manus2.0",
+   "desc": "AI Manus is a general-purpose AI Agent system that supports running various tools and operations in a sandbox environment.",
+   "stars": 665,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TradesmanRecord/GitHub-Copilot-app",
+   "url": "https://github.com/TradesmanRecord/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 665,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TurkeyDesignate/GitHub-Copilot-app",
+   "url": "https://github.com/TurkeyDesignate/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 664,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TurquoiseConsultant/GitHub-Copilot-app",
+   "url": "https://github.com/TurquoiseConsultant/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 664,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TrapBladesmith/GitHub-Copilot-app",
+   "url": "https://github.com/TrapBladesmith/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 664,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Tealplesense/GitHub-Copilot-app",
+   "url": "https://github.com/Tealplesense/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 663,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WebBookkeeper/GitHub-Copilot-app",
+   "url": "https://github.com/WebBookkeeper/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 663,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "topconstableinlet67/ai--manus2.0",
+   "url": "https://github.com/topconstableinlet67/ai--manus2.0",
+   "desc": "AI Manus is a general-purpose AI Agent system that supports running various tools and operations in a sandbox environment.",
+   "stars": 663,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "lxe/phoneuse",
+   "url": "https://github.com/lxe/phoneuse",
+   "desc": "See and operate an unmodified iPhone from a Linux PC: AirPlay mirror in, Bluetooth HID mouse/keyboard out, plus a CLI and skill for agents.",
+   "stars": 662,
+   "lang": "Python",
+   "created": "2026-11-07",
+   "is_new": false,
+   "star_delta": 13
+  },
+  {
+   "src": "github",
+   "title": "topconstableinlet67/GitHub-Copilot-app",
+   "url": "https://github.com/topconstableinlet67/GitHub-Copilot-app",
+   "desc": "The GitHub Copilot app is an agent-native desktop experience for finding, running, steering, and landing software work across your GitHub repositories. ",
+   "stars": 661,
+   "lang": null,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "My AI agents found an unmapped Maya site?",
+   "url": "https://pietromiotti.com/latest/maya-site",
+   "desc": "",
+   "points": 1035,
+   "comments": 392,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+   "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+   "desc": "",
+   "points": 680,
+   "comments": 706,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+   "url": "https://github.com/GoogleChrome/modern-web-guidance",
+   "desc": "",
+   "points": 443,
+   "comments": 146,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Brave Search API now accepts agentic payments via the x402 protocol",
+   "url": "https://brave.com/blog/search-api-agentic-payments/",
+   "desc": "",
+   "points": 260,
+   "comments": 151,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Atuin Threads: All your agent sessions on every machine",
+   "url": "https://blog.atuin.sh/threads-agent-sessions/",
+   "desc": "",
+   "points": 237,
+   "comments": 84,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "ChatGPT Desktop forwards your SSH agent to remote machines",
+   "url": "https://news.ycombinator.com/item?id=50422628",
+   "desc": "",
+   "points": 221,
+   "comments": 79,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Agent memory needs its OpenTelemetry moment",
+   "url": "https://www.lorekit.io/blog/open-agent-memory-format",
+   "desc": "",
+   "points": 191,
+   "comments": 110,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "I gave an agent a lakehouse and control of my garden",
+   "url": "https://jatorre.github.io/garden/",
+   "desc": "",
+   "points": 150,
+   "comments": 78,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+   "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md",
+   "desc": "",
+   "points": 137,
+   "comments": 39,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS Emulator and the engineer's job when agents write the code",
+   "url": "https://www.allthingsdistributed.com/2026/11/aws-emulator-and-the-engineers-job-when-agents-write-the-code.html",
+   "desc": "",
+   "points": 111,
+   "comments": 2,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Agweb – a browser for agents that stays out of your way",
+   "url": "https://github.com/paul-nameless/agweb",
+   "desc": "",
+   "points": 87,
+   "comments": 25,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Klad, a paint app your coding agent can drive (source-available)",
+   "url": "https://github.com/klad-app/klad",
+   "desc": "",
+   "points": 83,
+   "comments": 34,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Pomerado (YC F26) – Turn any website into an MCP for agents",
+   "url": "https://news.ycombinator.com/item?id=50455811",
+   "desc": "",
+   "points": 63,
+   "comments": 48,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS emulator",
+   "url": "https://github.com/aws/aws-emulator",
+   "desc": "",
+   "points": 987,
+   "comments": 266,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
+   "url": "https://gitlab.com/snipedbywifi/terminactory",
+   "desc": "",
+   "points": 137,
+   "comments": 28,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: DBDelve – Open-Source DB Client Made with Rust and GPUI",
+   "url": "https://news.ycombinator.com/item?id=50427934",
+   "desc": "",
+   "points": 124,
+   "comments": 49,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Aircad – Professional drafting and 3D modeling in the browser",
+   "url": "https://aircad.com",
+   "desc": "",
+   "points": 95,
+   "comments": 47,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Ask HN: What are the most useful, concrete AI skills to independently learn?",
+   "url": "https://news.ycombinator.com/item?id=50494696",
+   "desc": "",
+   "points": 78,
+   "comments": 49,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Kapso – Iterative learning from enterprise data",
+   "url": "https://news.ycombinator.com/item?id=50471281",
+   "desc": "",
+   "points": 60,
+   "comments": 13,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Socratic Tutor",
+   "url": "https://github.com/janestreet/agent_skills/blob/master/socratic-tutor/SKILL.md",
+   "desc": "",
+   "points": 710,
+   "comments": 167,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Why I will not be using LLMs in my coding",
+   "url": "https://www.polso.info/why-i-will-not-be-using-llms-coding",
+   "desc": "",
+   "points": 119,
+   "comments": 243,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "LLMs Play Zachtronics' TIS-100",
+   "url": "https://tis-100.wincon.dev/",
+   "desc": "",
+   "points": 95,
+   "comments": 23,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "6 Hours of YouTube and 85 handtyped pages of notes on LLM Inference – Start here",
+   "url": "https://github.com/samir-sarwar/samir-vllm",
+   "desc": "",
+   "points": 80,
+   "comments": 12,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Yogurt – Free, private, open-source alternative to Granola",
+   "url": "https://github.com/FrigadeHQ/yogurt",
+   "desc": "",
+   "points": 303,
+   "comments": 115,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Apron Chat Protocol",
+   "url": "https://apron.chat/",
+   "desc": "",
+   "points": 65,
+   "comments": 5,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "TimeNet: Open-source data infrastructure for Temporal Foundation Models",
+   "url": "https://github.com/OpenTSLM/TimeNet",
+   "desc": "",
+   "points": 53,
+   "comments": 9,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Distributed Ray Tracer",
+   "url": "https://ray.hatchet.run",
+   "desc": "",
+   "points": 47,
+   "comments": 15,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Let over Lambda–50 Years of Lisp (2008)",
+   "url": "https://letoverlambda.com/",
+   "desc": "",
+   "points": 88,
+   "comments": 25,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS Lambda Web Functions keep billing memory ~7 minutes after the last request",
+   "url": "https://www.easel.sh/blog/lambda-web-functions-idle-memory",
+   "desc": "",
+   "points": 81,
+   "comments": 31,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Reddit Migration's Impact on Lemmy (2023)",
+   "url": "https://www.jmis.org/archive/view_article?pid=jmis-10-4-333",
+   "desc": "",
+   "points": 46,
+   "comments": 39,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Jensen Huang resigns",
+   "url": "https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f",
+   "desc": "",
+   "points": 4043,
+   "comments": 3443,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "30 years of Internet transfers with curl",
+   "url": "https://daniel.haxx.se/blog/2026/11/11/30-years-of-internet-transfers-with-curl/",
+   "desc": "",
+   "points": 42,
+   "comments": 1,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "A false smoke alarm almost drowned Jane Street's only NYC datacenter",
+   "url": "https://michael.bacarella.com/2026/11/10/false-smoke-alarm-jane-street-datacenter/",
+   "desc": "",
+   "points": 587,
+   "comments": 276,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Serving GLM-5.3 at 607.8 tok/s across two Nvidia DGX stations with vLLM",
+   "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+   "desc": "",
+   "points": 128,
+   "comments": 65,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Black Ops II statically recompiled to native ARM64 macOS",
+   "url": "https://github.com/adrbn/bo2-mac",
+   "desc": "",
+   "points": 150,
+   "comments": 67,
+   "created": "2026-11-11",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Faster Retrieval for Better, More Efficient RAG",
+   "url": "https://machinelearning.apple.com/research/faster-retrieval",
+   "desc": "",
+   "points": 241,
+   "comments": 39,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
+   "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
+   "desc": "",
+   "points": 587,
+   "comments": 351,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+   "url": "https://github.com/synchopate/llama-modchip",
+   "desc": "",
+   "points": 485,
+   "comments": 210,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "When will this stop? The Raspberry Pi 5 16GB SBC now sells for $385",
+   "url": "https://www.cnx-software.com/2026/11/03/when-will-this-stop-the-raspberry-pi-5-16gb-sbc-now-sells-for-385/",
+   "desc": "",
+   "points": 329,
+   "comments": 303,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "RAM Altman: Linux Script Emails Sam Altman Daily How Much Unused RAM in Your PC",
+   "url": "https://respawnfirst.com/linux-script-emails-sam-altman-unused-ram-ram-altman/",
+   "desc": "",
+   "points": 257,
+   "comments": 167,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Queens Public Library under ransomware attack",
+   "url": "https://connect.queenslibrary.org/",
+   "desc": "",
+   "points": 213,
+   "comments": 119,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "OpenAI raises $11B at a $1.25T valuation",
+   "url": "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/",
+   "desc": "",
+   "points": 190,
+   "comments": 218,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "$30M Raised to Redo the CPU",
+   "url": "https://tendrils.co/blog/2026-11-10/30m-raised",
+   "desc": "",
+   "points": 146,
+   "comments": 159,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Researchers discover rare star system that emits radio signals every 8 minutes",
+   "url": "https://www.curtin.edu.au/news/media-release/researchers-discover-rare-star-system-that-emits-radio-signals-every-eight-minutes/",
+   "desc": "",
+   "points": 145,
+   "comments": 70,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "NetBSD 11 desktop on a Raspberry Pi 4",
+   "url": "https://neongd.com/articles/netbsd11-rpi4.gmi",
+   "desc": "",
+   "points": 144,
+   "comments": 88,
+   "created": "2026-11-08",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Chicago schools to Google – we'd rather lose Search than be forced to accept AI",
+   "url": "https://www.techspot.com/news/114532-chicago-schools-tell-google-they-can-live-without.html",
+   "desc": "",
+   "points": 90,
+   "comments": 30,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "RAM-Altman reports unused RAM on your machine, one email a day",
+   "url": "https://github.com/IainKay/ram-altman",
+   "desc": "",
+   "points": 89,
+   "comments": 18,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Words of warning about radiocarbon dating medieval human bones",
+   "url": "https://www.nature.com/articles/s40494-026-02958-x",
+   "desc": "",
+   "points": 82,
+   "comments": 20,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Seagate's new hybrid drive raises some old questions",
+   "url": "https://arstechnica.com/gadgets/2026/11/seagate-resurrects-the-ssd-hdd-hybrid-drive/",
+   "desc": "",
+   "points": 72,
+   "comments": 39,
+   "created": "2026-11-11",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "National Weather Service reports nationwide radar website outage amid FAA stop",
+   "url": "https://www.news9.com/oklahoma-city-news/national-weather-service-reports-nationwide-radar-website-outage",
+   "desc": "",
+   "points": 62,
+   "comments": 16,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "The 'europoors' rants reflect an American insecurity",
+   "url": "https://davekeating.substack.com/p/the-europoors-rants-reflect-an-american",
+   "desc": "",
+   "points": 57,
+   "comments": 103,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "RAM-Altman: a bash script that emails Sam Altman about your unused RAM",
+   "url": "https://ram-altman.lol/",
+   "desc": "",
+   "points": 54,
+   "comments": 9,
+   "created": "2026-11-08",
+   "is_new": false
+  }
+ ]
+}
