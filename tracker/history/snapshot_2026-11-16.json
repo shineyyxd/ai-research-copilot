@@ -1,0 +1,799 @@
+{
+ "date": "2026-11-16",
+ "items": [
+  {
+   "src": "github",
+   "title": "janestreet/agent_skills",
+   "url": "https://github.com/janestreet/agent_skills",
+   "desc": "Agent skills",
+   "stars": 9015,
+   "lang": null,
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 373
+  },
+  {
+   "src": "github",
+   "title": "KKKKhazix/agent-autoloop",
+   "url": "https://github.com/KKKKhazix/agent-autoloop",
+   "desc": "让你的命令行 Agent 在后台自己接活、自己跟进到底；平时不烦你，遇到拿不准的事才发卡片找你拍板。",
+   "stars": 5518,
+   "lang": "TypeScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 173
+  },
+  {
+   "src": "github",
+   "title": "shanselman/gputaskman",
+   "url": "https://github.com/shanselman/gputaskman",
+   "desc": "A GPU task manager for Windows, Linux, and WSL: per-process VRAM, GPU activity, and LLM model/KV-cache insights (Windows AMD and NVIDIA).",
+   "stars": 3344,
+   "lang": "Python",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 116
+  },
+  {
+   "src": "github",
+   "title": "sarpstar/cinecode",
+   "url": "https://github.com/sarpstar/cinecode",
+   "desc": "Films made with code. Short films, long YouTube videos, ads, explainers and music videos: an AI coding agent writes the script, builds every frame in code, designs the sound and hands you an MP4.",
+   "stars": 2562,
+   "lang": "Python",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 53
+  },
+  {
+   "src": "github",
+   "title": "DIYgod/pinky",
+   "url": "https://github.com/DIYgod/pinky",
+   "desc": "Let AI use your iPhone or Android phone, with you in the loop: any MCP agent from macOS, Windows or Linux, or Pinky itself, right on the phone.",
+   "stars": 2222,
+   "lang": "Go",
+   "created": "2026-11-06",
+   "is_new": false,
+   "star_delta": 69
+  },
+  {
+   "src": "github",
+   "title": "Sandflow-ai/sand3d",
+   "url": "https://github.com/Sandflow-ai/sand3d",
+   "desc": "3D modeling in Python, built for LLMs.",
+   "stars": 2042,
+   "lang": "HTML",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 43
+  },
+  {
+   "src": "github",
+   "title": "voyager-so/vork",
+   "url": "https://github.com/voyager-so/vork",
+   "desc": "Headless 3D and VFX engine for agents. Research preview.",
+   "stars": 1597,
+   "lang": "Rust",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 22
+  },
+  {
+   "src": "github",
+   "title": "agentes-chat/agentes-chat",
+   "url": "https://github.com/agentes-chat/agentes-chat",
+   "desc": "Open-source, self-hosted Slack alternative where your team and AI agents work together in channels and DMs. Agents run on Claude, ChatGPT/Codex, Gemini or Grok, with MCP tools, their own computer and ",
+   "stars": 1521,
+   "lang": "TypeScript",
+   "created": "2026-11-09",
+   "is_new": false,
+   "star_delta": 116
+  },
+  {
+   "src": "github",
+   "title": "JosssphZhou/poki",
+   "url": "https://github.com/JosssphZhou/poki",
+   "desc": "Let AI agents operate a real iPhone. Local MCP server and agent, no jailbreak, no extra hardware.",
+   "stars": 1356,
+   "lang": "Swift",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 93
+  },
+  {
+   "src": "github",
+   "title": "hitkeeen/blender-ai-mcp-addon",
+   "url": "https://github.com/hitkeeen/blender-ai-mcp-addon",
+   "desc": "AI assistant and MCP server for Blender: visual chat, scene tools, multi-agent workflows. Works with ChatGPT/GPT, Claude, Gemini, Ollama, OpenCode. Blender AI addon, copilot for 3D, bpy Python scripti",
+   "stars": 1270,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "andrew-babo/muse4ai",
+   "url": "https://github.com/andrew-babo/muse4ai",
+   "desc": "Muse4AI — let your AI agent make the pictures and the videos. Local Windows bridge for Muse via REST, MCP, and OAuth.",
+   "stars": 924,
+   "lang": "TypeScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 88
+  },
+  {
+   "src": "github",
+   "title": "kubai087/kubai-icons",
+   "url": "https://github.com/kubai087/kubai-icons",
+   "desc": "An agent skill that draws animated icons in one consistent style, for Claude Code, Codex and other coding agents. Comes with 2,600+ open-source icons for React, Vue and SVG, and a website to browse th",
+   "stars": 877,
+   "lang": "JavaScript",
+   "created": "2026-11-03",
+   "is_new": false,
+   "star_delta": 46
+  },
+  {
+   "src": "github",
+   "title": "hyperionaidev/smolmaxxing",
+   "url": "https://github.com/hyperionaidev/smolmaxxing",
+   "desc": "maxxing the ability to run different LLMs on the smallest devices possible",
+   "stars": 748,
+   "lang": "C",
+   "created": "2026-11-04",
+   "is_new": false,
+   "star_delta": 49
+  },
+  {
+   "src": "github",
+   "title": "majorminorlabs/hermes-voice",
+   "url": "https://github.com/majorminorlabs/hermes-voice",
+   "desc": "Talk to a Hermes Agent profile through Home Assistant Assist",
+   "stars": 707,
+   "lang": "Python",
+   "created": "2026-11-05",
+   "is_new": false,
+   "star_delta": 7
+  },
+  {
+   "src": "github",
+   "title": "Dodaios/ste80-humanizer",
+   "url": "https://github.com/Dodaios/ste80-humanizer",
+   "desc": "STE80 Humanizer: agent skill that removes AI tells and rewrites text 80% of the way to ASD-STE100 (Simplified Technical English), the method Andrej Karpathy shared.",
+   "stars": 696,
+   "lang": "Python",
+   "created": "2026-11-09",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "lxe/phoneuse",
+   "url": "https://github.com/lxe/phoneuse",
+   "desc": "See and operate an unmodified iPhone from a Linux PC: AirPlay mirror in, Bluetooth HID mouse/keyboard out, plus a CLI and skill for agents.",
+   "stars": 667,
+   "lang": "Python",
+   "created": "2026-11-07",
+   "is_new": false,
+   "star_delta": 5
+  },
+  {
+   "src": "github",
+   "title": "devvmhq/devvm",
+   "url": "https://github.com/devvmhq/devvm",
+   "desc": "One VM for every project. An isolated sandbox with your project’s toolchain, ready for you or a coding agent to start coding",
+   "stars": 647,
+   "lang": "Go",
+   "created": "2026-11-06",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "credoksopho1984/blender-ai-copilot-studio",
+   "url": "https://github.com/credoksopho1984/blender-ai-copilot-studio",
+   "desc": "An AI copilot and MCP server for Blender that turns plain-language briefs into scene operations—inside a visual chat studio with multi-agent teams, your choice of AI models, and 27 built-in scene tool",
+   "stars": 513,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "racdeufindurch198812/Blender-AI-MCP-Studio",
+   "url": "https://github.com/racdeufindurch198812/Blender-AI-MCP-Studio",
+   "desc": "Blender AI MCP Studio is an AI assistant and built-in Model Context Protocol MCP server for Blender that turns plain-language briefs into inspected, approved and reversible 3D scene operations — with ",
+   "stars": 511,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Moh4696/cinematic-skill",
+   "url": "https://github.com/Moh4696/cinematic-skill",
+   "desc": "Agent skill for narrated cinematic films built entirely from code: one continuous camera over photos, maps and cards, timed to the voice. Claude Code, Codex, Cursor, Gemini CLI.",
+   "stars": 510,
+   "lang": "Python",
+   "created": "2026-11-09",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "precygtrucqui1981/blender-ai-copilot-lab",
+   "url": "https://github.com/precygtrucqui1981/blender-ai-copilot-lab",
+   "desc": "An AI lab for Blender where manager–worker–reviewer agent teams run multi-step scene briefs as supervised experiments—a live task board, review findings, one correction attempt per blocked task, named",
+   "stars": 506,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "findavoulot1973/Blender-AI-MCP-Suite",
+   "url": "https://github.com/findavoulot1973/Blender-AI-MCP-Suite",
+   "desc": "Blender AI MCP Suite is an AI assistant and built-in Model Context Protocol MCP server for Blender that turns plain-language briefs into inspected, approved and reversible 3D scene operations — with a",
+   "stars": 497,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "benzgasfuncring197110/blender-ai-copilot-bridge",
+   "url": "https://github.com/benzgasfuncring197110/blender-ai-copilot-bridge",
+   "desc": "An MCP bridge for Blender that exposes 27 supervised scene tools to OpenCode and any compatible client—authenticated Streamable HTTP on a local endpoint, with the visual chat studio and agent teams on",
+   "stars": 491,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "berkantay/gpucanvas",
+   "url": "https://github.com/berkantay/gpucanvas",
+   "desc": "Put thousands of live DOM nodes on an infinite canvas: the GPU draws them, an editor selects, moves and resizes them, shaders and transitions run on them, and an AI agent can read them and point at th",
+   "stars": 482,
+   "lang": "TypeScript",
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Visionbeyondtrack/Gemini-Config-Checker-",
+   "url": "https://github.com/Visionbeyondtrack/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WinnerSpecialist/Gemini-Config-Checker-",
+   "url": "https://github.com/WinnerSpecialist/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "VortexHostFeel/Gemini-Config-Checker-",
+   "url": "https://github.com/VortexHostFeel/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "TurtleReside/Gemini-Config-Checker-",
+   "url": "https://github.com/TurtleReside/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Go",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WyrmClimberManacle/Gemini-Config-Checker-",
+   "url": "https://github.com/WyrmClimberManacle/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WingDataVacuum/Gemini-Config-Checker-",
+   "url": "https://github.com/WingDataVacuum/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "My AI agents found an unmapped Maya site?",
+   "url": "https://pietromiotti.com/latest/maya-site",
+   "desc": "",
+   "points": 1036,
+   "comments": 392,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+   "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+   "desc": "",
+   "points": 681,
+   "comments": 709,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+   "url": "https://github.com/GoogleChrome/modern-web-guidance",
+   "desc": "",
+   "points": 447,
+   "comments": 146,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Brave Search API now accepts agentic payments via the x402 protocol",
+   "url": "https://brave.com/blog/search-api-agentic-payments/",
+   "desc": "",
+   "points": 262,
+   "comments": 151,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Atuin Threads: All your agent sessions on every machine",
+   "url": "https://blog.atuin.sh/threads-agent-sessions/",
+   "desc": "",
+   "points": 239,
+   "comments": 84,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "ChatGPT Desktop forwards your SSH agent to remote machines",
+   "url": "https://news.ycombinator.com/item?id=50422628",
+   "desc": "",
+   "points": 221,
+   "comments": 80,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+   "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md",
+   "desc": "",
+   "points": 138,
+   "comments": 40,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS Emulator and the engineer's job when agents write the code",
+   "url": "https://www.allthingsdistributed.com/2026/11/aws-emulator-and-the-engineers-job-when-agents-write-the-code.html",
+   "desc": "",
+   "points": 111,
+   "comments": 2,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Agweb – a browser for agents that stays out of your way",
+   "url": "https://github.com/paul-nameless/agweb",
+   "desc": "",
+   "points": 107,
+   "comments": 37,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Klad, a paint app your coding agent can drive (source-available)",
+   "url": "https://github.com/klad-app/klad",
+   "desc": "",
+   "points": 84,
+   "comments": 34,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Your Agent Will Pick the Hackable One",
+   "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/",
+   "desc": "",
+   "points": 72,
+   "comments": 59,
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Pomerado (YC F26) – Turn any website into an MCP for agents",
+   "url": "https://news.ycombinator.com/item?id=50455811",
+   "desc": "",
+   "points": 64,
+   "comments": 49,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS emulator",
+   "url": "https://github.com/aws/aws-emulator",
+   "desc": "",
+   "points": 991,
+   "comments": 266,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
+   "url": "https://gitlab.com/snipedbywifi/terminactory",
+   "desc": "",
+   "points": 164,
+   "comments": 40,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: DBDelve – Open-Source DB Client Made with Rust and GPUI",
+   "url": "https://news.ycombinator.com/item?id=50427934",
+   "desc": "",
+   "points": 125,
+   "comments": 50,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Aircad – Professional drafting and 3D modeling in the browser",
+   "url": "https://aircad.com",
+   "desc": "",
+   "points": 95,
+   "comments": 47,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Ask HN: What are the most useful, concrete AI skills to independently learn?",
+   "url": "https://news.ycombinator.com/item?id=50494696",
+   "desc": "",
+   "points": 88,
+   "comments": 53,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Kapso – Iterative learning from enterprise data",
+   "url": "https://news.ycombinator.com/item?id=50471281",
+   "desc": "",
+   "points": 61,
+   "comments": 13,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Socratic Tutor",
+   "url": "https://github.com/janestreet/agent_skills/blob/master/socratic-tutor/SKILL.md",
+   "desc": "",
+   "points": 714,
+   "comments": 170,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Claude asked to renumber pages deletes professor's syllabus, year of notes",
+   "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits",
+   "desc": "",
+   "points": 50,
+   "comments": 75,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Understanding Positional Embeddings in Modern LLMs",
+   "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings",
+   "desc": "",
+   "points": 205,
+   "comments": 27,
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "LLMs Play Zachtronics' TIS-100",
+   "url": "https://tis-100.wincon.dev/",
+   "desc": "",
+   "points": 96,
+   "comments": 23,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "6 Hours of YouTube and 85 handtyped pages of notes on LLM Inference – Start here",
+   "url": "https://github.com/samir-sarwar/samir-vllm",
+   "desc": "",
+   "points": 80,
+   "comments": 12,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Yogurt – Free, private, open-source alternative to Granola",
+   "url": "https://github.com/FrigadeHQ/yogurt",
+   "desc": "",
+   "points": 305,
+   "comments": 115,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Apron Chat Protocol",
+   "url": "https://apron.chat/",
+   "desc": "",
+   "points": 66,
+   "comments": 6,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "TimeNet: Open-source data infrastructure for Temporal Foundation Models",
+   "url": "https://github.com/OpenTSLM/TimeNet",
+   "desc": "",
+   "points": 53,
+   "comments": 9,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Distributed Ray Tracer",
+   "url": "https://ray.hatchet.run",
+   "desc": "",
+   "points": 47,
+   "comments": 15,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Let over Lambda–50 Years of Lisp (2008)",
+   "url": "https://letoverlambda.com/",
+   "desc": "",
+   "points": 88,
+   "comments": 25,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "AWS Lambda Web Functions keep billing memory ~7 minutes after the last request",
+   "url": "https://www.easel.sh/blog/lambda-web-functions-idle-memory",
+   "desc": "",
+   "points": 82,
+   "comments": 31,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Reddit Migration's Impact on Lemmy (2023)",
+   "url": "https://www.jmis.org/archive/view_article?pid=jmis-10-4-333",
+   "desc": "",
+   "points": 46,
+   "comments": 39,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "A rare glimpse inside the high-risk, high-reward Hormuz trade",
+   "url": "https://www.lloydslist.com/LL1158922/A-rare-glimpse-inside-the-highrisk-highreward-Hormuz-trade",
+   "desc": "",
+   "points": 104,
+   "comments": 99,
+   "created": "2026-11-10",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Jensen Huang resigns",
+   "url": "https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f",
+   "desc": "",
+   "points": 4049,
+   "comments": 3456,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "The Single Router in Southern Arkansas That Ground Air Travel to a Halt",
+   "url": "https://www.wsj.com/business/airlines/the-single-router-in-southern-arkansas-that-ground-air-travel-to-a-halt-eedc326c",
+   "desc": "",
+   "points": 86,
+   "comments": 55,
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "20 Years of Pyrolog",
+   "url": "https://pypy.org/posts/2026/11/20-years-of-pyrolog.html",
+   "desc": "",
+   "points": 71,
+   "comments": 4,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "30 years of Internet transfers with curl",
+   "url": "https://daniel.haxx.se/blog/2026/11/11/30-years-of-internet-transfers-with-curl/",
+   "desc": "",
+   "points": 42,
+   "comments": 1,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Faster Retrieval for Better, More Efficient RAG",
+   "url": "https://machinelearning.apple.com/research/faster-retrieval",
+   "desc": "",
+   "points": 241,
+   "comments": 39,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
+   "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
+   "desc": "",
+   "points": 587,
+   "comments": 351,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "When will this stop? The Raspberry Pi 5 16GB SBC now sells for $385",
+   "url": "https://www.cnx-software.com/2026/11/03/when-will-this-stop-the-raspberry-pi-5-16gb-sbc-now-sells-for-385/",
+   "desc": "",
+   "points": 329,
+   "comments": 303,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Queens Public Library under ransomware attack",
+   "url": "https://connect.queenslibrary.org/",
+   "desc": "",
+   "points": 213,
+   "comments": 119,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "$30M Raised to Redo the CPU",
+   "url": "https://tendrils.co/blog/2026-11-10/30m-raised",
+   "desc": "",
+   "points": 147,
+   "comments": 159,
+   "created": "2026-11-10",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Researchers discover rare star system that emits radio signals every 8 minutes",
+   "url": "https://www.curtin.edu.au/news/media-release/researchers-discover-rare-star-system-that-emits-radio-signals-every-eight-minutes/",
+   "desc": "",
+   "points": 147,
+   "comments": 71,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Seagate's new hybrid drive raises some old questions",
+   "url": "https://arstechnica.com/gadgets/2026/11/seagate-resurrects-the-ssd-hdd-hybrid-drive/",
+   "desc": "",
+   "points": 103,
+   "comments": 59,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Chicago schools to Google – we'd rather lose Search than be forced to accept AI",
+   "url": "https://www.techspot.com/news/114532-chicago-schools-tell-google-they-can-live-without.html",
+   "desc": "",
+   "points": 90,
+   "comments": 30,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "RAM-Altman reports unused RAM on your machine, one email a day",
+   "url": "https://github.com/IainKay/ram-altman",
+   "desc": "",
+   "points": 89,
+   "comments": 18,
+   "created": "2026-11-09",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Words of warning about radiocarbon dating medieval human bones",
+   "url": "https://www.nature.com/articles/s40494-026-02958-x",
+   "desc": "",
+   "points": 82,
+   "comments": 20,
+   "created": "2026-11-11",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "The 'europoors' rants reflect an American insecurity",
+   "url": "https://davekeating.substack.com/p/the-europoors-rants-reflect-an-american",
+   "desc": "",
+   "points": 71,
+   "comments": 133,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "National Weather Service reports nationwide radar website outage amid FAA stop",
+   "url": "https://www.news9.com/oklahoma-city-news/national-weather-service-reports-nationwide-radar-website-outage",
+   "desc": "",
+   "points": 62,
+   "comments": 16,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: MeowDisplay Is iPhone Mirroring, but in Reverse",
+   "url": "https://meowdisplay.app/",
+   "desc": "",
+   "points": 121,
+   "comments": 45,
+   "created": "2026-11-09",
+   "is_new": true
+  }
+ ]
+}
