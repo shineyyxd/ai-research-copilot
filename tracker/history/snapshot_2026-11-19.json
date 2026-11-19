@@ -1,0 +1,791 @@
+{
+ "date": "2026-11-19",
+ "items": [
+  {
+   "src": "github",
+   "title": "DIYgod/pinky",
+   "url": "https://github.com/DIYgod/pinky",
+   "desc": "Let AI use your iPhone or Android phone, with you in the loop: any MCP agent from macOS, Windows or Linux, or Pinky itself, right on the phone.",
+   "stars": 2479,
+   "lang": "Go",
+   "created": "2026-11-06",
+   "is_new": false,
+   "star_delta": 257
+  },
+  {
+   "src": "github",
+   "title": "agentes-chat/agentes-chat",
+   "url": "https://github.com/agentes-chat/agentes-chat",
+   "desc": "Open-source, self-hosted Slack alternative where your team and AI agents work together in channels and DMs. Agents run on Claude, ChatGPT/Codex, Gemini or Grok, with MCP tools, their own computer and ",
+   "stars": 1726,
+   "lang": "TypeScript",
+   "created": "2026-11-09",
+   "is_new": false,
+   "star_delta": 205
+  },
+  {
+   "src": "github",
+   "title": "sybil-solutions/inference-optimisation-skill",
+   "url": "https://github.com/sybil-solutions/inference-optimisation-skill",
+   "desc": "Agent skill for hill-climbing local LLM serving speed (decode, speculative decoding, prefill, KV, startup, TTFT) on any hardware and quantization",
+   "stars": 1129,
+   "lang": "Python",
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Dodaios/ste80-humanizer",
+   "url": "https://github.com/Dodaios/ste80-humanizer",
+   "desc": "STE80 Humanizer: agent skill that removes AI tells and rewrites text 80% of the way to ASD-STE100 (Simplified Technical English), the method Andrej Karpathy shared.",
+   "stars": 892,
+   "lang": "Python",
+   "created": "2026-11-09",
+   "is_new": false,
+   "star_delta": 196
+  },
+  {
+   "src": "github",
+   "title": "huggingface/pybot",
+   "url": "https://github.com/huggingface/pybot",
+   "desc": "PyBot: a chatbot written in pure Python by a swarm of agents. No weights, no training, just rules.",
+   "stars": 847,
+   "lang": "Python",
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "Moh4696/cinematic-skill",
+   "url": "https://github.com/Moh4696/cinematic-skill",
+   "desc": "Agent skill for narrated cinematic films built entirely from code: one continuous camera over photos, maps and cards, timed to the voice. Claude Code, Codex, Cursor, Gemini CLI.",
+   "stars": 783,
+   "lang": "Python",
+   "created": "2026-11-09",
+   "is_new": false,
+   "star_delta": 273
+  },
+  {
+   "src": "github",
+   "title": "devvmhq/devvm",
+   "url": "https://github.com/devvmhq/devvm",
+   "desc": "One VM for every project. An isolated sandbox with your project’s toolchain, ready for you or a coding agent to start coding",
+   "stars": 703,
+   "lang": "Go",
+   "created": "2026-11-06",
+   "is_new": false,
+   "star_delta": 56
+  },
+  {
+   "src": "github",
+   "title": "lxe/phoneuse",
+   "url": "https://github.com/lxe/phoneuse",
+   "desc": "See and operate an unmodified iPhone from a Linux PC: AirPlay mirror in, Bluetooth HID mouse/keyboard out, plus a CLI and skill for agents.",
+   "stars": 686,
+   "lang": "Python",
+   "created": "2026-11-07",
+   "is_new": false,
+   "star_delta": 19
+  },
+  {
+   "src": "github",
+   "title": "boringmarketer/boring-marketing-skills",
+   "url": "https://github.com/boringmarketer/boring-marketing-skills",
+   "desc": "32 free marketing skills for your AI agent: research, positioning, copy, pages, SEO, AI search, ads, email and content, plus a deep local-business pack. MIT.",
+   "stars": 671,
+   "lang": "Python",
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "berkantay/gpucanvas",
+   "url": "https://github.com/berkantay/gpucanvas",
+   "desc": "Put thousands of live DOM nodes on an infinite canvas: the GPU draws them, an editor selects, moves and resizes them, shaders and transitions run on them, and an AI agent can read them and point at th",
+   "stars": 528,
+   "lang": "TypeScript",
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 46
+  },
+  {
+   "src": "github",
+   "title": "racdeufindurch198812/Blender-AI-MCP-Studio",
+   "url": "https://github.com/racdeufindurch198812/Blender-AI-MCP-Studio",
+   "desc": "Blender AI MCP Studio is an AI assistant and built-in Model Context Protocol MCP server for Blender that turns plain-language briefs into inspected, approved and reversible 3D scene operations — with ",
+   "stars": 516,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 5
+  },
+  {
+   "src": "github",
+   "title": "credoksopho1984/blender-ai-copilot-studio",
+   "url": "https://github.com/credoksopho1984/blender-ai-copilot-studio",
+   "desc": "An AI copilot and MCP server for Blender that turns plain-language briefs into scene operations—inside a visual chat studio with multi-agent teams, your choice of AI models, and 27 built-in scene tool",
+   "stars": 516,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 3
+  },
+  {
+   "src": "github",
+   "title": "precygtrucqui1981/blender-ai-copilot-lab",
+   "url": "https://github.com/precygtrucqui1981/blender-ai-copilot-lab",
+   "desc": "An AI lab for Blender where manager–worker–reviewer agent teams run multi-step scene briefs as supervised experiments—a live task board, review findings, one correction attempt per blocked task, named",
+   "stars": 507,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 1
+  },
+  {
+   "src": "github",
+   "title": "gogoymh/auto-ontology-mcp",
+   "url": "https://github.com/gogoymh/auto-ontology-mcp",
+   "desc": "NVIDIA Auto Ontology's semantic layer and a personal knowledge base as an MCP server for Claude, ChatGPT and other MCP clients. No LLM API key needed.",
+   "stars": 503,
+   "lang": "Python",
+   "created": "2026-11-06",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "findavoulot1973/Blender-AI-MCP-Suite",
+   "url": "https://github.com/findavoulot1973/Blender-AI-MCP-Suite",
+   "desc": "Blender AI MCP Suite is an AI assistant and built-in Model Context Protocol MCP server for Blender that turns plain-language briefs into inspected, approved and reversible 3D scene operations — with a",
+   "stars": 498,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 1
+  },
+  {
+   "src": "github",
+   "title": "benzgasfuncring197110/blender-ai-copilot-bridge",
+   "url": "https://github.com/benzgasfuncring197110/blender-ai-copilot-bridge",
+   "desc": "An MCP bridge for Blender that exposes 27 supervised scene tools to OpenCode and any compatible client—authenticated Streamable HTTP on a local endpoint, with the visual chat studio and agent teams on",
+   "stars": 492,
+   "lang": null,
+   "created": "2026-11-12",
+   "is_new": false,
+   "star_delta": 1
+  },
+  {
+   "src": "github",
+   "title": "simplexai-labs/linger",
+   "url": "https://github.com/simplexai-labs/linger",
+   "desc": "Linger is An Open-Source Personal Agent That Runs Fully on Your PC.  We aim to break Big Tech’s grip on AI by bringing powerful local AI to everyday computers through efficient model–harness co-design",
+   "stars": 478,
+   "lang": "TypeScript",
+   "created": "2026-11-10",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "YellowLaborerMarket/Gemini-Config-Checker-",
+   "url": "https://github.com/YellowLaborerMarket/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 475,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "weightcashiercupola/Gemini-Config-Checker-",
+   "url": "https://github.com/weightcashiercupola/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 474,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WinnerSpecialist/Gemini-Config-Checker-",
+   "url": "https://github.com/WinnerSpecialist/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": false,
+   "star_delta": 0
+  },
+  {
+   "src": "github",
+   "title": "VortexHostFeel/Gemini-Config-Checker-",
+   "url": "https://github.com/VortexHostFeel/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": false,
+   "star_delta": 0
+  },
+  {
+   "src": "github",
+   "title": "Visionbeyondtrack/Gemini-Config-Checker-",
+   "url": "https://github.com/Visionbeyondtrack/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": false,
+   "star_delta": 0
+  },
+  {
+   "src": "github",
+   "title": "Violetnyudress/Gemini-Config-Checker-",
+   "url": "https://github.com/Violetnyudress/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Go",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WindGatorRise37/Gemini-Config-Checker-",
+   "url": "https://github.com/WindGatorRise37/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WireProvostPucker/Gemini-Config-Checker-",
+   "url": "https://github.com/WireProvostPucker/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WestLocksmithSpout/Gemini-Config-Checker-",
+   "url": "https://github.com/WestLocksmithSpout/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Go",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "VisionWormStudio/Gemini-Config-Checker-",
+   "url": "https://github.com/VisionWormStudio/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Go",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WindowStaffGate11/Gemini-Config-Checker-",
+   "url": "https://github.com/WindowStaffGate11/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WerewolfEmuHub/Gemini-Config-Checker-",
+   "url": "https://github.com/WerewolfEmuHub/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Go",
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "github",
+   "title": "WyrmClimberManacle/Gemini-Config-Checker-",
+   "url": "https://github.com/WyrmClimberManacle/Gemini-Config-Checker-",
+   "desc": "Chain region scanner: find proxy configs that get you into Google AI Studio and Gemini (signed-in browser check, anti-DPI, Windows/macOS/Linux/Android) ",
+   "stars": 473,
+   "lang": "Makefile",
+   "created": "2026-11-15",
+   "is_new": false,
+   "star_delta": 0
+  },
+  {
+   "src": "hn",
+   "title": "Windows 11 is collecting data on which coding agents and developer tools you use",
+   "url": "https://xusheng.dev/posts/windows-coding-agent-telemetry/",
+   "desc": "",
+   "points": 728,
+   "comments": 619,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "AI agents ask better questions than KPMG accountants in audit trial",
+   "url": "https://europeanbusinessmagazine.com/ai-agents-better-questions-kpmg/",
+   "desc": "",
+   "points": 381,
+   "comments": 167,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
+   "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+   "desc": "",
+   "points": 320,
+   "comments": 440,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Brave Search API now accepts agentic payments via the x402 protocol",
+   "url": "https://brave.com/blog/search-api-agentic-payments/",
+   "desc": "",
+   "points": 262,
+   "comments": 150,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: AgentRun – open-source, Self-improving Managed Agents",
+   "url": "https://github.com/Parcha-ai/agentrun/blob/main/README.md",
+   "desc": "",
+   "points": 138,
+   "comments": 41,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Running coding agents without handing them my credentials",
+   "url": "https://blog.antonio.cx/running-agents-with-lend",
+   "desc": "",
+   "points": 134,
+   "comments": 113,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Agweb – a browser for agents that stays out of your way",
+   "url": "https://github.com/paul-nameless/agweb",
+   "desc": "",
+   "points": 109,
+   "comments": 37,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
+   "url": "https://news.ycombinator.com/item?id=50536468",
+   "desc": "",
+   "points": 87,
+   "comments": 48,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Your Agent Will Pick the Hackable One",
+   "url": "https://geoffstearns.com/blog/your-agent-will-pick-the-hackable-one/",
+   "desc": "",
+   "points": 76,
+   "comments": 65,
+   "created": "2026-11-15",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Advancing computer-use agents for healthcare teams",
+   "url": "https://openai.com/index/advancing-computer-use-for-healthcare-teams/",
+   "desc": "",
+   "points": 53,
+   "comments": 32,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Coral – Open-source gateway where agents write their own tools",
+   "url": "https://github.com/withcoral/coral",
+   "desc": "",
+   "points": 52,
+   "comments": 24,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Maritime (YC F26) – A managed cloud for production AI agents",
+   "url": "https://news.ycombinator.com/item?id=50549188",
+   "desc": "",
+   "points": 45,
+   "comments": 39,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: db-branch – database branches in seconds for AI agents and CI, via ZFS",
+   "url": "https://github.com/db-branch/db-branch",
+   "desc": "",
+   "points": 45,
+   "comments": 17,
+   "created": "2026-11-15",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: A terminal-native idle factory game, written in Rust with ratatui",
+   "url": "https://gitlab.com/snipedbywifi/terminactory",
+   "desc": "",
+   "points": 173,
+   "comments": 44,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Tell HN: HN is being scraped for emails to scam",
+   "url": "https://news.ycombinator.com/item?id=50513451",
+   "desc": "",
+   "points": 123,
+   "comments": 43,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Ask HN: What are the most useful, concrete AI skills to independently learn?",
+   "url": "https://news.ycombinator.com/item?id=50494696",
+   "desc": "",
+   "points": 92,
+   "comments": 53,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
+   "url": "https://news.ycombinator.com/item?id=50548660",
+   "desc": "",
+   "points": 85,
+   "comments": 31,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Kapso – Iterative learning from enterprise data",
+   "url": "https://news.ycombinator.com/item?id=50471281",
+   "desc": "",
+   "points": 61,
+   "comments": 18,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: TrnRT – An open-source LLM inference engine for AWS Trainium",
+   "url": "https://github.com/RunanywhereAI/trnrt",
+   "desc": "",
+   "points": 54,
+   "comments": 7,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Claude asked to renumber pages deletes professor's syllabus, year of notes",
+   "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-claude-ai-tasked-with-renumbering-pages-accidentally-deletes-law-professors-entire-syllabus-one-year-of-lecture-notes-youre-right-to-be-angry-i-deleted-your-files-through-my-own-carelessness-humbled-agent-admits",
+   "desc": "",
+   "points": 51,
+   "comments": 75,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "I'm making LLMs work on small and old devices",
+   "url": "https://github.com/hyperionaidev/smolmaxxing/",
+   "desc": "",
+   "points": 485,
+   "comments": 180,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Understanding Positional Embeddings in Modern LLMs",
+   "url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings",
+   "desc": "",
+   "points": 246,
+   "comments": 27,
+   "created": "2026-11-15",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Not Everything Needs an LLM",
+   "url": "https://newsletter.posthog.com/p/decision-models",
+   "desc": "",
+   "points": 180,
+   "comments": 74,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "LLM assisted reverse engineering",
+   "url": "https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering",
+   "desc": "",
+   "points": 88,
+   "comments": 24,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Apron Chat Protocol",
+   "url": "https://apron.chat/",
+   "desc": "",
+   "points": 66,
+   "comments": 6,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Distributed Ray Tracer",
+   "url": "https://ray.hatchet.run",
+   "desc": "",
+   "points": 47,
+   "comments": 15,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Jensen Huang resigns",
+   "url": "https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f",
+   "desc": "",
+   "points": 4059,
+   "comments": 3490,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "MAI Code 2 and Code 2 Flash",
+   "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+   "desc": "",
+   "points": 417,
+   "comments": 169,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "The Single Router in Southern Arkansas That Ground Air Travel to a Halt",
+   "url": "https://www.wsj.com/business/airlines/the-single-router-in-southern-arkansas-that-ground-air-travel-to-a-halt-eedc326c",
+   "desc": "",
+   "points": 89,
+   "comments": 61,
+   "created": "2026-11-15",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "20 Years of Pyrolog",
+   "url": "https://pypy.org/posts/2026/11/20-years-of-pyrolog.html",
+   "desc": "",
+   "points": 84,
+   "comments": 4,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "How to make almost anything",
+   "url": "https://pub.cba.mit.edu/863.26/site/",
+   "desc": "",
+   "points": 916,
+   "comments": 149,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Fakemetrics.com – \"build in public\" like a superstar",
+   "url": "https://fakemetrics.com/",
+   "desc": "",
+   "points": 51,
+   "comments": 22,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Claude Mythos slashed software work to onboard AMD GPUs to around three days",
+   "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
+   "desc": "",
+   "points": 55,
+   "comments": 21,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Tor Project Issues Rapid-Response DoS-Defense Fix Amid Sustained DDoS Attack",
+   "url": "https://forum.torproject.org/t/security-release-0-4-9-17/22454",
+   "desc": "",
+   "points": 253,
+   "comments": 68,
+   "created": "2026-11-16",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "OOS – an open operating system for the Rigol Scopes",
+   "url": "https://www.eevblog.com/forum/testgear/oos-an-open-operating-system-for-the-rigol-scopes/",
+   "desc": "",
+   "points": 152,
+   "comments": 40,
+   "created": "2026-11-13",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Researchers discover rare star system that emits radio signals every 8 minutes",
+   "url": "https://www.curtin.edu.au/news/media-release/researchers-discover-rare-star-system-that-emits-radio-signals-every-eight-minutes/",
+   "desc": "",
+   "points": 148,
+   "comments": 71,
+   "created": "2026-11-12",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Regulatory Capture by Anthropic Through METR",
+   "url": "https://nitter.cf/kevinnbass/status/2099621874279817638",
+   "desc": "",
+   "points": 140,
+   "comments": 75,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Multiple vulnerabilities in Regexp and String case conversion",
+   "url": "https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/",
+   "desc": "",
+   "points": 105,
+   "comments": 25,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Chicago schools to Google – we'd rather lose Search than be forced to accept AI",
+   "url": "https://www.techspot.com/news/114532-chicago-schools-tell-google-they-can-live-without.html",
+   "desc": "",
+   "points": 90,
+   "comments": 30,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "A US Federal Women's Prison Became a \"Rape Club\"",
+   "url": "https://www.propublica.org/article/federal-womens-prison-sexual-abuse-reform-dublin-bop",
+   "desc": "",
+   "points": 86,
+   "comments": 47,
+   "created": "2026-11-17",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "The 'europoors' rants reflect an American insecurity",
+   "url": "https://davekeating.substack.com/p/the-europoors-rants-reflect-an-american",
+   "desc": "",
+   "points": 71,
+   "comments": 137,
+   "created": "2026-11-14",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "National Weather Service reports nationwide radar website outage amid FAA stop",
+   "url": "https://www.news9.com/oklahoma-city-news/national-weather-service-reports-nationwide-radar-website-outage",
+   "desc": "",
+   "points": 62,
+   "comments": 16,
+   "created": "2026-11-13",
+   "is_new": false
+  },
+  {
+   "src": "hn",
+   "title": "Aspidistra: A British wartime radio transmitter used for MitM attacks",
+   "url": "https://en.wikipedia.org/wiki/Aspidistra_(transmitter)",
+   "desc": "",
+   "points": 46,
+   "comments": 5,
+   "created": "2026-11-12",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Take Voyager 1 apart, down to a single memory chip",
+   "url": "https://rshekhar.com/voyager/",
+   "desc": "",
+   "points": 163,
+   "comments": 34,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Show HN: Zigzag, a native Mac browser for people leaving Arc",
+   "url": "https://github.com/ZigaoWang/zigzag",
+   "desc": "",
+   "points": 120,
+   "comments": 74,
+   "created": "2026-11-14",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Codeberg seems to have vanished from DNS",
+   "url": "https://news.ycombinator.com/item?id=50542948",
+   "desc": "",
+   "points": 57,
+   "comments": 20,
+   "created": "2026-11-18",
+   "is_new": true
+  },
+  {
+   "src": "hn",
+   "title": "Launch HN: Axonnic (YC F26) – Sleeves that track fingers and estimate force",
+   "url": "https://news.ycombinator.com/item?id=50522776",
+   "desc": "",
+   "points": 56,
+   "comments": 29,
+   "created": "2026-11-16",
+   "is_new": true
+  }
+ ]
+}
